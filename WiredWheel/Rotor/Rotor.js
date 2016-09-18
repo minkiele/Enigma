@@ -1,10 +1,9 @@
-import {WiredWheel} from "../WiredWheel";
+import WiredWheel from "../WiredWheel";
 import {A_INDEX} from "../../Utils";
 
 export default class Rotor extends WiredWheel {
 
   constructor () {
-    super();
     this.setRingPosition(0);
   }
 
