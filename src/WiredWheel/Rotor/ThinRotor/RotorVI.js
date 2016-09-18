@@ -1,4 +1,4 @@
-import {ThinRotor} from "./ThinRotor";
+import ThinRotor from "./ThinRotor";
 
 export default class RotorVI extends ThinRotor {
 

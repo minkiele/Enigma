@@ -1,4 +1,4 @@
-import {Reflector} from "./Reflector";
+import Reflector from "./Reflector";
 
 export default class ReflectorA extends Reflector {
   constructor () {
