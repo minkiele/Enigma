@@ -11,7 +11,7 @@ function getNextLetter (currentLetter) {
 }
 
 function getNotchLetter(windowLetter) {
-  return getShiftedLetter(windowLetter, 1);
+  return getShiftedLetter(windowLetter, 8);
 }
 
 export {A_INDEX, getNextLetter, getNotchLetter};

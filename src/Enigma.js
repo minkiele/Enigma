@@ -42,7 +42,7 @@ export default class Enigma {
 
   isRotorInNotchPosition (position) {
     let notchLetter = getNotchLetter(this.getRotorWindowLetter(position));
-    return notchLetter === this.getRotor(position).notchPosition;
+    return this.getRotor(position).notchPosition.indexOf(notchLetter) > -1;
   }
 
   advanceRotor (rotor) {
