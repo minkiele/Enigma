@@ -21,15 +21,15 @@ export default class Rotor extends WiredWheel {
   }
 
   setRingSetting(ringSetting) {
-    this.ringPosition = ringSetting.charCodeAt(0) - A_INDEX;
+    this.setRingPosition(ringSetting.charCodeAt(0) - A_INDEX);
   }
 
   getOutputLetter(inputLetter) {
     let normalizedInputLetter = inputLetter.toUpperCase();
     let inputIndex = normalizedInputLetter.charCodeAt(0) - A_INDEX;
-    let normalizedInputIndex = (inputIndex + this.ringPosition) % 26;
+    let normalizedInputIndex = (inputIndex + 26 - this.ringPosition) % 26;
     let normalizedOutputIndex = this.getOutputPlate(normalizedInputIndex);
-    let outputIndex = (normalizedOutputIndex + 26 - this.ringPosition) % 26;
+    let outputIndex = (normalizedOutputIndex + this.ringPosition) % 26;
     return String.fromCharCode(outputIndex + A_INDEX);
   }
 
