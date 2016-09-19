@@ -1,5 +1,5 @@
 import WiredWheel from "../WiredWheel";
-import {A_INDEX} from "../../Utils";
+import {A_INDEX} from "../../../Utils";
 
 export default class Rotor extends WiredWheel {
 

@@ -1,10 +1,12 @@
-import Plugboard from "./PlugBoard";
+import Plugboard from "./Component/PlugBoard";
 import {A_INDEX, getNextLetter} from "./Utils";
+import EntryWheel from "./Component/WiredWheel/EntryWheel";
 
 export default class Enigma {
 
   constructor () {
     this.plugboard = new PlugBoard();
+    this.entryWheel = new EntryWheel();
   }
 
   setLeftRotor (leftRotor) {
@@ -43,8 +45,10 @@ export default class Enigma {
     this.rightRotorLetter = getNextLetter(this.rightRotorLetter);
   }
 
-  encodeLetter (letter) {
-
+  getEncodedLetter (inputLetter) {
+    var normalizedInputLetter = inputLetter.toUpperCase();
+    var swappedInputLetter = this.plugboard.getSwappedLetter(normalizedInputLetter);
+    var inputPosition = this.entryWheel.getPinFromLetter(swappedInputLetter);
   }
 
 }
