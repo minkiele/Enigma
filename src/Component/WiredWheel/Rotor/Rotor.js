@@ -25,20 +25,20 @@ export default class Rotor extends WiredWheel {
   }
 
   getOutputLetter(inputLetter) {
-    var normalizedInputLetter = inputLetter.toUpperCase();
-    var inputIndex = normalizedInputLetter.charCodeAt(0) - A_INDEX;
-    var normalizedInputIndex = (inputIndex + this.ringPosition) % 26;
-    var normalizedOutputIndex = this.getOutputPlate(normalizedInputIndex);
-    var outputIndex = (normalizedOutputIndex + 26 - this.ringPosition) % 26;
+    let normalizedInputLetter = inputLetter.toUpperCase();
+    let inputIndex = normalizedInputLetter.charCodeAt(0) - A_INDEX;
+    let normalizedInputIndex = (inputIndex + this.ringPosition) % 26;
+    let normalizedOutputIndex = this.getOutputPlate(normalizedInputIndex);
+    let outputIndex = (normalizedOutputIndex + 26 - this.ringPosition) % 26;
     return String.fromCharCode(outputIndex + A_INDEX);
   }
 
   getInputLetter(outputLetter) {
-    var normalizedOutputLetter = outputLetter.toUpperCase();
-    var outputIndex = normalizedOutputLetter.charCodeAt(0) - A_INDEX;
-    var normalizedOutputIndex = (outputIndex + this.ringPosition) % 26;
-    var normalizedInputIndex = this.getInputPin(outputIndex);
-    var inputIndex = (normalizedInputIndex + 26 - this.ringPosition) % 26;
+    let normalizedOutputLetter = outputLetter.toUpperCase();
+    let outputIndex = normalizedOutputLetter.charCodeAt(0) - A_INDEX;
+    let normalizedOutputIndex = (outputIndex + this.ringPosition) % 26;
+    let normalizedInputIndex = this.getInputPin(outputIndex);
+    let inputIndex = (normalizedInputIndex + 26 - this.ringPosition) % 26;
     return String.fromCharCode(inputIndex + A_INDEX);
   }
 

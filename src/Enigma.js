@@ -66,9 +66,9 @@ export default class Enigma {
 
     this.advanceRotors();
 
-    var normalizedInputLetter = inputLetter.toUpperCase();
-    var swappedInputLetter = this.plugboard.getSwappedLetter(normalizedInputLetter);
-    var inputPosition = this.entryWheel.getPinFromLetter(swappedInputLetter);
+    let normalizedInputLetter = inputLetter.toUpperCase();
+    let swappedInputLetter = this.plugboard.getSwappedLetter(normalizedInputLetter);
+    let inputPosition = this.entryWheel.getPinFromLetter(swappedInputLetter);
   }
 
 }

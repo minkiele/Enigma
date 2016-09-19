@@ -8,9 +8,9 @@ export default class Reflector extends WiredWheel {
   }
 
   getReflectedLetter(inputLetter) {
-    var normalizedInputLetter = inputLetter.toUpperCase();
-    var inputIndex = normalizedInputLetter.charCodeAt(0) - A_INDEX;
-    var outputIndex = this.getReflectedPin(inputIndex);
+    let normalizedInputLetter = inputLetter.toUpperCase();
+    let inputIndex = normalizedInputLetter.charCodeAt(0) - A_INDEX;
+    let outputIndex = this.getReflectedPin(inputIndex);
     return String.fromCharCode(outputIndex + A_INDEX);
   }
 
