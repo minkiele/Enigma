@@ -1,5 +1,5 @@
 import PlugBoard from "./Component/PlugBoard";
-import {A_INDEX, getNextLetter, getNotchLetter} from "./Utils";
+import {A_INDEX, getIndex, getLetter, getNextLetter, getNotchLetter} from "./Utils";
 import EntryWheel from "./Component/WiredWheel/EntryWheel";
 
 const LEFT_ROTOR = 'L';
@@ -69,6 +69,13 @@ export default class Enigma {
     let normalizedInputLetter = inputLetter.toUpperCase();
     let swappedInputLetter = this.plugboard.getSwappedLetter(normalizedInputLetter);
     let inputPosition = this.entryWheel.getPinFromLetter(swappedInputLetter);
+    //let rightRotorWindowIndex = getIndex(this.getRotorWindowLetter(RIGHT_ROTOR));
+    //let rightRotorInputPin = (26 + rightRotorWindowIndex - this.getRotor(RIGHT_ROTOR).ringPosition) % 26;
+    //let rightRotorOutputPlate = this.getRotor(RIGHT_ROTOR).getOutputPlate(rightRotorInputPin);
+    //rightRotorOutputPlate = (26 - rightRotorOutputPlate) % 26;
+
+    //I must find some easy way to compute all the relative shiftings
+
   }
 
 }

@@ -1,9 +1,17 @@
 const A_INDEX = 'A'.charCodeAt(0);
 
-function getShiftedLetter(currentLetter, shift) {
-  let currentIndex = currentLetter.charCodeAt(0) - A_INDEX;
-  let outputIndex = (currentIndex + 26 + shift) % 26;
+function getIndex(letter) {
+  return letter.charCodeAt(0) - A_INDEX;
+}
+
+function getLetter(index) {
   return String.fromCharCode(outputIndex + A_INDEX);
+}
+
+function getShiftedLetter(currentLetter, shift) {
+  let currentIndex = getIndex(currentLetter)
+  let outputIndex = (currentIndex + 26 + shift) % 26;
+  return getLetter(outputIndex);
 }
 
 function getNextLetter (currentLetter) {
@@ -14,4 +22,4 @@ function getNotchLetter(windowLetter) {
   return getShiftedLetter(windowLetter, 8);
 }
 
-export {A_INDEX, getNextLetter, getNotchLetter};
+export {A_INDEX, getIndex, getLetter, getNextLetter, getNotchLetter};
