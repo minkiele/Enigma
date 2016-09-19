@@ -5,7 +5,7 @@ export default class RotorIII extends Rotor {
     constructor () {
       super();
       this.wirings = 'BDFHJLCPRTXVZNYEIWGAKMUSQO';
-      this.notchPosition = 'V';
+      this.notchPosition = 'D';
     }
 
 }
