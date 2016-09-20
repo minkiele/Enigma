@@ -152,12 +152,16 @@ describe('Enigma Machine', function () {
 
     var machine = new Enigma.default();
 
-    machine.setRotor(new RotorI(), Enigma.LEFT_ROTOR);
-    machine.setRotorWindowLetter('B', Enigma.LEFT_ROTOR);
-    machine.setRotor(new RotorII(), Enigma.CENTER_ROTOR);
-    machine.setRotorWindowLetter('B', Enigma.CENTER_ROTOR);
-    machine.setRotor(new RotorIII(), Enigma.RIGHT_ROTOR);
-    machine.setRotorWindowLetter('B', Enigma.RIGHT_ROTOR);
+    var leftRotor = new RotorI();
+    leftRotor.setRingSetting('B');
+    var centerRotor = new RotorII();
+    centerRotor.setRingSetting('B');
+    var rightRotor = new RotorIII();
+    rightRotor.setRingSetting('B');
+
+    machine.setRotor(leftRotor, Enigma.LEFT_ROTOR);
+    machine.setRotor(centerRotor, Enigma.CENTER_ROTOR);
+    machine.setRotor(rightRotor, Enigma.RIGHT_ROTOR);
     machine.setReflector(new ReflectorB());
 
     expect(machine.getEncodedLetter('A')).toEqual('E');

@@ -65,33 +65,46 @@ export default class Enigma {
 
     this.advanceRotors();
 
-    //FORWARD
+    //FORWARD THROUGH THE NON ROTATING PARTS
     let normalizedInputLetter = inputLetter.toUpperCase();
     let swappedInputLetter = this.plugboard.getSwappedLetter(normalizedInputLetter);
     let entryWheelInputPosition = this.entryWheel.getPlateFromLetter(swappedInputLetter);
+
+    //RIGHT ROTOR
     let rightRotorInputPin = this.getRotorInputPosition(entryWheelInputPosition, RIGHT_ROTOR);
     let rightRotorOutputPlate = this.getRotor(RIGHT_ROTOR).pinToPlate(rightRotorInputPin);
     let rightRotorForwardOutputPosition = this.getRotorOutputPosition(rightRotorOutputPlate, RIGHT_ROTOR);
+
+    //CENTER ROTOR
     let centerRotorInputPin = this.getRotorInputPosition(rightRotorForwardOutputPosition, CENTER_ROTOR);
-    let centerRotorOutputPlate = this.getRotor(CENTER_ROTOR).pinToPlate(rightRotorInputPin);
+    let centerRotorOutputPlate = this.getRotor(CENTER_ROTOR).pinToPlate(centerRotorInputPin);
     let centerRotorForwardOutputPosition = this.getRotorOutputPosition(centerRotorOutputPlate, CENTER_ROTOR);
+
+    //LEFT ROTOR
     let leftRotorInputPin = this.getRotorInputPosition(centerRotorForwardOutputPosition, LEFT_ROTOR);
     let leftRotorOutputPlate = this.getRotor(LEFT_ROTOR).pinToPlate(leftRotorInputPin);
     let leftRotorForwardOutputPosition = this.getRotorOutputPosition(leftRotorOutputPlate, LEFT_ROTOR);
 
     //REFLECTION
     let reflectedPosition = this.reflector.pinToPin(leftRotorForwardOutputPosition);
-
     //AND NOW BACKWARDS!
+
+    //LEFT ROTOR
     let leftRotorInputPlate = this.getRotorInputPosition(reflectedPosition, LEFT_ROTOR);
     let leftRotorOutputPin = this.getRotor(LEFT_ROTOR).plateToPin(leftRotorInputPlate);
     let leftRotorBackwardsOutputPosition = this.getRotorOutputPosition(leftRotorOutputPin, LEFT_ROTOR);
+
+    //CENTER ROTOR
     let centerRotorInputPosition = this.getRotorInputPosition(leftRotorBackwardsOutputPosition, CENTER_ROTOR);
     let centerRotorOutputPin = this.getRotor(CENTER_ROTOR).plateToPin(centerRotorInputPosition);
     let centerRotorBackwardsOutputPosition = this.getRotorOutputPosition(centerRotorOutputPin, CENTER_ROTOR);
+
+    //RIGHT ROTOR
     let rightRotorInputPlate = this.getRotorInputPosition(centerRotorBackwardsOutputPosition, RIGHT_ROTOR);
     let rightRotorOutputPin = this.getRotor(RIGHT_ROTOR).plateToPin(rightRotorInputPlate);
     let rightRotorBackwardsOutputPosition = this.getRotorOutputPosition(rightRotorOutputPin, RIGHT_ROTOR);
+
+    //AND THROUGH AGAIN THE NON ROTATING PARTS
     let entryWheelOutputLetter = this.entryWheel.getLetterFromPlate(rightRotorBackwardsOutputPosition);
     let swappedOutputLetter = this.plugboard.getSwappedLetter(entryWheelOutputLetter);
 
