@@ -18,6 +18,10 @@ export default class Enigma {
     this.setRotor(null, RIGHT_ROTOR);
   }
 
+  getPlugboard () {
+    return this.plugboard;
+  }
+
   setRotor (rotor, position) {
     this.rotors[position] = rotor;
     this.setRotorWindowLetter('A', position);
@@ -113,21 +117,28 @@ export default class Enigma {
   }
 
   getRotorInputPosition(inputPosition, rotor) {
-    return (
-      26 +
+    return Utils.getModularNumber(
       inputPosition +
       Utils.getIndex(this.getRotorWindowLetter(rotor)) -
       this.getRotor(rotor).ringPosition
-    ) % 26;
+    );
   }
 
   getRotorOutputPosition(outputPosition, rotor) {
-    return (
-      26 +
+    return Utils.getModularNumber(
       outputPosition -
       Utils.getIndex(this.getRotorWindowLetter(rotor)) +
       this.getRotor(rotor).ringPosition
-    ) % 26;
+    );
+  }
+
+  encode (string) {
+    let output = '';
+    let normalizedString = string.toUpperCase();
+    for(var i = 0; i < string.length; i += 1){
+      output += this.getEncodedLetter(string.charAt(i));
+    }
+    return output;
   }
 
 }

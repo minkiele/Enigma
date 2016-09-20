@@ -1,5 +1,5 @@
 import WiredWheel from "./WiredWheel";
-import {A_INDEX} from "../../Utils";
+import * as Utils from "../../Utils";
 
 export default class EntryWheel {
 
@@ -8,11 +8,11 @@ export default class EntryWheel {
   }
 
   getPlateFromLetter (letter) {
-    return letter.charCodeAt(0) - A_INDEX;
+    return Utils.getIndex(letter);
   }
 
   getLetterFromPlate (pin) {
-    return String.fromCharCode(pin + A_INDEX);
+    return Utils.getLetter(pin);
   }
 
 }

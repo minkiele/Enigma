@@ -1,7 +1,7 @@
 export const A_INDEX = 'A'.charCodeAt(0);
 
-export function getIndex(letter) {
-  return letter.charCodeAt(0) - A_INDEX;
+export function getIndex(letter, index = 0) {
+  return letter.charCodeAt(index) - A_INDEX;
 }
 
 export function getLetter(index) {
@@ -10,7 +10,7 @@ export function getLetter(index) {
 
 export function getShiftedLetter(currentLetter, shift) {
   let currentIndex = getIndex(currentLetter)
-  let outputIndex = (currentIndex + 26 + shift) % 26;
+  let outputIndex = getModularNumber(currentIndex + shift);
   return getLetter(outputIndex);
 }
 
@@ -20,4 +20,8 @@ export function getNextLetter (currentLetter) {
 
 export function getNotchLetter(windowLetter) {
   return getShiftedLetter(windowLetter, 8);
+}
+
+export function getModularNumber(expression, module = 26) {
+  return (module + expression) % module;
 }

@@ -1,5 +1,5 @@
 import WiredWheel from "../WiredWheel";
-import {A_INDEX} from "../../../Utils";
+import * as Utils from "../../../Utils";
 
 export default class Rotor extends WiredWheel {
 
@@ -9,11 +9,11 @@ export default class Rotor extends WiredWheel {
   }
 
   pinToPlate(inputPin) {
-    return this.wirings.charCodeAt(inputPin) - A_INDEX;
+    return Utils.getIndex(this.wirings, inputPin);
   }
 
   plateToPin(outputPlate) {
-    return this.wirings.indexOf(String.fromCharCode(outputPlate + A_INDEX));
+    return this.wirings.indexOf(Utils.getLetter(outputPlate));
   }
 
   setRingPosition(ringPosition) {
@@ -21,25 +21,25 @@ export default class Rotor extends WiredWheel {
   }
 
   setRingSetting(ringSetting) {
-    this.setRingPosition(ringSetting.charCodeAt(0) - A_INDEX);
+    this.setRingPosition(Utils.getIndex(ringSetting));
   }
 
   getOutputLetter(inputLetter) {
     let normalizedInputLetter = inputLetter.toUpperCase();
-    let inputIndex = normalizedInputLetter.charCodeAt(0) - A_INDEX;
-    let normalizedInputIndex = (inputIndex + 26 - this.ringPosition) % 26;
+    let inputIndex = Utils.getIndex(normalizedInputLetter);
+    let normalizedInputIndex = Utils.getModularNumber(inputIndex - this.ringPosition);
     let normalizedOutputIndex = this.pinToPlate(normalizedInputIndex);
-    let outputIndex = (normalizedOutputIndex + this.ringPosition) % 26;
-    return String.fromCharCode(outputIndex + A_INDEX);
+    let outputIndex = Utils.getModularNumber(normalizedOutputIndex + this.ringPosition);
+    return Utils.getLetter(outputIndex);
   }
 
   getInputLetter(outputLetter) {
     let normalizedOutputLetter = outputLetter.toUpperCase();
-    let outputIndex = normalizedOutputLetter.charCodeAt(0) - A_INDEX;
-    let normalizedOutputIndex = (outputIndex + this.ringPosition) % 26;
+    let outputIndex = Utils.getIndex(normalizedOutputLetter);
+    let normalizedOutputIndex = Utils.getModularNumber(outputIndex + this.ringPosition);
     let normalizedInputIndex = this.plateToPin(outputIndex);
-    let inputIndex = (normalizedInputIndex + 26 - this.ringPosition) % 26;
-    return String.fromCharCode(inputIndex + A_INDEX);
+    let inputIndex = Utils.getModularNumber(normalizedInputIndex - this.ringPosition);
+    return Utils.getLetter(inputIndex);
   }
 
 }
