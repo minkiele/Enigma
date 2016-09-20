@@ -9,7 +9,7 @@ export const RIGHT_ROTOR = 'R';
 export default class Enigma {
 
   constructor () {
-    this.plugboard = new PlugBoard();
+    this.plugBoard = new PlugBoard();
     this.entryWheel = new EntryWheel();
     this.rotors = {};
     this.rotorsWindowLetter = {};
@@ -18,8 +18,8 @@ export default class Enigma {
     this.setRotor(null, RIGHT_ROTOR);
   }
 
-  getPlugboard () {
-    return this.plugboard;
+  getPlugBoard () {
+    return this.plugBoard;
   }
 
   setRotor (rotor, position) {
@@ -71,7 +71,7 @@ export default class Enigma {
 
     //FORWARD THROUGH THE NON ROTATING PARTS
     let normalizedInputLetter = inputLetter.toUpperCase();
-    let swappedInputLetter = this.plugboard.getSwappedLetter(normalizedInputLetter);
+    let swappedInputLetter = this.plugBoard.getSwappedLetter(normalizedInputLetter);
     let entryWheelInputPosition = this.entryWheel.getPlateFromLetter(swappedInputLetter);
 
     //RIGHT ROTOR
@@ -110,7 +110,7 @@ export default class Enigma {
 
     //AND THROUGH AGAIN THE NON ROTATING PARTS
     let entryWheelOutputLetter = this.entryWheel.getLetterFromPlate(rightRotorBackwardsOutputPosition);
-    let swappedOutputLetter = this.plugboard.getSwappedLetter(entryWheelOutputLetter);
+    let swappedOutputLetter = this.plugBoard.getSwappedLetter(entryWheelOutputLetter);
 
     return swappedOutputLetter;
 
