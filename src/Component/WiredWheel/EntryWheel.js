@@ -7,11 +7,11 @@ export default class EntryWheel {
 
   }
 
-  getPinFromLetter (letter) {
+  getPlateFromLetter (letter) {
     return letter.charCodeAt(0) - A_INDEX;
   }
 
-  getLetterFromPin (pin) {
+  getLetterFromPlate (pin) {
     return String.fromCharCode(pin + A_INDEX);
   }
 

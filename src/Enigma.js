@@ -1,5 +1,5 @@
 import PlugBoard from "./Component/PlugBoard";
-import {A_INDEX, getIndex, getLetter, getNextLetter, getNotchLetter} from "./Utils";
+import * as Utils from "./Utils";
 import EntryWheel from "./Component/WiredWheel/EntryWheel";
 
 export const LEFT_ROTOR = 'L';
@@ -27,6 +27,10 @@ export default class Enigma {
     return this.rotors[position];
   }
 
+  setReflector(reflector) {
+    this.reflector = reflector;
+  }
+
   setRotorWindowLetter(letter, position) {
     this.rotorsWindowLetter[position] = letter;
   }
@@ -36,12 +40,12 @@ export default class Enigma {
   }
 
   isRotorInNotchPosition (position) {
-    let notchLetter = getNotchLetter(this.getRotorWindowLetter(position));
+    let notchLetter = Utils.getNotchLetter(this.getRotorWindowLetter(position));
     return this.getRotor(position).notchPosition.indexOf(notchLetter) > -1;
   }
 
   advanceRotor (rotor) {
-    this.setRotorWindowLetter(getNextLetter(this.getRotorWindowLetter(rotor)), rotor);
+    this.setRotorWindowLetter(Utils.getNextLetter(this.getRotorWindowLetter(rotor)), rotor);
   }
 
   advanceRotors () {
@@ -61,16 +65,56 @@ export default class Enigma {
 
     this.advanceRotors();
 
+    //FORWARD
     let normalizedInputLetter = inputLetter.toUpperCase();
     let swappedInputLetter = this.plugboard.getSwappedLetter(normalizedInputLetter);
-    let inputPosition = this.entryWheel.getPinFromLetter(swappedInputLetter);
-    //let rightRotorWindowIndex = getIndex(this.getRotorWindowLetter(RIGHT_ROTOR));
-    //let rightRotorInputPin = (26 + rightRotorWindowIndex - this.getRotor(RIGHT_ROTOR).ringPosition) % 26;
-    //let rightRotorOutputPlate = this.getRotor(RIGHT_ROTOR).getOutputPlate(rightRotorInputPin);
-    //rightRotorOutputPlate = (26 - rightRotorOutputPlate) % 26;
+    let entryWheelInputPosition = this.entryWheel.getPlateFromLetter(swappedInputLetter);
+    let rightRotorInputPin = this.getRotorInputPosition(entryWheelInputPosition, RIGHT_ROTOR);
+    let rightRotorOutputPlate = this.getRotor(RIGHT_ROTOR).pinToPlate(rightRotorInputPin);
+    let rightRotorForwardOutputPosition = this.getRotorOutputPosition(rightRotorOutputPlate, RIGHT_ROTOR);
+    let centerRotorInputPin = this.getRotorInputPosition(rightRotorForwardOutputPosition, CENTER_ROTOR);
+    let centerRotorOutputPlate = this.getRotor(CENTER_ROTOR).pinToPlate(rightRotorInputPin);
+    let centerRotorForwardOutputPosition = this.getRotorOutputPosition(centerRotorOutputPlate, CENTER_ROTOR);
+    let leftRotorInputPin = this.getRotorInputPosition(centerRotorForwardOutputPosition, LEFT_ROTOR);
+    let leftRotorOutputPlate = this.getRotor(LEFT_ROTOR).pinToPlate(leftRotorInputPin);
+    let leftRotorForwardOutputPosition = this.getRotorOutputPosition(leftRotorOutputPlate, LEFT_ROTOR);
 
-    //I must find some easy way to compute all the relative shiftings
+    //REFLECTION
+    let reflectedPosition = this.reflector.pinToPin(leftRotorForwardOutputPosition);
 
+    //AND NOW BACKWARDS!
+    let leftRotorInputPlate = this.getRotorInputPosition(reflectedPosition, LEFT_ROTOR);
+    let leftRotorOutputPin = this.getRotor(LEFT_ROTOR).plateToPin(leftRotorInputPlate);
+    let leftRotorBackwardsOutputPosition = this.getRotorOutputPosition(leftRotorOutputPin, LEFT_ROTOR);
+    let centerRotorInputPosition = this.getRotorInputPosition(leftRotorBackwardsOutputPosition, CENTER_ROTOR);
+    let centerRotorOutputPin = this.getRotor(CENTER_ROTOR).plateToPin(centerRotorInputPosition);
+    let centerRotorBackwardsOutputPosition = this.getRotorOutputPosition(centerRotorOutputPin, CENTER_ROTOR);
+    let rightRotorInputPlate = this.getRotorInputPosition(centerRotorBackwardsOutputPosition, RIGHT_ROTOR);
+    let rightRotorOutputPin = this.getRotor(RIGHT_ROTOR).plateToPin(rightRotorInputPlate);
+    let rightRotorBackwardsOutputPosition = this.getRotorOutputPosition(rightRotorOutputPin, RIGHT_ROTOR);
+    let entryWheelOutputLetter = this.entryWheel.getLetterFromPlate(rightRotorBackwardsOutputPosition);
+    let swappedOutputLetter = this.plugboard.getSwappedLetter(entryWheelOutputLetter);
+
+    return swappedOutputLetter;
+
+  }
+
+  getRotorInputPosition(inputPosition, rotor) {
+    return (
+      26 +
+      inputPosition +
+      Utils.getIndex(this.getRotorWindowLetter(rotor)) -
+      this.getRotor(rotor).ringPosition
+    ) % 26;
+  }
+
+  getRotorOutputPosition(outputPosition, rotor) {
+    return (
+      26 +
+      outputPosition -
+      Utils.getIndex(this.getRotorWindowLetter(rotor)) +
+      this.getRotor(rotor).ringPosition
+    ) % 26;
   }
 
 }
