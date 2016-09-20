@@ -2,9 +2,9 @@ import PlugBoard from "./Component/PlugBoard";
 import {A_INDEX, getIndex, getLetter, getNextLetter, getNotchLetter} from "./Utils";
 import EntryWheel from "./Component/WiredWheel/EntryWheel";
 
-const LEFT_ROTOR = 'L';
-const CENTER_ROTOR = 'C';
-const RIGHT_ROTOR = 'R';
+export const LEFT_ROTOR = 'L';
+export const CENTER_ROTOR = 'C';
+export const RIGHT_ROTOR = 'R';
 
 export default class Enigma {
 
