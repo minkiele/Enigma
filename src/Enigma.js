@@ -12,15 +12,10 @@ export default class Enigma {
     this.plugboard = new PlugBoard();
     this.entryWheel = new EntryWheel();
     this.rotors = {};
-    this.rotors[LEFT_ROTOR] = null;
-    this.rotors[CENTER_ROTOR] = null;
-    this.rotors[RIGHT_ROTOR] = null;
     this.rotorsWindowLetter = {};
-
-    this.rotorsWindowLetter[LEFT_ROTOR] = null;
-    this.rotorsWindowLetter[CENTER_ROTOR] = null;
-    this.rotorsWindowLetter[RIGHT_ROTOR] = null;
-
+    this.setRotor(null, LEFT_ROTOR);
+    this.setRotor(null, CENTER_ROTOR);
+    this.setRotor(null, RIGHT_ROTOR);
   }
 
   setRotor (rotor, position) {

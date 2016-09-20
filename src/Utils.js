@@ -5,7 +5,7 @@ export function getIndex(letter) {
 }
 
 export function getLetter(index) {
-  return String.fromCharCode(outputIndex + A_INDEX);
+  return String.fromCharCode(index + A_INDEX);
 }
 
 export function getShiftedLetter(currentLetter, shift) {
