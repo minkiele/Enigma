@@ -11,8 +11,8 @@ export default class EntryWheel {
     return Utils.getIndex(letter);
   }
 
-  getLetterFromPlate (pin) {
-    return Utils.getLetter(pin);
+  getLetterFromPlate (plate) {
+    return Utils.getLetter(plate);
   }
 
 }

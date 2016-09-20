@@ -32,8 +32,8 @@ var EntryWheel = function () {
     }
   }, {
     key: "getLetterFromPlate",
-    value: function getLetterFromPlate(pin) {
-      return Utils.getLetter(pin);
+    value: function getLetterFromPlate(plate) {
+      return Utils.getLetter(plate);
     }
   }]);
 
