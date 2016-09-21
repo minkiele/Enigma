@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ThinReflector2 = require("./ThinReflector");
+var _ThinReflector2 = require("../ThinReflector");
 
 var _ThinReflector3 = _interopRequireDefault(_ThinReflector2);
 

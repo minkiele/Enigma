@@ -1,5 +1,5 @@
 import WiredWheel from "../WiredWheel";
-import * as Utils from "../../../Utils";
+import * as Utils from "../../Utils";
 
 export default class Rotor extends WiredWheel {
 

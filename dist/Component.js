@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var WiredWheel = function WiredWheel() {
-  _classCallCheck(this, WiredWheel);
+var Component = function Component() {
+  _classCallCheck(this, Component);
 };
 
-exports.default = WiredWheel;
+exports.default = Component;
 module.exports = exports["default"];

@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Rotor2 = require('./Rotor');
+var _Rotor2 = require('../Rotor');
 
 var _Rotor3 = _interopRequireDefault(_Rotor2);
 

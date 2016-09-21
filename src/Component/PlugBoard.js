@@ -1,6 +1,9 @@
-export default class PlugBoard {
+import Component from "../Component";
+
+export default class PlugBoard extends Component {
 
   constructor () {
+    super();
     this.wirings = [];
   }
 

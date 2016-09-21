@@ -1,5 +1,5 @@
 var Enigma = require('../dist/Enigma');
-var Rotor = require('../dist/Component/WiredWheel/Rotor/Rotor');
+var Rotor = require('../dist/Component/WiredWheel/Rotor');
 var RotorI = require('../dist/Component/WiredWheel/Rotor/RotorI');
 var RotorII = require('../dist/Component/WiredWheel/Rotor/RotorII');
 var RotorIII = require('../dist/Component/WiredWheel/Rotor/RotorIII');

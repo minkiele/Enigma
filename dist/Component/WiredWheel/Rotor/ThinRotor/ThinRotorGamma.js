@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ThinRotor2 = require("./ThinRotor");
+var _ThinRotor2 = require("../ThinRotor");
 
 var _ThinRotor3 = _interopRequireDefault(_ThinRotor2);
 
@@ -16,20 +16,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var RotorVII = function (_ThinRotor) {
-  _inherits(RotorVII, _ThinRotor);
+var ThinRotorGamma = function (_ThinRotor) {
+  _inherits(ThinRotorGamma, _ThinRotor);
 
-  function RotorVII() {
-    _classCallCheck(this, RotorVII);
+  function ThinRotorGamma() {
+    _classCallCheck(this, ThinRotorGamma);
 
-    var _this = _possibleConstructorReturn(this, (RotorVII.__proto__ || Object.getPrototypeOf(RotorVII)).call(this));
+    var _this = _possibleConstructorReturn(this, (ThinRotorGamma.__proto__ || Object.getPrototypeOf(ThinRotorGamma)).call(this));
 
-    _this.wirings = 'NZJHGRCXMYSWBOUFAIVLPEKQDT';
+    _this.wirings = 'FSOKANUERHMBTIYCWLQPZXVGJD';
     return _this;
   }
 
-  return RotorVII;
+  return ThinRotorGamma;
 }(_ThinRotor3.default);
 
-exports.default = RotorVII;
+exports.default = ThinRotorGamma;
 module.exports = exports["default"];

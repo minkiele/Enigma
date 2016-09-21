@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Reflector2 = require("./Reflector");
+var _Reflector2 = require("../Reflector");
 
 var _Reflector3 = _interopRequireDefault(_Reflector2);
 

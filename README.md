@@ -11,4 +11,4 @@ accurate, as 4th rotor and thin reflector swap pin and plate sides.
 Also, although the fourth rotor cannot advance automatically the method accepts
 even that rotor.
 
-Yes, it needs validation.
+Yes, it needs some further validation, but the base is that even the M4 is proven to work.

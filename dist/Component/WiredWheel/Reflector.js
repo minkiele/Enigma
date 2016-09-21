@@ -10,7 +10,7 @@ var _WiredWheel2 = require("../WiredWheel");
 
 var _WiredWheel3 = _interopRequireDefault(_WiredWheel2);
 
-var _Utils = require("../../../Utils");
+var _Utils = require("../../Utils");
 
 var Utils = _interopRequireWildcard(_Utils);
 

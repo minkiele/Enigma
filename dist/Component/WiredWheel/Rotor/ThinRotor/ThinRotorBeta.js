@@ -4,9 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _Rotor2 = require("../Rotor");
+var _ThinRotor2 = require("../ThinRotor");
 
-var _Rotor3 = _interopRequireDefault(_Rotor2);
+var _ThinRotor3 = _interopRequireDefault(_ThinRotor2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16,20 +16,20 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ThinRotor = function (_Rotor) {
-  _inherits(ThinRotor, _Rotor);
+var ThinRotorBeta = function (_ThinRotor) {
+  _inherits(ThinRotorBeta, _ThinRotor);
 
-  function ThinRotor() {
-    _classCallCheck(this, ThinRotor);
+  function ThinRotorBeta() {
+    _classCallCheck(this, ThinRotorBeta);
 
-    var _this = _possibleConstructorReturn(this, (ThinRotor.__proto__ || Object.getPrototypeOf(ThinRotor)).call(this));
+    var _this = _possibleConstructorReturn(this, (ThinRotorBeta.__proto__ || Object.getPrototypeOf(ThinRotorBeta)).call(this));
 
-    _this.notchPosition = 'HU';
+    _this.wirings = 'LEYJVCNIXWPBQMDRTAKZGFUHOS';
     return _this;
   }
 
-  return ThinRotor;
-}(_Rotor3.default);
+  return ThinRotorBeta;
+}(_ThinRotor3.default);
 
-exports.default = ThinRotor;
+exports.default = ThinRotorBeta;
 module.exports = exports["default"];

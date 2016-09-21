@@ -4,9 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ThinRotor2 = require("./ThinRotor");
+var _Component2 = require("../Component");
 
-var _ThinRotor3 = _interopRequireDefault(_ThinRotor2);
+var _Component3 = _interopRequireDefault(_Component2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16,20 +16,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var RotorVIII = function (_ThinRotor) {
-  _inherits(RotorVIII, _ThinRotor);
+var WiredWheel = function (_Component) {
+  _inherits(WiredWheel, _Component);
 
-  function RotorVIII() {
-    _classCallCheck(this, RotorVIII);
+  function WiredWheel() {
+    _classCallCheck(this, WiredWheel);
 
-    var _this = _possibleConstructorReturn(this, (RotorVIII.__proto__ || Object.getPrototypeOf(RotorVIII)).call(this));
-
-    _this.wirings = 'FKQHTLXOCBJSPDZRAMEWNIUYGV';
-    return _this;
+    return _possibleConstructorReturn(this, (WiredWheel.__proto__ || Object.getPrototypeOf(WiredWheel)).apply(this, arguments));
   }
 
-  return RotorVIII;
-}(_ThinRotor3.default);
+  return WiredWheel;
+}(_Component3.default);
 
-exports.default = RotorVIII;
+exports.default = WiredWheel;
 module.exports = exports["default"];

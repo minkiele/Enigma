@@ -1,11 +1,7 @@
-import WiredWheel from "./WiredWheel";
+import WiredWheel from "../WiredWheel";
 import * as Utils from "../../Utils";
 
-export default class EntryWheel {
-
-  constructor () {
-
-  }
+export default class EntryWheel extends WiredWheel {
 
   getPlateFromLetter (letter) {
     return Utils.getIndex(letter);

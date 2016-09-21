@@ -1,4 +1,4 @@
-import ThinReflector from "./ThinReflector";
+import ThinReflector from "../ThinReflector";
 
 export default class ThinReflectorB extends ThinReflector {
   constructor () {

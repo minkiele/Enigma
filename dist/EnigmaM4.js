@@ -1,7 +1,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.FOURTH_ROTOR = undefined;
 
@@ -21,82 +21,82 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var FOURTH_ROTOR = exports.FOURTH_ROTOR = 'F';
 
-var EnigmaM4 = function (_Enigma$Enigma) {
-    _inherits(EnigmaM4, _Enigma$Enigma);
+var EnigmaM4 = function (_Enigma$default) {
+  _inherits(EnigmaM4, _Enigma$default);
 
-    function EnigmaM4() {
-        _classCallCheck(this, EnigmaM4);
+  function EnigmaM4() {
+    _classCallCheck(this, EnigmaM4);
 
-        var _this = _possibleConstructorReturn(this, (EnigmaM4.__proto__ || Object.getPrototypeOf(EnigmaM4)).call(this));
+    var _this = _possibleConstructorReturn(this, (EnigmaM4.__proto__ || Object.getPrototypeOf(EnigmaM4)).call(this));
 
-        _this.setRotor(null, FOURTH_ROTOR);
-        return _this;
+    _this.setRotor(null, FOURTH_ROTOR);
+    return _this;
+  }
+
+  _createClass(EnigmaM4, [{
+    key: "getEncodedLetter",
+    value: function getEncodedLetter(inputLetter) {
+
+      this.advanceRotors();
+
+      //FORWARD THROUGH THE NON ROTATING PARTS
+      var normalizedInputLetter = inputLetter.toUpperCase();
+      var swappedInputLetter = this.plugBoard.getSwappedLetter(normalizedInputLetter);
+      var entryWheelInputPosition = this.entryWheel.getPlateFromLetter(swappedInputLetter);
+
+      //RIGHT ROTOR
+      var rightRotorInputPin = this.getRotorInputPosition(entryWheelInputPosition, Enigma.RIGHT_ROTOR);
+      var rightRotorOutputPlate = this.getRotor(Enigma.RIGHT_ROTOR).pinToPlate(rightRotorInputPin);
+      var rightRotorForwardOutputPosition = this.getRotorOutputPosition(rightRotorOutputPlate, Enigma.RIGHT_ROTOR);
+
+      //CENTER ROTOR
+      var centerRotorInputPin = this.getRotorInputPosition(rightRotorForwardOutputPosition, Enigma.CENTER_ROTOR);
+      var centerRotorOutputPlate = this.getRotor(Enigma.CENTER_ROTOR).pinToPlate(centerRotorInputPin);
+      var centerRotorForwardOutputPosition = this.getRotorOutputPosition(centerRotorOutputPlate, Enigma.CENTER_ROTOR);
+
+      //LEFT ROTOR
+      var leftRotorInputPin = this.getRotorInputPosition(centerRotorForwardOutputPosition, Enigma.LEFT_ROTOR);
+      var leftRotorOutputPlate = this.getRotor(Enigma.LEFT_ROTOR).pinToPlate(leftRotorInputPin);
+      var leftRotorForwardOutputPosition = this.getRotorOutputPosition(leftRotorOutputPlate, Enigma.LEFT_ROTOR);
+
+      //FOURTH ROTOR
+      var fourthRotorForwardInputPin = this.getRotorInputPosition(leftRotorForwardOutputPosition, FOURTH_ROTOR);
+      var fourthRotorForwardOutputPin = this.getRotor(FOURTH_ROTOR).pinToPlate(fourthRotorForwardInputPin);
+      var fourthRotorForwardOutputPosition = this.getRotorOutputPosition(fourthRotorForwardOutputPin, FOURTH_ROTOR);
+
+      //REFLECTION
+      var reflectedPosition = this.reflector.pinToPin(fourthRotorForwardOutputPosition);
+      //AND NOW BACKWARDS!
+
+      //FOURTH ROTOR
+      var fourthRotorBackwardsInputPin = this.getRotorInputPosition(reflectedPosition, FOURTH_ROTOR);
+      var fourthRotorBackwardsOutputPin = this.getRotor(FOURTH_ROTOR).plateToPin(fourthRotorBackwardsInputPin);
+      var fourthRotorBackwardsOutputPosition = this.getRotorOutputPosition(fourthRotorBackwardsOutputPin, FOURTH_ROTOR);
+
+      //LEFT ROTOR
+      var leftRotorInputPlate = this.getRotorInputPosition(fourthRotorBackwardsOutputPosition, Enigma.LEFT_ROTOR);
+      var leftRotorOutputPin = this.getRotor(Enigma.LEFT_ROTOR).plateToPin(leftRotorInputPlate);
+      var leftRotorBackwardsOutputPosition = this.getRotorOutputPosition(leftRotorOutputPin, Enigma.LEFT_ROTOR);
+
+      //CENTER ROTOR
+      var centerRotorInputPosition = this.getRotorInputPosition(leftRotorBackwardsOutputPosition, Enigma.CENTER_ROTOR);
+      var centerRotorOutputPin = this.getRotor(Enigma.CENTER_ROTOR).plateToPin(centerRotorInputPosition);
+      var centerRotorBackwardsOutputPosition = this.getRotorOutputPosition(centerRotorOutputPin, Enigma.CENTER_ROTOR);
+
+      //RIGHT ROTOR
+      var rightRotorInputPlate = this.getRotorInputPosition(centerRotorBackwardsOutputPosition, Enigma.RIGHT_ROTOR);
+      var rightRotorOutputPin = this.getRotor(Enigma.RIGHT_ROTOR).plateToPin(rightRotorInputPlate);
+      var rightRotorBackwardsOutputPosition = this.getRotorOutputPosition(rightRotorOutputPin, Enigma.RIGHT_ROTOR);
+
+      //AND THROUGH AGAIN THE NON ROTATING PARTS
+      var entryWheelOutputLetter = this.entryWheel.getLetterFromPlate(rightRotorBackwardsOutputPosition);
+      var swappedOutputLetter = this.plugBoard.getSwappedLetter(entryWheelOutputLetter);
+
+      return swappedOutputLetter;
     }
+  }]);
 
-    _createClass(EnigmaM4, [{
-        key: "getEncodedLetter",
-        value: function getEncodedLetter(inputLetter) {
-
-            this.advanceRotors();
-
-            //FORWARD THROUGH THE NON ROTATING PARTS
-            var normalizedInputLetter = inputLetter.toUpperCase();
-            var swappedInputLetter = this.plugBoard.getSwappedLetter(normalizedInputLetter);
-            var entryWheelInputPosition = this.entryWheel.getPlateFromLetter(swappedInputLetter);
-
-            //RIGHT ROTOR
-            var rightRotorInputPin = this.getRotorInputPosition(entryWheelInputPosition, RIGHT_ROTOR);
-            var rightRotorOutputPlate = this.getRotor(RIGHT_ROTOR).pinToPlate(rightRotorInputPin);
-            var rightRotorForwardOutputPosition = this.getRotorOutputPosition(rightRotorOutputPlate, RIGHT_ROTOR);
-
-            //CENTER ROTOR
-            var centerRotorInputPin = this.getRotorInputPosition(rightRotorForwardOutputPosition, CENTER_ROTOR);
-            var centerRotorOutputPlate = this.getRotor(CENTER_ROTOR).pinToPlate(centerRotorInputPin);
-            var centerRotorForwardOutputPosition = this.getRotorOutputPosition(centerRotorOutputPlate, CENTER_ROTOR);
-
-            //LEFT ROTOR
-            var leftRotorInputPin = this.getRotorInputPosition(centerRotorForwardOutputPosition, LEFT_ROTOR);
-            var leftRotorOutputPlate = this.getRotor(LEFT_ROTOR).pinToPlate(leftRotorInputPin);
-            var leftRotorForwardOutputPosition = this.getRotorOutputPosition(leftRotorOutputPlate, LEFT_ROTOR);
-
-            //FOURTH ROTOR
-            var fourthRotorForwardInputPin = this.getRotorInputPosition(leftRotorForwardOutputPosition, FOURTH_ROTOR);
-            var fourthRotorForwardOutputPin = this.getRotor(FOURTH_ROTOR).pinToPlate(fourthRotorInputPin);
-            var fourthRotorForwardOutputPosition = this.getRotorOutputPosition(fourthRotorForwardOutputPin, FOURTH_ROTOR);
-
-            //REFLECTION
-            var reflectedPosition = this.reflector.pinToPin(fourthRotorForwardOutputPosition);
-            //AND NOW BACKWARDS!
-
-            //FOURTH ROTOR
-            var fourthRotorBackwardsInputPin = this.getRotorInputPosition(reflectedPosition, FOURTH_ROTOR);
-            var fourthRotorBackwardsOutputPin = this.getRotor(FOURTH_ROTOR).plateToPin(fourthRotorBackwardsInputPin);
-            var fourthRotorBackwardsOutputPosition = this.getRotorOutputPosition(fourthRotorBackwardsOutputPin, FOURTH_ROTOR);
-
-            //LEFT ROTOR
-            var leftRotorInputPlate = this.getRotorInputPosition(fourthRotorBackwardsOutputPosition, LEFT_ROTOR);
-            var leftRotorOutputPin = this.getRotor(LEFT_ROTOR).plateToPin(leftRotorInputPlate);
-            var leftRotorBackwardsOutputPosition = this.getRotorOutputPosition(leftRotorOutputPin, LEFT_ROTOR);
-
-            //CENTER ROTOR
-            var centerRotorInputPosition = this.getRotorInputPosition(leftRotorBackwardsOutputPosition, CENTER_ROTOR);
-            var centerRotorOutputPin = this.getRotor(CENTER_ROTOR).plateToPin(centerRotorInputPosition);
-            var centerRotorBackwardsOutputPosition = this.getRotorOutputPosition(centerRotorOutputPin, CENTER_ROTOR);
-
-            //RIGHT ROTOR
-            var rightRotorInputPlate = this.getRotorInputPosition(centerRotorBackwardsOutputPosition, RIGHT_ROTOR);
-            var rightRotorOutputPin = this.getRotor(RIGHT_ROTOR).plateToPin(rightRotorInputPlate);
-            var rightRotorBackwardsOutputPosition = this.getRotorOutputPosition(rightRotorOutputPin, RIGHT_ROTOR);
-
-            //AND THROUGH AGAIN THE NON ROTATING PARTS
-            var entryWheelOutputLetter = this.entryWheel.getLetterFromPlate(rightRotorBackwardsOutputPosition);
-            var swappedOutputLetter = this.plugBoard.getSwappedLetter(entryWheelOutputLetter);
-
-            return swappedOutputLetter;
-        }
-    }]);
-
-    return EnigmaM4;
-}(Enigma.Enigma);
+  return EnigmaM4;
+}(Enigma.default);
 
 exports.default = EnigmaM4;
