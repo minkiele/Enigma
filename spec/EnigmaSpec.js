@@ -1,9 +1,9 @@
 var Enigma = require('../dist/Enigma');
-var Rotor = require('../dist/Component/WiredWheel/Rotor/Rotor').default;
-var RotorI = require('../dist/Component/WiredWheel/Rotor/RotorI').default;
-var RotorII = require('../dist/Component/WiredWheel/Rotor/RotorII').default;
-var RotorIII = require('../dist/Component/WiredWheel/Rotor/RotorIII').default;
-var ReflectorB = require('../dist/Component/WiredWheel/Reflector/ReflectorB').default;
+var Rotor = require('../dist/Component/WiredWheel/Rotor/Rotor');
+var RotorI = require('../dist/Component/WiredWheel/Rotor/RotorI');
+var RotorII = require('../dist/Component/WiredWheel/Rotor/RotorII');
+var RotorIII = require('../dist/Component/WiredWheel/Rotor/RotorIII');
+var ReflectorB = require('../dist/Component/WiredWheel/Reflector/ReflectorB');
 
 describe('Enigma Machine', function () {
 

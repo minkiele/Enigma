@@ -32,3 +32,4 @@ var ThinReflectorB = function (_ThinReflector) {
 }(_ThinReflector3.default);
 
 exports.default = ThinReflectorB;
+module.exports = exports["default"];

@@ -1,4 +1,4 @@
-var RotorI = require('../dist/Component/WiredWheel/Rotor/RotorI').default;
+var RotorI = require('../dist/Component/WiredWheel/Rotor/RotorI');
 
 describe('RotorI', function () {
   it('should return the same position', function () {

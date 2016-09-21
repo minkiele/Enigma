@@ -11,3 +11,4 @@ var WiredWheel = function WiredWheel() {
 };
 
 exports.default = WiredWheel;
+module.exports = exports["default"];

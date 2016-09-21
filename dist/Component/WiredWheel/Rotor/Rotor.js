@@ -82,3 +82,4 @@ var Rotor = function (_WiredWheel) {
 }(_WiredWheel3.default);
 
 exports.default = Rotor;
+module.exports = exports["default"];

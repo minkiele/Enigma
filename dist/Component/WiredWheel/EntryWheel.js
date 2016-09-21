@@ -41,3 +41,4 @@ var EntryWheel = function () {
 }();
 
 exports.default = EntryWheel;
+module.exports = exports["default"];

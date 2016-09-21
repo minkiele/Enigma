@@ -33,3 +33,4 @@ var RotorII = function (_Rotor) {
 }(_Rotor3.default);
 
 exports.default = RotorII;
+module.exports = exports['default'];

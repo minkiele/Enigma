@@ -32,3 +32,4 @@ var ReflectorB = function (_Reflector) {
 }(_Reflector3.default);
 
 exports.default = ReflectorB;
+module.exports = exports["default"];

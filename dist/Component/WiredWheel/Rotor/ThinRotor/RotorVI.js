@@ -32,3 +32,4 @@ var RotorVI = function (_ThinRotor) {
 }(_ThinRotor3.default);
 
 exports.default = RotorVI;
+module.exports = exports["default"];

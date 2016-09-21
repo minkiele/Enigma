@@ -32,3 +32,4 @@ var ReflectorGamma = function (_Reflector) {
 }(_Reflector3.default);
 
 exports.default = ReflectorGamma;
+module.exports = exports["default"];

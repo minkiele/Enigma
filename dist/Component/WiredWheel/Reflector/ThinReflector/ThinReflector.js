@@ -29,3 +29,4 @@ var ThinReflector = function (_Reflector) {
 }(_Reflector3.default);
 
 exports.default = ThinReflector;
+module.exports = exports["default"];

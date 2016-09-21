@@ -41,3 +41,4 @@ var PlugBoard = function () {
 }();
 
 exports.default = PlugBoard;
+module.exports = exports["default"];

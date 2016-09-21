@@ -52,3 +52,4 @@ var Reflector = function (_WiredWheel) {
 }(_WiredWheel3.default);
 
 exports.default = Reflector;
+module.exports = exports["default"];
