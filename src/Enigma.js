@@ -65,9 +65,7 @@ export default class Enigma {
     this.advanceRotor(RIGHT_ROTOR);
   }
 
-  getEncodedLetter (inputLetter) {
-
-    this.advanceRotors();
+  encodeForward (inputLetter) {
 
     //FORWARD THROUGH THE NON ROTATING PARTS
     let normalizedInputLetter = inputLetter.toUpperCase();
@@ -89,9 +87,20 @@ export default class Enigma {
     let leftRotorOutputPlate = this.getRotor(LEFT_ROTOR).pinToPlate(leftRotorInputPin);
     let leftRotorForwardOutputPosition = this.getRotorOutputPosition(leftRotorOutputPlate, LEFT_ROTOR);
 
+    return leftRotorForwardOutputPosition;
+
+  }
+
+  encodeReflect (leftRotorForwardOutputPosition) {
     //REFLECTION
     let reflectedPosition = this.reflector.pinToPin(leftRotorForwardOutputPosition);
     //AND NOW BACKWARDS!
+
+    return reflectedPosition;
+
+  }
+
+  encodeBackwards (reflectedPosition) {
 
     //LEFT ROTOR
     let leftRotorInputPlate = this.getRotorInputPosition(reflectedPosition, LEFT_ROTOR);
@@ -111,6 +120,18 @@ export default class Enigma {
     //AND THROUGH AGAIN THE NON ROTATING PARTS
     let entryWheelOutputLetter = this.entryWheel.getLetterFromPlate(rightRotorBackwardsOutputPosition);
     let swappedOutputLetter = this.plugBoard.getSwappedLetter(entryWheelOutputLetter);
+
+    return swappedOutputLetter;
+
+  }
+
+  getEncodedLetter (inputLetter) {
+
+    this.advanceRotors();
+
+    let leftRotorForwardOutputPosition = this.encodeForward(inputLetter);
+    let reflectedPosition = this.encodeReflect(leftRotorForwardOutputPosition);
+    let swappedOutputLetter = this.encodeBackwards(reflectedPosition);
 
     return swappedOutputLetter;
 

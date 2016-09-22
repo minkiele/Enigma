@@ -99,10 +99,8 @@ var Enigma = function () {
       this.advanceRotor(RIGHT_ROTOR);
     }
   }, {
-    key: "getEncodedLetter",
-    value: function getEncodedLetter(inputLetter) {
-
-      this.advanceRotors();
+    key: "encodeForward",
+    value: function encodeForward(inputLetter) {
 
       //FORWARD THROUGH THE NON ROTATING PARTS
       var normalizedInputLetter = inputLetter.toUpperCase();
@@ -124,9 +122,20 @@ var Enigma = function () {
       var leftRotorOutputPlate = this.getRotor(LEFT_ROTOR).pinToPlate(leftRotorInputPin);
       var leftRotorForwardOutputPosition = this.getRotorOutputPosition(leftRotorOutputPlate, LEFT_ROTOR);
 
+      return leftRotorForwardOutputPosition;
+    }
+  }, {
+    key: "encodeReflect",
+    value: function encodeReflect(leftRotorForwardOutputPosition) {
       //REFLECTION
       var reflectedPosition = this.reflector.pinToPin(leftRotorForwardOutputPosition);
       //AND NOW BACKWARDS!
+
+      return reflectedPosition;
+    }
+  }, {
+    key: "encodeBackwards",
+    value: function encodeBackwards(reflectedPosition) {
 
       //LEFT ROTOR
       var leftRotorInputPlate = this.getRotorInputPosition(reflectedPosition, LEFT_ROTOR);
@@ -146,6 +155,18 @@ var Enigma = function () {
       //AND THROUGH AGAIN THE NON ROTATING PARTS
       var entryWheelOutputLetter = this.entryWheel.getLetterFromPlate(rightRotorBackwardsOutputPosition);
       var swappedOutputLetter = this.plugBoard.getSwappedLetter(entryWheelOutputLetter);
+
+      return swappedOutputLetter;
+    }
+  }, {
+    key: "getEncodedLetter",
+    value: function getEncodedLetter(inputLetter) {
+
+      this.advanceRotors();
+
+      var leftRotorForwardOutputPosition = this.encodeForward(inputLetter);
+      var reflectedPosition = this.encodeReflect(leftRotorForwardOutputPosition);
+      var swappedOutputLetter = this.encodeBackwards(reflectedPosition);
 
       return swappedOutputLetter;
     }
