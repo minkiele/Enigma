@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FOURTH_ROTOR = undefined;
+exports.FOURTH_ROTOR = exports.RIGHT_ROTOR = exports.CENTER_ROTOR = exports.LEFT_ROTOR = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -25,6 +25,9 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+exports.LEFT_ROTOR = _Enigma2.LEFT_ROTOR;
+exports.CENTER_ROTOR = _Enigma2.CENTER_ROTOR;
+exports.RIGHT_ROTOR = _Enigma2.RIGHT_ROTOR;
 var FOURTH_ROTOR = exports.FOURTH_ROTOR = 'F';
 
 var EnigmaM4 = function (_Enigma) {
@@ -45,23 +48,39 @@ var EnigmaM4 = function (_Enigma) {
 
       var leftRotorForwardOutputPosition = _get(EnigmaM4.prototype.__proto__ || Object.getPrototypeOf(EnigmaM4.prototype), "encodeForward", this).call(this, inputLetter);
 
-      //FOURTH ROTOR
-      var fourthRotorForwardInputPin = this.getRotorInputPosition(leftRotorForwardOutputPosition, FOURTH_ROTOR);
-      var fourthRotorForwardOutputPin = this.getRotor(FOURTH_ROTOR).pinToPlate(fourthRotorForwardInputPin);
-      var fourthRotorForwardOutputPosition = this.getRotorOutputPosition(fourthRotorForwardOutputPin, FOURTH_ROTOR);
-
-      return fourthRotorForwardOutputPosition;
+      if (this.isClassicConfiguration()) {
+        return leftRotorForwardOutputPosition;
+      } else {
+        //FOURTH ROTOR
+        var fourthRotorForwardInputPin = this.getRotorInputPosition(leftRotorForwardOutputPosition, FOURTH_ROTOR);
+        var fourthRotorForwardOutputPin = this.getRotor(FOURTH_ROTOR).pinToPlate(fourthRotorForwardInputPin);
+        var fourthRotorForwardOutputPosition = this.getRotorOutputPosition(fourthRotorForwardOutputPin, FOURTH_ROTOR);
+        return fourthRotorForwardOutputPosition;
+      }
     }
   }, {
     key: "encodeBackwards",
     value: function encodeBackwards(reflectedPosition) {
 
-      //FOURTH ROTOR
-      var fourthRotorBackwardsInputPin = this.getRotorInputPosition(reflectedPosition, FOURTH_ROTOR);
-      var fourthRotorBackwardsOutputPin = this.getRotor(FOURTH_ROTOR).plateToPin(fourthRotorBackwardsInputPin);
-      var fourthRotorBackwardsOutputPosition = this.getRotorOutputPosition(fourthRotorBackwardsOutputPin, FOURTH_ROTOR);
+      var inputReflectedPosition = void 0;
 
-      return _get(EnigmaM4.prototype.__proto__ || Object.getPrototypeOf(EnigmaM4.prototype), "encodeBackwards", this).call(this, fourthRotorBackwardsOutputPosition);
+      if (this.isClassicConfiguration()) {
+        inputReflectedPosition = reflectedPosition;
+      } else {
+        //FOURTH ROTOR
+        var fourthRotorBackwardsInputPin = this.getRotorInputPosition(reflectedPosition, FOURTH_ROTOR);
+        var fourthRotorBackwardsOutputPin = this.getRotor(FOURTH_ROTOR).plateToPin(fourthRotorBackwardsInputPin);
+        var fourthRotorBackwardsOutputPosition = this.getRotorOutputPosition(fourthRotorBackwardsOutputPin, FOURTH_ROTOR);
+
+        inputReflectedPosition = fourthRotorBackwardsOutputPosition;
+      }
+
+      return _get(EnigmaM4.prototype.__proto__ || Object.getPrototypeOf(EnigmaM4.prototype), "encodeBackwards", this).call(this, inputReflectedPosition);
+    }
+  }, {
+    key: "isClassicConfiguration",
+    value: function isClassicConfiguration() {
+      return this.getRotor(FOURTH_ROTOR) === null && this.reflector instanceof _ThinRotor2.default;
     }
   }]);
 

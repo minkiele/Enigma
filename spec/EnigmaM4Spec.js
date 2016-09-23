@@ -2,10 +2,11 @@ var Enigma = require('../dist/Enigma');
 var EnigmaM4 = require('../dist/EnigmaM4');
 var RotorI = require('../dist/Component/WiredWheel/Rotor/RotorI');
 var RotorII = require('../dist/Component/WiredWheel/Rotor/RotorII');
-var RotorIV = require('../dist/Component/WiredWheel/Rotor/RotorIV');
+var RotorIII = require('../dist/Component/WiredWheel/Rotor/RotorIII');
 var RotorIV = require('../dist/Component/WiredWheel/Rotor/RotorIV');
 var ThinRotorBeta = require('../dist/Component/WiredWheel/Rotor/ThinRotor/ThinRotorBeta');
 var ThinReflectorB = require('../dist/Component/WiredWheel/Reflector/ThinReflector/ThinReflectorB');
+var ReflectorB = require('../dist/Component/WiredWheel/Reflector/ReflectorB');
 
 describe('EnigmaM4 Machine', function () {
 
@@ -61,4 +62,58 @@ describe('EnigmaM4 Machine', function () {
     expect(machine.encode(decodedMessage)).toBe(encodedMessage);
   });
 
+});
+
+describe('Enigma M4 Machine (in classic mode)', function () {
+  it('should encode AAAAA IN BDZGO', function () {
+
+    /**
+     * Test found here
+     * https://en.wikipedia.org/wiki/Enigma_rotor_details#Rotor_offset
+     */
+
+    var machine = new Enigma.default();
+
+    machine.setRotor(new RotorI(), Enigma.LEFT_ROTOR);
+    machine.setRotor(new RotorII(), Enigma.CENTER_ROTOR);
+    machine.setRotor(new RotorIII(), Enigma.RIGHT_ROTOR);
+    machine.setReflector(new ReflectorB());
+
+    expect(machine.getEncodedLetter('A')).toEqual('B');
+    expect(machine.getEncodedLetter('A')).toEqual('D');
+    expect(machine.getEncodedLetter('A')).toEqual('Z');
+    expect(machine.getEncodedLetter('A')).toEqual('G');
+    expect(machine.getEncodedLetter('A')).toEqual('O');
+
+  });
+
+
+  it('should encode AAAAA IN EWTYX', function () {
+
+    /**
+     * Test found here
+     * https://en.wikipedia.org/wiki/Enigma_rotor_details#Rotor_offset
+     */
+
+    var machine = new Enigma.default();
+
+    var leftRotor = new RotorI();
+    leftRotor.setRingSetting('B');
+    var centerRotor = new RotorII();
+    centerRotor.setRingSetting('B');
+    var rightRotor = new RotorIII();
+    rightRotor.setRingSetting('B');
+
+    machine.setRotor(leftRotor, Enigma.LEFT_ROTOR);
+    machine.setRotor(centerRotor, Enigma.CENTER_ROTOR);
+    machine.setRotor(rightRotor, Enigma.RIGHT_ROTOR);
+    machine.setReflector(new ReflectorB());
+
+    expect(machine.getEncodedLetter('A')).toEqual('E');
+    expect(machine.getEncodedLetter('A')).toEqual('W');
+    expect(machine.getEncodedLetter('A')).toEqual('T');
+    expect(machine.getEncodedLetter('A')).toEqual('Y');
+    expect(machine.getEncodedLetter('A')).toEqual('X');
+
+  });
 });
