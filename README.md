@@ -12,3 +12,9 @@ Also, although the fourth rotor cannot advance automatically the method accepts
 even that rotor.
 
 Yes, it needs some further validation, but the base is that even the M4 is proven to work.
+
+The main references:
+
+ * [Enigma rotor details](https://en.wikipedia.org/wiki/Enigma_rotor_details)
+ * [Enigma details](http://users.telenet.be/d.rijmenants/en/enigmatech.htm#steppingmechanism)
+ * [Enigma/Sample Messages](http://wiki.franklinheath.co.uk/index.php/Enigma/Sample_Messages)
