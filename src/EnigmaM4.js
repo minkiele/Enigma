@@ -1,5 +1,6 @@
 import Enigma, {LEFT_ROTOR, CENTER_ROTOR, RIGHT_ROTOR} from "./Enigma";
 import ThinRotor from "./Component/WiredWheel/Rotor/ThinRotor";
+import ThinReflector from "./Component/WiredWheel/Reflector/ThinReflector";
 
 export {LEFT_ROTOR, CENTER_ROTOR, RIGHT_ROTOR};
 
@@ -33,7 +34,7 @@ export default class EnigmaM4 extends Enigma {
     let inputReflectedPosition;
 
     if(this.isClassicConfiguration()) {
-      inputReflectedPosition = reflectedPosition
+      inputReflectedPosition = reflectedPosition;
     } else {
       //FOURTH ROTOR
       let fourthRotorBackwardsInputPin = this.getRotorInputPosition(reflectedPosition, FOURTH_ROTOR);
@@ -50,6 +51,19 @@ export default class EnigmaM4 extends Enigma {
 
   isClassicConfiguration () {
     return this.getRotor(FOURTH_ROTOR) === null && this.reflector instanceof ThinRotor;
+  }
+
+  isMachineValidState () {
+
+    let superTest = super.isMachineValidState();
+
+    if(this.isClassicConfiguration()){
+      return superTest;
+    } else {
+        return superTest &&
+               this.getRotor(FOURTH_ROTOR) instanceof ThinRotor &&
+               this.reflector instanceof ThinReflector;
+    }
   }
 
 }

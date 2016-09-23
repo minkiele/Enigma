@@ -19,6 +19,14 @@ var _EntryWheel = require("./Component/WiredWheel/EntryWheel");
 
 var _EntryWheel2 = _interopRequireDefault(_EntryWheel);
 
+var _Rotor = require("./Component/WiredWheel/Rotor");
+
+var _Rotor2 = _interopRequireDefault(_Rotor);
+
+var _Reflector = require("./Component/WiredWheel/Reflector");
+
+var _Reflector2 = _interopRequireDefault(_Reflector);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -52,6 +60,7 @@ var Enigma = function () {
     value: function setRotor(rotor, position) {
       this.rotors[position] = rotor;
       this.setRotorWindowLetter('A', position);
+      return this;
     }
   }, {
     key: "getRotor",
@@ -62,11 +71,13 @@ var Enigma = function () {
     key: "setReflector",
     value: function setReflector(reflector) {
       this.reflector = reflector;
+      return this;
     }
   }, {
     key: "setRotorWindowLetter",
     value: function setRotorWindowLetter(letter, position) {
       this.rotorsWindowLetter[position] = letter;
+      return this;
     }
   }, {
     key: "getRotorWindowLetter",
@@ -83,6 +94,7 @@ var Enigma = function () {
     key: "advanceRotor",
     value: function advanceRotor(rotor) {
       this.setRotorWindowLetter(Utils.getNextLetter(this.getRotorWindowLetter(rotor)), rotor);
+      return this;
     }
   }, {
     key: "advanceRotors",
@@ -97,6 +109,7 @@ var Enigma = function () {
         this.advanceRotor(CENTER_ROTOR);
       }
       this.advanceRotor(RIGHT_ROTOR);
+      return this;
     }
   }, {
     key: "encodeForward",
@@ -162,6 +175,10 @@ var Enigma = function () {
     key: "getEncodedLetter",
     value: function getEncodedLetter(inputLetter) {
 
+      if (!this.isMachineValidState()) {
+        throw "Machine is not in valid state";
+      }
+
       this.advanceRotors();
 
       var leftRotorForwardOutputPosition = this.encodeForward(inputLetter);
@@ -189,6 +206,11 @@ var Enigma = function () {
         output += this.getEncodedLetter(string.charAt(i));
       }
       return output;
+    }
+  }, {
+    key: "isMachineValidState",
+    value: function isMachineValidState() {
+      return this.getRotor(LEFT_ROTOR) instanceof _Rotor2.default && this.getRotor(CENTER_ROTOR) instanceof _Rotor2.default && this.getRotor(RIGHT_ROTOR) instanceof _Rotor2.default && this.reflector instanceof _Reflector2.default;
     }
   }]);
 

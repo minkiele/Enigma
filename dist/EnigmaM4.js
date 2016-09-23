@@ -17,6 +17,10 @@ var _ThinRotor = require("./Component/WiredWheel/Rotor/ThinRotor");
 
 var _ThinRotor2 = _interopRequireDefault(_ThinRotor);
 
+var _ThinReflector = require("./Component/WiredWheel/Reflector/ThinReflector");
+
+var _ThinReflector2 = _interopRequireDefault(_ThinReflector);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -81,6 +85,18 @@ var EnigmaM4 = function (_Enigma) {
     key: "isClassicConfiguration",
     value: function isClassicConfiguration() {
       return this.getRotor(FOURTH_ROTOR) === null && this.reflector instanceof _ThinRotor2.default;
+    }
+  }, {
+    key: "isMachineValidState",
+    value: function isMachineValidState() {
+
+      var superTest = _get(EnigmaM4.prototype.__proto__ || Object.getPrototypeOf(EnigmaM4.prototype), "isMachineValidState", this).call(this);
+
+      if (this.isClassicConfiguration()) {
+        return superTest;
+      } else {
+        return superTest && this.getRotor(FOURTH_ROTOR) instanceof _ThinRotor2.default && this.reflector instanceof _ThinReflector2.default;
+      }
     }
   }]);
 

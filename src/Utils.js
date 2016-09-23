@@ -25,3 +25,18 @@ export function getNotchLetter(windowLetter) {
 export function getModularNumber(expression, module = 26) {
   return (module + expression) % module;
 }
+
+let upperCaseLetterRegexp = /^[A-Z]$/;
+
+export function isUpperCaseLetter(input){
+  return upperCaseLetterRegexp.test(input);
+}
+
+export function normalizeInput(letter) {
+  let upperCase = `${letter}`.toUpperCase();
+  if(isUpperCaseLetter(upperCase)){
+    return upperCase.charAt(0);
+  } else {
+    throw 'Input cannot be normalized';
+  }
+}

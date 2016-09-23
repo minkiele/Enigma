@@ -10,6 +10,8 @@ var _Component2 = require("../Component");
 
 var _Component3 = _interopRequireDefault(_Component2);
 
+var _Utils = require("../Utils");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33,13 +35,22 @@ var PlugBoard = function (_Component) {
   _createClass(PlugBoard, [{
     key: "plugWire",
     value: function plugWire(firstLetter, secondLetter) {
+
+      firstLetter = (0, _Utils.normalizeInput)(firstLetter);
+      secondLetter = (0, _Utils.normalizeInput)(secondLetter);
+
+      if (firstLetter === secondLetter) {
+        throw 'Cannot plug the same letter';
+      }
       var wire = [firstLetter, secondLetter];
       this.wirings.push(wire);
     }
   }, {
     key: "getSwappedLetter",
     value: function getSwappedLetter(inputLetter) {
-      var normalizedInputLetter = inputLetter.toUpperCase();
+
+      inputLetter = (0, _Utils.normalizeInput)(inputLetter);
+
       for (var i = 0; i < this.wirings.length; i += 1) {
         if (this.wirings[i][0] === inputLetter) {
           return this.wirings[i][1];
@@ -48,7 +59,7 @@ var PlugBoard = function (_Component) {
         }
       }
 
-      return normalizedInputLetter;
+      return inputLetter;
     }
   }]);
 

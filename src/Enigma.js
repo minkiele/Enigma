@@ -1,6 +1,8 @@
 import PlugBoard from "./Component/PlugBoard";
 import * as Utils from "./Utils";
 import EntryWheel from "./Component/WiredWheel/EntryWheel";
+import Rotor from "./Component/WiredWheel/Rotor";
+import Reflector from "./Component/WiredWheel/Reflector";
 
 export const LEFT_ROTOR = 'L';
 export const CENTER_ROTOR = 'C';
@@ -25,6 +27,7 @@ export default class Enigma {
   setRotor (rotor, position) {
     this.rotors[position] = rotor;
     this.setRotorWindowLetter('A', position);
+    return this;
   }
 
   getRotor (position) {
@@ -33,10 +36,12 @@ export default class Enigma {
 
   setReflector(reflector) {
     this.reflector = reflector;
+    return this;
   }
 
   setRotorWindowLetter(letter, position) {
     this.rotorsWindowLetter[position] = letter;
+    return this;
   }
 
   getRotorWindowLetter(position) {
@@ -50,6 +55,7 @@ export default class Enigma {
 
   advanceRotor (rotor) {
     this.setRotorWindowLetter(Utils.getNextLetter(this.getRotorWindowLetter(rotor)), rotor);
+    return this;
   }
 
   advanceRotors () {
@@ -63,6 +69,7 @@ export default class Enigma {
       this.advanceRotor(CENTER_ROTOR);
     }
     this.advanceRotor(RIGHT_ROTOR);
+    return this;
   }
 
   encodeForward (inputLetter) {
@@ -127,6 +134,10 @@ export default class Enigma {
 
   getEncodedLetter (inputLetter) {
 
+    if(!this.isMachineValidState()) {
+      throw "Machine is not in valid state";
+    }
+
     this.advanceRotors();
 
     let leftRotorForwardOutputPosition = this.encodeForward(inputLetter);
@@ -160,6 +171,13 @@ export default class Enigma {
       output += this.getEncodedLetter(string.charAt(i));
     }
     return output;
+  }
+
+  isMachineValidState () {
+    return this.getRotor(LEFT_ROTOR) instanceof Rotor &&
+           this.getRotor(CENTER_ROTOR) instanceof Rotor &&
+           this.getRotor(RIGHT_ROTOR) instanceof Rotor &&
+           this.reflector instanceof Reflector;
   }
 
 }

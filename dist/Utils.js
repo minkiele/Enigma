@@ -9,6 +9,8 @@ exports.getShiftedLetter = getShiftedLetter;
 exports.getNextLetter = getNextLetter;
 exports.getNotchLetter = getNotchLetter;
 exports.getModularNumber = getModularNumber;
+exports.isUpperCaseLetter = isUpperCaseLetter;
+exports.normalizeInput = normalizeInput;
 var A_INDEX = exports.A_INDEX = 'A'.charCodeAt(0);
 
 function getIndex(letter) {
@@ -39,4 +41,19 @@ function getModularNumber(expression) {
   var module = arguments.length <= 1 || arguments[1] === undefined ? 26 : arguments[1];
 
   return (module + expression) % module;
+}
+
+var upperCaseLetterRegexp = /^[A-Z]$/;
+
+function isUpperCaseLetter(input) {
+  return upperCaseLetterRegexp.test(input);
+}
+
+function normalizeInput(letter) {
+  var upperCase = ('' + letter).toUpperCase();
+  if (isUpperCaseLetter(upperCase)) {
+    return upperCase.charAt(0);
+  } else {
+    throw 'Input cannot be normalized';
+  }
 }
