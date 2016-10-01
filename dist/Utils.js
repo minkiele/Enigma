@@ -14,7 +14,7 @@ exports.normalizeInput = normalizeInput;
 var A_INDEX = exports.A_INDEX = 'A'.charCodeAt(0);
 
 function getIndex(letter) {
-  var index = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
+  var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
   return letter.charCodeAt(index) - A_INDEX;
 }
@@ -38,7 +38,7 @@ function getNotchLetter(windowLetter) {
 }
 
 function getModularNumber(expression) {
-  var module = arguments.length <= 1 || arguments[1] === undefined ? 26 : arguments[1];
+  var module = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 26;
 
   return (module + expression) % module;
 }

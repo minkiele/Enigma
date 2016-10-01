@@ -4,9 +4,9 @@ import EntryWheel from "./Component/WiredWheel/EntryWheel";
 import Rotor from "./Component/WiredWheel/Rotor";
 import Reflector from "./Component/WiredWheel/Reflector";
 
-export const LEFT_ROTOR = 'L';
-export const CENTER_ROTOR = 'C';
-export const RIGHT_ROTOR = 'R';
+const LEFT_ROTOR = 'L';
+const CENTER_ROTOR = 'C';
+const RIGHT_ROTOR = 'R';
 
 export default class Enigma {
 
@@ -181,3 +181,7 @@ export default class Enigma {
   }
 
 }
+
+Enigma.LEFT_ROTOR = LEFT_ROTOR;
+Enigma.CENTER_ROTOR = CENTER_ROTOR;
+Enigma.RIGHT_ROTOR = RIGHT_ROTOR;

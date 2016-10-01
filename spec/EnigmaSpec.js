@@ -9,7 +9,7 @@ describe('Enigma Machine', function () {
 
   it('should have all its rotors not set', function () {
 
-    var machine = new Enigma.default();
+    var machine = new Enigma();
 
     expect(machine.getRotor(Enigma.LEFT_ROTOR)).toBe(null);
     expect(machine.getRotor(Enigma.CENTER_ROTOR)).toBe(null);
@@ -18,7 +18,7 @@ describe('Enigma Machine', function () {
 
   it('should have rotor setters that work', function () {
 
-    var machine = new Enigma.default();
+    var machine = new Enigma();
 
     machine.setRotor(new RotorIII(), Enigma.LEFT_ROTOR);
     machine.setRotor(new RotorII(), Enigma.CENTER_ROTOR);
@@ -32,7 +32,7 @@ describe('Enigma Machine', function () {
 
   it('should have rotor getters that work', function () {
 
-    var machine = new Enigma.default();
+    var machine = new Enigma();
 
     machine.setRotor(new RotorIII(), Enigma.LEFT_ROTOR);
     machine.setRotor(new RotorII(), Enigma.CENTER_ROTOR);
@@ -46,7 +46,7 @@ describe('Enigma Machine', function () {
 
   it('should do the double step', function () {
 
-    var machine = new Enigma.default();
+    var machine = new Enigma();
 
     machine.setRotor(new RotorIII(), Enigma.LEFT_ROTOR);
     machine.setRotor(new RotorII(), Enigma.CENTER_ROTOR);
@@ -72,7 +72,7 @@ describe('Enigma Machine', function () {
 
   it('should find the correct input pin and output plate', function () {
 
-    var machine = new Enigma.default();
+    var machine = new Enigma();
 
     /**
      * Verifying this tests
@@ -127,7 +127,7 @@ describe('Enigma Machine', function () {
      * https://en.wikipedia.org/wiki/Enigma_rotor_details#Rotor_offset
      */
 
-    var machine = new Enigma.default();
+    var machine = new Enigma();
 
     machine.setRotor(new RotorI(), Enigma.LEFT_ROTOR);
     machine.setRotor(new RotorII(), Enigma.CENTER_ROTOR);
@@ -150,7 +150,7 @@ describe('Enigma Machine', function () {
      * https://en.wikipedia.org/wiki/Enigma_rotor_details#Rotor_offset
      */
 
-    var machine = new Enigma.default();
+    var machine = new Enigma();
 
     var leftRotor = new RotorI();
     leftRotor.setRingSetting('B');
@@ -174,7 +174,7 @@ describe('Enigma Machine', function () {
 
   it('should encode both ways', function () {
 
-    var machine = new Enigma.default();
+    var machine = new Enigma();
 
     machine.setRotor(new RotorI(), Enigma.LEFT_ROTOR);
     machine.setRotor(new RotorII(), Enigma.CENTER_ROTOR);

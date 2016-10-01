@@ -16,7 +16,7 @@ describe('EnigmaM4 Machine', function () {
      * @link http://wiki.franklinheath.co.uk/index.php/Enigma/Sample_Messages
      */
 
-    var machine = new EnigmaM4.default();
+    var machine = new EnigmaM4();
 
     machine.setReflector(new ThinReflectorB());
 
@@ -24,14 +24,14 @@ describe('EnigmaM4 Machine', function () {
     machine.setRotor(fourthRotor, EnigmaM4.FOURTH_ROTOR);
 
     var leftRotor = new RotorII();
-    machine.setRotor(leftRotor, Enigma.LEFT_ROTOR);
+    machine.setRotor(leftRotor, EnigmaM4.LEFT_ROTOR);
 
     var centerRotor = new RotorIV();
-    machine.setRotor(centerRotor, Enigma.CENTER_ROTOR);
+    machine.setRotor(centerRotor, EnigmaM4.CENTER_ROTOR);
 
     var rightRotor = new RotorI();
     rightRotor.setRingPosition(21);
-    machine.setRotor(rightRotor, Enigma.RIGHT_ROTOR);
+    machine.setRotor(rightRotor, EnigmaM4.RIGHT_ROTOR);
 
     var plugBoard = machine.getPlugBoard();
 
@@ -47,17 +47,17 @@ describe('EnigmaM4 Machine', function () {
     plugBoard.plugWire('V', 'X');
 
     machine.setRotorWindowLetter('V', EnigmaM4.FOURTH_ROTOR);
-    machine.setRotorWindowLetter('J', Enigma.LEFT_ROTOR);
-    machine.setRotorWindowLetter('N', Enigma.CENTER_ROTOR);
+    machine.setRotorWindowLetter('J', EnigmaM4.LEFT_ROTOR);
+    machine.setRotorWindowLetter('N', EnigmaM4.CENTER_ROTOR);
 
     var encodedMessage = 'NCZWVUSXPNYMINHZXMQXSFWXWLKJAHSHNMCOCCAKUQPMKCSMHKSEINJUSBLKIOSXCKUBHMLLXCSJUSRRDVKOHULXWCCBGVLIYXEOAHXRHKKFVDREWEZLXOBAFGYUJQUKGRTVUKAMEURBVEKSUHHVOYHABCJWMAKLFKLMYFVNRIZRVVRTKOFDANJMOLBGFFLEOPRGTFLVRHOWOPBEKVWMUQFMPWPARMFHAGKXIIBG';
                         //VONVONJLOOKSJHFFTTTEINSEINSDREIZWOYYQNNSNEUNINHALTXXBEIANGRIFFUNTERWASSERGEDRUECKTYWABOSXLETZTERGEGNERSTANDNULACHTDREINULUHRMARQUANTONJOTANEUNACHTSEYHSDREIYZWOZWONULGRADYACHTSMYSTOSSENACHXEKNSVIERMBFAELLTYNNNNNNOOOVIERYSICHTEINSNULL
     var decodedMessage = machine.encode(encodedMessage);
 
     machine.setRotorWindowLetter('V', EnigmaM4.FOURTH_ROTOR);
-    machine.setRotorWindowLetter('J', Enigma.LEFT_ROTOR);
-    machine.setRotorWindowLetter('N', Enigma.CENTER_ROTOR);
-    machine.setRotorWindowLetter('A', Enigma.RIGHT_ROTOR);
+    machine.setRotorWindowLetter('J', EnigmaM4.LEFT_ROTOR);
+    machine.setRotorWindowLetter('N', EnigmaM4.CENTER_ROTOR);
+    machine.setRotorWindowLetter('A', EnigmaM4.RIGHT_ROTOR);
 
     expect(machine.encode(decodedMessage)).toBe(encodedMessage);
   });
@@ -72,11 +72,11 @@ describe('Enigma M4 Machine (in classic mode)', function () {
      * https://en.wikipedia.org/wiki/Enigma_rotor_details#Rotor_offset
      */
 
-    var machine = new Enigma.default();
+    var machine = new EnigmaM4();
 
-    machine.setRotor(new RotorI(), Enigma.LEFT_ROTOR);
-    machine.setRotor(new RotorII(), Enigma.CENTER_ROTOR);
-    machine.setRotor(new RotorIII(), Enigma.RIGHT_ROTOR);
+    machine.setRotor(new RotorI(), EnigmaM4.LEFT_ROTOR);
+    machine.setRotor(new RotorII(), EnigmaM4.CENTER_ROTOR);
+    machine.setRotor(new RotorIII(), EnigmaM4.RIGHT_ROTOR);
     machine.setReflector(new ReflectorB());
 
     expect(machine.getEncodedLetter('A')).toEqual('B');
@@ -95,7 +95,7 @@ describe('Enigma M4 Machine (in classic mode)', function () {
      * https://en.wikipedia.org/wiki/Enigma_rotor_details#Rotor_offset
      */
 
-    var machine = new Enigma.default();
+    var machine = new EnigmaM4();
 
     var leftRotor = new RotorI();
     leftRotor.setRingSetting('B');
@@ -104,9 +104,9 @@ describe('Enigma M4 Machine (in classic mode)', function () {
     var rightRotor = new RotorIII();
     rightRotor.setRingSetting('B');
 
-    machine.setRotor(leftRotor, Enigma.LEFT_ROTOR);
-    machine.setRotor(centerRotor, Enigma.CENTER_ROTOR);
-    machine.setRotor(rightRotor, Enigma.RIGHT_ROTOR);
+    machine.setRotor(leftRotor, EnigmaM4.LEFT_ROTOR);
+    machine.setRotor(centerRotor, EnigmaM4.CENTER_ROTOR);
+    machine.setRotor(rightRotor, EnigmaM4.RIGHT_ROTOR);
     machine.setReflector(new ReflectorB());
 
     expect(machine.getEncodedLetter('A')).toEqual('E');

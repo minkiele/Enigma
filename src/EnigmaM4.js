@@ -1,10 +1,9 @@
 import Enigma, {LEFT_ROTOR, CENTER_ROTOR, RIGHT_ROTOR} from "./Enigma";
 import ThinRotor from "./Component/WiredWheel/Rotor/ThinRotor";
+import Reflector from "./Component/WiredWheel/Reflector";
 import ThinReflector from "./Component/WiredWheel/Reflector/ThinReflector";
 
-export {LEFT_ROTOR, CENTER_ROTOR, RIGHT_ROTOR};
-
-export const FOURTH_ROTOR = 'F';
+const FOURTH_ROTOR = 'F';
 
 export default class EnigmaM4 extends Enigma {
 
@@ -50,7 +49,7 @@ export default class EnigmaM4 extends Enigma {
   }
 
   isClassicConfiguration () {
-    return this.getRotor(FOURTH_ROTOR) === null && this.reflector instanceof ThinRotor;
+    return this.getRotor(FOURTH_ROTOR) === null && this.reflector instanceof Reflector && !(this.reflector instanceof ThinReflector);
   }
 
   isMachineValidState () {
@@ -67,3 +66,5 @@ export default class EnigmaM4 extends Enigma {
   }
 
 }
+
+EnigmaM4.FOURTH_ROTOR = FOURTH_ROTOR;

@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FOURTH_ROTOR = exports.RIGHT_ROTOR = exports.CENTER_ROTOR = exports.LEFT_ROTOR = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -17,6 +16,10 @@ var _ThinRotor = require("./Component/WiredWheel/Rotor/ThinRotor");
 
 var _ThinRotor2 = _interopRequireDefault(_ThinRotor);
 
+var _Reflector = require("./Component/WiredWheel/Reflector");
+
+var _Reflector2 = _interopRequireDefault(_Reflector);
+
 var _ThinReflector = require("./Component/WiredWheel/Reflector/ThinReflector");
 
 var _ThinReflector2 = _interopRequireDefault(_ThinReflector);
@@ -29,10 +32,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-exports.LEFT_ROTOR = _Enigma2.LEFT_ROTOR;
-exports.CENTER_ROTOR = _Enigma2.CENTER_ROTOR;
-exports.RIGHT_ROTOR = _Enigma2.RIGHT_ROTOR;
-var FOURTH_ROTOR = exports.FOURTH_ROTOR = 'F';
+var FOURTH_ROTOR = 'F';
 
 var EnigmaM4 = function (_Enigma) {
   _inherits(EnigmaM4, _Enigma);
@@ -84,7 +84,7 @@ var EnigmaM4 = function (_Enigma) {
   }, {
     key: "isClassicConfiguration",
     value: function isClassicConfiguration() {
-      return this.getRotor(FOURTH_ROTOR) === null && this.reflector instanceof _ThinRotor2.default;
+      return this.getRotor(FOURTH_ROTOR) === null && this.reflector instanceof _Reflector2.default && !(this.reflector instanceof _ThinReflector2.default);
     }
   }, {
     key: "isMachineValidState",
@@ -104,3 +104,7 @@ var EnigmaM4 = function (_Enigma) {
 }(_Enigma3.default);
 
 exports.default = EnigmaM4;
+
+
+EnigmaM4.FOURTH_ROTOR = FOURTH_ROTOR;
+module.exports = exports["default"];
