@@ -37,6 +37,16 @@ export default class PlugBoard extends Component {
 
   }
 
+  plugWires (wires) {
+    wires.forEach((wire) => {
+      this.plugWire(wire[0], wire[1]);
+    });
+  }
+
+  unplugAllWires () {
+    this.wirings.splice(0, this.wirings.length);
+  }
+
   getSwappedLetter(inputLetter) {
 
     inputLetter = normalizeInput(inputLetter);

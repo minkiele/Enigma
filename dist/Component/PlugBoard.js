@@ -62,6 +62,20 @@ var PlugBoard = function (_Component) {
       return false;
     }
   }, {
+    key: "plugWires",
+    value: function plugWires(wires) {
+      var _this2 = this;
+
+      wires.forEach(function (wire) {
+        _this2.plugWire(wire[0], wire[1]);
+      });
+    }
+  }, {
+    key: "unplugAllWires",
+    value: function unplugAllWires() {
+      this.wirings.splice(0, this.wirings.length);
+    }
+  }, {
     key: "getSwappedLetter",
     value: function getSwappedLetter(inputLetter) {
 
