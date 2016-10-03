@@ -46,6 +46,22 @@ var PlugBoard = function (_Component) {
       this.wirings.push(wire);
     }
   }, {
+    key: "unplugWire",
+    value: function unplugWire(firstLetter, secondLetter) {
+
+      firstLetter = (0, _Utils.normalizeInput)(firstLetter);
+      secondLetter = (0, _Utils.normalizeInput)(secondLetter);
+
+      for (var i = 0; i < this.wirings.length; i += 1) {
+        if (this.wirings[i][0] === firstLetter && this.wirings[i][1] === secondLetter || this.wirings[i][1] === firstLetter && this.wirings[i][0] === secondLetter) {
+          this.wirings.splice(i, 1);
+          return true;
+        }
+      }
+
+      return false;
+    }
+  }, {
     key: "getSwappedLetter",
     value: function getSwappedLetter(inputLetter) {
 

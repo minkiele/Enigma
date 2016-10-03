@@ -20,6 +20,23 @@ export default class PlugBoard extends Component {
     this.wirings.push(wire);
   }
 
+  unplugWire (firstLetter, secondLetter) {
+
+    firstLetter = normalizeInput(firstLetter);
+    secondLetter = normalizeInput(secondLetter);
+
+    for(let i = 0; i < this.wirings.length; i += 1) {
+      if((this.wirings[i][0] === firstLetter && this.wirings[i][1] === secondLetter) ||
+        (this.wirings[i][1] === firstLetter && this.wirings[i][0] === secondLetter)){
+        this.wirings.splice(i, 1);
+        return true;
+      }
+    }
+
+    return false;
+
+  }
+
   getSwappedLetter(inputLetter) {
 
     inputLetter = normalizeInput(inputLetter);
