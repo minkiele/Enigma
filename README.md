@@ -18,3 +18,9 @@ The main references:
  * [Enigma rotor details](https://en.wikipedia.org/wiki/Enigma_rotor_details)
  * [Enigma details](http://users.telenet.be/d.rijmenants/en/enigmatech.htm#steppingmechanism)
  * [Enigma/Sample Messages](http://wiki.franklinheath.co.uk/index.php/Enigma/Sample_Messages)
+
+## ES5 and CommonJS
+
+The `dist` directory has been transpiled for ES5 and to support a CommonJS environment.
+
+    BABEL_ENV=ES5-CJS node_modules/.bin/babel -d dist src

@@ -1,6 +1,6 @@
 {
   "name": "enigma-minkiele",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "\"An ES6 implementation of Enigma\"",
   "main": "index.js",
   "scripts": {
