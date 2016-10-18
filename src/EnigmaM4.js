@@ -1,4 +1,4 @@
-import Enigma, {LEFT_ROTOR, CENTER_ROTOR, RIGHT_ROTOR} from "./Enigma";
+import Enigma from "./Enigma";
 import ThinRotor from "./Component/WiredWheel/Rotor/ThinRotor";
 import Reflector from "./Component/WiredWheel/Reflector";
 import ThinReflector from "./Component/WiredWheel/Reflector/ThinReflector";
