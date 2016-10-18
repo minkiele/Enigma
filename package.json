@@ -20,5 +20,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/minkiele/Enigma"
+  },
+  "dependencies": {
+    "glob": "^7.1.1"
   }
 }
