@@ -8,7 +8,7 @@ export default class PlugBoard extends Component {
     this.wirings = [];
   }
 
-  plugWire(firstLetter, secondLetter){
+  plugWire (firstLetter, secondLetter) {
 
     firstLetter = normalizeInput(firstLetter);
     secondLetter = normalizeInput(secondLetter);
@@ -16,6 +16,7 @@ export default class PlugBoard extends Component {
     if(firstLetter === secondLetter) {
       throw 'Cannot plug the same letter';
     }
+
     let wire = [firstLetter, secondLetter];
     this.wirings.push(wire);
   }
@@ -47,7 +48,7 @@ export default class PlugBoard extends Component {
     this.wirings.splice(0, this.wirings.length);
   }
 
-  getSwappedLetter(inputLetter) {
+  getSwappedLetter (inputLetter) {
 
     inputLetter = normalizeInput(inputLetter);
 

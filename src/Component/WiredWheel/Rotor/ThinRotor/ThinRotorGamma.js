@@ -2,9 +2,9 @@ import ThinRotor from "../ThinRotor";
 
 export default class ThinRotorGamma extends ThinRotor {
 
-    constructor () {
-      super();
-      this.wirings = 'FSOKANUERHMBTIYCWLQPZXVGJD';
-    }
+  constructor () {
+    super();
+    this.wirings = 'FSOKANUERHMBTIYCWLQPZXVGJD';
+  }
 
 }

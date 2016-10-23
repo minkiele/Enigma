@@ -42,6 +42,7 @@ var PlugBoard = function (_Component) {
       if (firstLetter === secondLetter) {
         throw 'Cannot plug the same letter';
       }
+
       var wire = [firstLetter, secondLetter];
       this.wirings.push(wire);
     }

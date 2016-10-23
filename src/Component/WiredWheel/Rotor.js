@@ -8,23 +8,23 @@ export default class Rotor extends WiredWheel {
     this.setRingPosition(0);
   }
 
-  pinToPlate(inputPin) {
+  pinToPlate (inputPin) {
     return Utils.getIndex(this.wirings, inputPin);
   }
 
-  plateToPin(outputPlate) {
+  plateToPin (outputPlate) {
     return this.wirings.indexOf(Utils.getLetter(outputPlate));
   }
 
-  setRingPosition(ringPosition) {
+  setRingPosition (ringPosition) {
     this.ringPosition = ringPosition;
   }
 
-  setRingSetting(ringSetting) {
+  setRingSetting (ringSetting) {
     this.setRingPosition(Utils.getIndex(ringSetting));
   }
 
-  getOutputLetter(inputLetter) {
+  getOutputLetter (inputLetter) {
     let normalizedInputLetter = inputLetter.toUpperCase();
     let inputIndex = Utils.getIndex(normalizedInputLetter);
     let normalizedInputIndex = Utils.getModularNumber(inputIndex - this.ringPosition);
@@ -33,7 +33,7 @@ export default class Rotor extends WiredWheel {
     return Utils.getLetter(outputIndex);
   }
 
-  getInputLetter(outputLetter) {
+  getInputLetter (outputLetter) {
     let normalizedOutputLetter = outputLetter.toUpperCase();
     let outputIndex = Utils.getIndex(normalizedOutputLetter);
     let normalizedOutputIndex = Utils.getModularNumber(outputIndex + this.ringPosition);

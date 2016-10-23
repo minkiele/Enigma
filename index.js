@@ -18,4 +18,5 @@ glob.sync('./dist/**/*.js').forEach(function (component) {
     components[componentName] = require(component);
   }
 });
+
 module.exports = components;

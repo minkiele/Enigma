@@ -12,10 +12,6 @@ var _WiredWheel3 = _interopRequireDefault(_WiredWheel2);
 
 var _Utils = require("../../Utils");
 
-var Utils = _interopRequireWildcard(_Utils);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -36,12 +32,12 @@ var EntryWheel = function (_WiredWheel) {
   _createClass(EntryWheel, [{
     key: "getPlateFromLetter",
     value: function getPlateFromLetter(letter) {
-      return Utils.getIndex(letter);
+      return (0, _Utils.getIndex)(letter);
     }
   }, {
     key: "getLetterFromPlate",
     value: function getLetterFromPlate(plate) {
-      return Utils.getLetter(plate);
+      return (0, _Utils.getLetter)(plate);
     }
   }]);
 

@@ -34,17 +34,17 @@ export default class Enigma {
     return this.rotors[position];
   }
 
-  setReflector(reflector) {
+  setReflector (reflector) {
     this.reflector = reflector;
     return this;
   }
 
-  setRotorWindowLetter(letter, position) {
+  setRotorWindowLetter (letter, position) {
     this.rotorsWindowLetter[position] = letter;
     return this;
   }
 
-  getRotorWindowLetter(position) {
+  getRotorWindowLetter (position) {
     return this.rotorsWindowLetter[position];
   }
 
@@ -148,7 +148,7 @@ export default class Enigma {
 
   }
 
-  getRotorInputPosition(inputPosition, rotor) {
+  getRotorInputPosition (inputPosition, rotor) {
     return Utils.getModularNumber(
       inputPosition +
       Utils.getIndex(this.getRotorWindowLetter(rotor)) -
@@ -156,7 +156,7 @@ export default class Enigma {
     );
   }
 
-  getRotorOutputPosition(outputPosition, rotor) {
+  getRotorOutputPosition (outputPosition, rotor) {
     return Utils.getModularNumber(
       outputPosition -
       Utils.getIndex(this.getRotorWindowLetter(rotor)) +

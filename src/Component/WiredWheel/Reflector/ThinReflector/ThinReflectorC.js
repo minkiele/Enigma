@@ -1,8 +1,10 @@
 import ThinReflector from "../ThinReflector";
 
 export default class ThinReflectorC extends ThinReflector {
-  constructor  () {
+
+  constructor () {
     super();
     this.wirings = 'RDOBJNTKVEHMLFCWZAXGYIPSUQ';
   }
+
 }

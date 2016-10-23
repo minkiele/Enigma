@@ -1,14 +1,14 @@
 import WiredWheel from "../WiredWheel";
-import * as Utils from "../../Utils";
+import {getIndex, getLetter} from "../../Utils";
 
 export default class EntryWheel extends WiredWheel {
 
   getPlateFromLetter (letter) {
-    return Utils.getIndex(letter);
+    return getIndex(letter);
   }
 
   getLetterFromPlate (plate) {
-    return Utils.getLetter(plate);
+    return getLetter(plate);
   }
 
 }
