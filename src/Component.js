@@ -1,3 +1,5 @@
-export default class Component {
+import EventEmitter from "events";
+
+export default class Component extends EventEmitter {
 
 }

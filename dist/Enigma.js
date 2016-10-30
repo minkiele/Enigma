@@ -26,27 +26,40 @@ var _Reflector = require("./Component/WiredWheel/Reflector");
 
 var _Reflector2 = _interopRequireDefault(_Reflector);
 
+var _events = require("events");
+
+var _events2 = _interopRequireDefault(_events);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var LEFT_ROTOR = 'L';
 var CENTER_ROTOR = 'C';
 var RIGHT_ROTOR = 'R';
 
-var Enigma = function () {
+var Enigma = function (_EventEmitter) {
+  _inherits(Enigma, _EventEmitter);
+
   function Enigma() {
     _classCallCheck(this, Enigma);
 
-    this.plugBoard = new _PlugBoard2.default();
-    this.entryWheel = new _EntryWheel2.default();
-    this.rotors = {};
-    this.rotorsWindowLetter = {};
-    this.setRotor(null, LEFT_ROTOR);
-    this.setRotor(null, CENTER_ROTOR);
-    this.setRotor(null, RIGHT_ROTOR);
+    var _this = _possibleConstructorReturn(this, (Enigma.__proto__ || Object.getPrototypeOf(Enigma)).call(this));
+
+    _this.plugBoard = new _PlugBoard2.default();
+    _this.entryWheel = new _EntryWheel2.default();
+    _this.rotors = {};
+    _this.rotorsWindowLetter = {};
+    _this.setRotor(null, LEFT_ROTOR);
+    _this.setRotor(null, CENTER_ROTOR);
+    _this.setRotor(null, RIGHT_ROTOR);
+    return _this;
   }
 
   _createClass(Enigma, [{
@@ -58,6 +71,7 @@ var Enigma = function () {
     key: "setRotor",
     value: function setRotor(rotor, position) {
       this.rotors[position] = rotor;
+      this.emit('change.rotorSet', rotor, position);
       this.setRotorWindowLetter('A', position);
       return this;
     }
@@ -70,12 +84,14 @@ var Enigma = function () {
     key: "setReflector",
     value: function setReflector(reflector) {
       this.reflector = reflector;
+      this.emit('change.reflectorSet', reflector);
       return this;
     }
   }, {
     key: "setRotorWindowLetter",
     value: function setRotorWindowLetter(letter, position) {
       this.rotorsWindowLetter[position] = letter;
+      this.emit('change.rotorWindowLetterSet', letter, position, this.getRotor(position));
       return this;
     }
   }, {
@@ -91,8 +107,9 @@ var Enigma = function () {
     }
   }, {
     key: "advanceRotor",
-    value: function advanceRotor(rotor) {
-      this.setRotorWindowLetter(Utils.getNextLetter(this.getRotorWindowLetter(rotor)), rotor);
+    value: function advanceRotor(position) {
+      this.setRotorWindowLetter(Utils.getNextLetter(this.getRotorWindowLetter(position)), position);
+      this.emit('change.rotorAdvanced', position, this.getRotor(position), this.getRotorWindowLetter(position));
       return this;
     }
   }, {
@@ -108,6 +125,7 @@ var Enigma = function () {
         this.advanceRotor(CENTER_ROTOR);
       }
       this.advanceRotor(RIGHT_ROTOR);
+      this.emit('change.rotorsAdvanced');
       return this;
     }
   }, {
@@ -214,7 +232,7 @@ var Enigma = function () {
   }]);
 
   return Enigma;
-}();
+}(_events2.default);
 
 exports.default = Enigma;
 

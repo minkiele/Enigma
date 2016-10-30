@@ -43,8 +43,15 @@ var PlugBoard = function (_Component) {
         throw 'Cannot plug the same letter';
       }
 
+      for (var i = 0; i < this.wirings.length; i += 1) {
+        if (this.wirings[i][0] === firstLetter || this.wirings[i][1] === secondLetter || this.wirings[i][1] === firstLetter || this.wirings[i][0] === secondLetter) {
+          return false;
+        }
+      }
+
       var wire = [firstLetter, secondLetter];
       this.wirings.push(wire);
+      this.emit('change.wirePlugged', firstLetter, secondLetter);
     }
   }, {
     key: "unplugWire",
@@ -56,6 +63,7 @@ var PlugBoard = function (_Component) {
       for (var i = 0; i < this.wirings.length; i += 1) {
         if (this.wirings[i][0] === firstLetter && this.wirings[i][1] === secondLetter || this.wirings[i][1] === firstLetter && this.wirings[i][0] === secondLetter) {
           this.wirings.splice(i, 1);
+          this.emit('change.wireUnplugged', firstLetter, secondLetter);
           return true;
         }
       }

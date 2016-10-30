@@ -3,14 +3,16 @@ import * as Utils from "./Utils";
 import EntryWheel from "./Component/WiredWheel/EntryWheel";
 import Rotor from "./Component/WiredWheel/Rotor";
 import Reflector from "./Component/WiredWheel/Reflector";
+import EventEmitter from "events";
 
 const LEFT_ROTOR = 'L';
 const CENTER_ROTOR = 'C';
 const RIGHT_ROTOR = 'R';
 
-export default class Enigma {
+export default class Enigma extends EventEmitter {
 
   constructor () {
+    super();
     this.plugBoard = new PlugBoard();
     this.entryWheel = new EntryWheel();
     this.rotors = {};
@@ -26,6 +28,7 @@ export default class Enigma {
 
   setRotor (rotor, position) {
     this.rotors[position] = rotor;
+    this.emit('change.rotorSet', rotor, position);
     this.setRotorWindowLetter('A', position);
     return this;
   }
@@ -36,11 +39,13 @@ export default class Enigma {
 
   setReflector (reflector) {
     this.reflector = reflector;
+    this.emit('change.reflectorSet', reflector);
     return this;
   }
 
   setRotorWindowLetter (letter, position) {
     this.rotorsWindowLetter[position] = letter;
+    this.emit('change.rotorWindowLetterSet', letter, position, this.getRotor(position))
     return this;
   }
 
@@ -53,8 +58,9 @@ export default class Enigma {
     return this.getRotor(position).notchPosition.indexOf(notchLetter) > -1;
   }
 
-  advanceRotor (rotor) {
-    this.setRotorWindowLetter(Utils.getNextLetter(this.getRotorWindowLetter(rotor)), rotor);
+  advanceRotor (position) {
+    this.setRotorWindowLetter(Utils.getNextLetter(this.getRotorWindowLetter(position)), position);
+    this.emit('change.rotorAdvanced', position, this.getRotor(position), this.getRotorWindowLetter(position));
     return this;
   }
 
@@ -69,6 +75,7 @@ export default class Enigma {
       this.advanceRotor(CENTER_ROTOR);
     }
     this.advanceRotor(RIGHT_ROTOR);
+    this.emit('change.rotorsAdvanced');
     return this;
   }
 

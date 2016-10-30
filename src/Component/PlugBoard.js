@@ -17,8 +17,16 @@ export default class PlugBoard extends Component {
       throw 'Cannot plug the same letter';
     }
 
+    for(let i = 0; i < this.wirings.length; i += 1) {
+      if(this.wirings[i][0] === firstLetter || this.wirings[i][1] === secondLetter ||
+          this.wirings[i][1] === firstLetter || this.wirings[i][0] === secondLetter){
+        return false;
+      }
+    }
+
     let wire = [firstLetter, secondLetter];
     this.wirings.push(wire);
+    this.emit('change.wirePlugged', firstLetter, secondLetter);
   }
 
   unplugWire (firstLetter, secondLetter) {
@@ -30,6 +38,7 @@ export default class PlugBoard extends Component {
       if((this.wirings[i][0] === firstLetter && this.wirings[i][1] === secondLetter) ||
         (this.wirings[i][1] === firstLetter && this.wirings[i][0] === secondLetter)){
         this.wirings.splice(i, 1);
+        this.emit('change.wireUnplugged', firstLetter, secondLetter);
         return true;
       }
     }

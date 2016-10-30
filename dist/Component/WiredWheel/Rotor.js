@@ -50,11 +50,13 @@ var Rotor = function (_WiredWheel) {
     key: "setRingPosition",
     value: function setRingPosition(ringPosition) {
       this.ringPosition = ringPosition;
+      this.emit('change.ringPositionSet', ringPosition);
     }
   }, {
     key: "setRingSetting",
     value: function setRingSetting(ringSetting) {
       this.setRingPosition(Utils.getIndex(ringSetting));
+      this.emit('change.ringSettingSet', ringSetting);
     }
   }, {
     key: "getOutputLetter",

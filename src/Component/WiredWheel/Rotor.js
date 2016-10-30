@@ -18,10 +18,12 @@ export default class Rotor extends WiredWheel {
 
   setRingPosition (ringPosition) {
     this.ringPosition = ringPosition;
+    this.emit('change.ringPositionSet', ringPosition);
   }
 
   setRingSetting (ringSetting) {
     this.setRingPosition(Utils.getIndex(ringSetting));
+    this.emit('change.ringSettingSet', ringSetting);
   }
 
   getOutputLetter (inputLetter) {
