@@ -12,7 +12,7 @@ var doNotRequire = [
   'ThinReflector'
 ];
 
-glob.sync('./dist/**/*.js').forEach(function (component) {
+glob.sync(path.join(__dirname, 'dist/**/*.js')).forEach(function (component) {
   var componentName = path.parse(component).name;
   if(doNotRequire.indexOf(componentName) === -1) {
     components[componentName] = require(component);
