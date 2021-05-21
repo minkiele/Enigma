@@ -1,35 +1,31 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _ThinReflector2 = require("../ThinReflector");
-
-var _ThinReflector3 = _interopRequireDefault(_ThinReflector2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ThinReflectorC = function (_ThinReflector) {
-  _inherits(ThinReflectorC, _ThinReflector);
-
-  function ThinReflectorC() {
-    _classCallCheck(this, ThinReflectorC);
-
-    var _this = _possibleConstructorReturn(this, (ThinReflectorC.__proto__ || Object.getPrototypeOf(ThinReflectorC)).call(this));
-
-    _this.wirings = 'RDOBJNTKVEHMLFCWZAXGYIPSUQ';
-    return _this;
-  }
-
-  return ThinReflectorC;
-}(_ThinReflector3.default);
-
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var ThinReflector_1 = __importDefault(require("../ThinReflector"));
+var ThinReflectorC = /** @class */ (function (_super) {
+    __extends(ThinReflectorC, _super);
+    function ThinReflectorC() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.wirings = 'RDOBJNTKVEHMLFCWZAXGYIPSUQ';
+        return _this;
+    }
+    return ThinReflectorC;
+}(ThinReflector_1.default));
 exports.default = ThinReflectorC;
-module.exports = exports["default"];

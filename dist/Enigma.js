@@ -1,243 +1,191 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _PlugBoard = require("./Component/PlugBoard");
-
-var _PlugBoard2 = _interopRequireDefault(_PlugBoard);
-
-var _Utils = require("./Utils");
-
-var Utils = _interopRequireWildcard(_Utils);
-
-var _EntryWheel = require("./Component/WiredWheel/EntryWheel");
-
-var _EntryWheel2 = _interopRequireDefault(_EntryWheel);
-
-var _Rotor = require("./Component/WiredWheel/Rotor");
-
-var _Rotor2 = _interopRequireDefault(_Rotor);
-
-var _Reflector = require("./Component/WiredWheel/Reflector");
-
-var _Reflector2 = _interopRequireDefault(_Reflector);
-
-var _events = require("events");
-
-var _events2 = _interopRequireDefault(_events);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var PlugBoard_1 = __importDefault(require("./Component/PlugBoard"));
+var Utils = __importStar(require("./Utils"));
+var EntryWheel_1 = __importDefault(require("./Component/WiredWheel/EntryWheel"));
+var Rotor_1 = __importDefault(require("./Component/WiredWheel/Rotor"));
+var Reflector_1 = __importDefault(require("./Component/WiredWheel/Reflector"));
+var events_1 = __importDefault(require("events"));
 var LEFT_ROTOR = 'L';
 var CENTER_ROTOR = 'C';
 var RIGHT_ROTOR = 'R';
-
-var Enigma = function (_EventEmitter) {
-  _inherits(Enigma, _EventEmitter);
-
-  function Enigma() {
-    _classCallCheck(this, Enigma);
-
-    var _this = _possibleConstructorReturn(this, (Enigma.__proto__ || Object.getPrototypeOf(Enigma)).call(this));
-
-    _this.plugBoard = new _PlugBoard2.default();
-    _this.entryWheel = new _EntryWheel2.default();
-    _this.rotors = {};
-    _this.rotorsWindowLetter = {};
-    _this.setRotor(null, LEFT_ROTOR);
-    _this.setRotor(null, CENTER_ROTOR);
-    _this.setRotor(null, RIGHT_ROTOR);
-    return _this;
-  }
-
-  _createClass(Enigma, [{
-    key: "getPlugBoard",
-    value: function getPlugBoard() {
-      return this.plugBoard;
+var Enigma = /** @class */ (function (_super) {
+    __extends(Enigma, _super);
+    function Enigma() {
+        var _this = _super.call(this) || this;
+        _this.plugBoard = new PlugBoard_1.default();
+        _this.entryWheel = new EntryWheel_1.default();
+        _this.rotors = {};
+        _this.rotorsWindowLetter = {};
+        _this.setRotor(null, LEFT_ROTOR);
+        _this.setRotor(null, CENTER_ROTOR);
+        _this.setRotor(null, RIGHT_ROTOR);
+        return _this;
     }
-  }, {
-    key: "setRotor",
-    value: function setRotor(rotor, position) {
-      this.rotors[position] = rotor;
-      this.emit('change.rotorSet', rotor, position);
-      this.setRotorWindowLetter('A', position);
-      return this;
-    }
-  }, {
-    key: "getRotor",
-    value: function getRotor(position) {
-      return this.rotors[position];
-    }
-  }, {
-    key: "setReflector",
-    value: function setReflector(reflector) {
-      this.reflector = reflector;
-      this.emit('change.reflectorSet', reflector);
-      return this;
-    }
-  }, {
-    key: "setRotorWindowLetter",
-    value: function setRotorWindowLetter(letter, position) {
-      this.rotorsWindowLetter[position] = letter;
-      this.emit('change.rotorWindowLetterSet', letter, position, this.getRotor(position));
-      return this;
-    }
-  }, {
-    key: "getRotorWindowLetter",
-    value: function getRotorWindowLetter(position) {
-      return this.rotorsWindowLetter[position];
-    }
-  }, {
-    key: "isRotorInNotchPosition",
-    value: function isRotorInNotchPosition(position) {
-      var notchLetter = Utils.getNotchLetter(this.getRotorWindowLetter(position));
-      return this.getRotor(position).notchPosition.indexOf(notchLetter) > -1;
-    }
-  }, {
-    key: "advanceRotor",
-    value: function advanceRotor(position) {
-      this.setRotorWindowLetter(Utils.getNextLetter(this.getRotorWindowLetter(position)), position);
-      this.emit('change.rotorAdvanced', position, this.getRotor(position), this.getRotorWindowLetter(position));
-      return this;
-    }
-  }, {
-    key: "advanceRotors",
-    value: function advanceRotors() {
-      var isCenterNotch = this.isRotorInNotchPosition(CENTER_ROTOR);
-      var isRightNotch = this.isRotorInNotchPosition(RIGHT_ROTOR);
-      if (isCenterNotch) {
-        this.advanceRotor(LEFT_ROTOR);
-      }
-      //And that's how we deal with the double step
-      if (isCenterNotch || isRightNotch) {
-        this.advanceRotor(CENTER_ROTOR);
-      }
-      this.advanceRotor(RIGHT_ROTOR);
-      this.emit('change.rotorsAdvanced');
-      return this;
-    }
-  }, {
-    key: "encodeForward",
-    value: function encodeForward(inputLetter) {
-
-      //FORWARD THROUGH THE NON ROTATING PARTS
-      var normalizedInputLetter = inputLetter.toUpperCase();
-      var swappedInputLetter = this.plugBoard.getSwappedLetter(normalizedInputLetter);
-      var entryWheelInputPosition = this.entryWheel.getPlateFromLetter(swappedInputLetter);
-
-      //RIGHT ROTOR
-      var rightRotorInputPin = this.getRotorInputPosition(entryWheelInputPosition, RIGHT_ROTOR);
-      var rightRotorOutputPlate = this.getRotor(RIGHT_ROTOR).pinToPlate(rightRotorInputPin);
-      var rightRotorForwardOutputPosition = this.getRotorOutputPosition(rightRotorOutputPlate, RIGHT_ROTOR);
-
-      //CENTER ROTOR
-      var centerRotorInputPin = this.getRotorInputPosition(rightRotorForwardOutputPosition, CENTER_ROTOR);
-      var centerRotorOutputPlate = this.getRotor(CENTER_ROTOR).pinToPlate(centerRotorInputPin);
-      var centerRotorForwardOutputPosition = this.getRotorOutputPosition(centerRotorOutputPlate, CENTER_ROTOR);
-
-      //LEFT ROTOR
-      var leftRotorInputPin = this.getRotorInputPosition(centerRotorForwardOutputPosition, LEFT_ROTOR);
-      var leftRotorOutputPlate = this.getRotor(LEFT_ROTOR).pinToPlate(leftRotorInputPin);
-      var leftRotorForwardOutputPosition = this.getRotorOutputPosition(leftRotorOutputPlate, LEFT_ROTOR);
-
-      return leftRotorForwardOutputPosition;
-    }
-  }, {
-    key: "encodeReflect",
-    value: function encodeReflect(leftRotorForwardOutputPosition) {
-      //REFLECTION
-      var reflectedPosition = this.reflector.pinToPin(leftRotorForwardOutputPosition);
-      //AND NOW BACKWARDS!
-
-      return reflectedPosition;
-    }
-  }, {
-    key: "encodeBackwards",
-    value: function encodeBackwards(reflectedPosition) {
-
-      //LEFT ROTOR
-      var leftRotorInputPlate = this.getRotorInputPosition(reflectedPosition, LEFT_ROTOR);
-      var leftRotorOutputPin = this.getRotor(LEFT_ROTOR).plateToPin(leftRotorInputPlate);
-      var leftRotorBackwardsOutputPosition = this.getRotorOutputPosition(leftRotorOutputPin, LEFT_ROTOR);
-
-      //CENTER ROTOR
-      var centerRotorInputPosition = this.getRotorInputPosition(leftRotorBackwardsOutputPosition, CENTER_ROTOR);
-      var centerRotorOutputPin = this.getRotor(CENTER_ROTOR).plateToPin(centerRotorInputPosition);
-      var centerRotorBackwardsOutputPosition = this.getRotorOutputPosition(centerRotorOutputPin, CENTER_ROTOR);
-
-      //RIGHT ROTOR
-      var rightRotorInputPlate = this.getRotorInputPosition(centerRotorBackwardsOutputPosition, RIGHT_ROTOR);
-      var rightRotorOutputPin = this.getRotor(RIGHT_ROTOR).plateToPin(rightRotorInputPlate);
-      var rightRotorBackwardsOutputPosition = this.getRotorOutputPosition(rightRotorOutputPin, RIGHT_ROTOR);
-
-      //AND THROUGH AGAIN THE NON ROTATING PARTS
-      var entryWheelOutputLetter = this.entryWheel.getLetterFromPlate(rightRotorBackwardsOutputPosition);
-      var swappedOutputLetter = this.plugBoard.getSwappedLetter(entryWheelOutputLetter);
-
-      return swappedOutputLetter;
-    }
-  }, {
-    key: "getEncodedLetter",
-    value: function getEncodedLetter(inputLetter) {
-
-      if (!this.isMachineValidState()) {
-        throw "Machine is not in valid state";
-      }
-
-      this.advanceRotors();
-
-      var leftRotorForwardOutputPosition = this.encodeForward(inputLetter);
-      var reflectedPosition = this.encodeReflect(leftRotorForwardOutputPosition);
-      var swappedOutputLetter = this.encodeBackwards(reflectedPosition);
-
-      return swappedOutputLetter;
-    }
-  }, {
-    key: "getRotorInputPosition",
-    value: function getRotorInputPosition(inputPosition, rotor) {
-      return Utils.getModularNumber(inputPosition + Utils.getIndex(this.getRotorWindowLetter(rotor)) - this.getRotor(rotor).ringPosition);
-    }
-  }, {
-    key: "getRotorOutputPosition",
-    value: function getRotorOutputPosition(outputPosition, rotor) {
-      return Utils.getModularNumber(outputPosition - Utils.getIndex(this.getRotorWindowLetter(rotor)) + this.getRotor(rotor).ringPosition);
-    }
-  }, {
-    key: "encode",
-    value: function encode(string) {
-      var output = '';
-      var normalizedString = string.toUpperCase();
-      for (var i = 0; i < string.length; i += 1) {
-        output += this.getEncodedLetter(string.charAt(i));
-      }
-      return output;
-    }
-  }, {
-    key: "isMachineValidState",
-    value: function isMachineValidState() {
-      return this.getRotor(LEFT_ROTOR) instanceof _Rotor2.default && this.getRotor(CENTER_ROTOR) instanceof _Rotor2.default && this.getRotor(RIGHT_ROTOR) instanceof _Rotor2.default && this.reflector instanceof _Reflector2.default;
-    }
-  }]);
-
-  return Enigma;
-}(_events2.default);
-
+    Enigma.prototype.getPlugBoard = function () {
+        return this.plugBoard;
+    };
+    Enigma.prototype.setRotor = function (rotor, position) {
+        this.rotors[position] = rotor;
+        this.emit('change.rotorSet', rotor, position);
+        this.setRotorWindowLetter('A', position);
+        return this;
+    };
+    Enigma.prototype.getRotor = function (position) {
+        return this.rotors[position];
+    };
+    Enigma.prototype.setReflector = function (reflector) {
+        this.reflector = reflector;
+        this.emit('change.reflectorSet', reflector);
+        return this;
+    };
+    Enigma.prototype.setRotorWindowLetter = function (letter, position) {
+        this.rotorsWindowLetter[position] = letter;
+        this.emit('change.rotorWindowLetterSet', letter, position, this.getRotor(position));
+        return this;
+    };
+    Enigma.prototype.getRotorWindowLetter = function (position) {
+        return this.rotorsWindowLetter[position];
+    };
+    Enigma.prototype.isRotorInNotchPosition = function (position) {
+        var notchLetter = Utils.getNotchLetter(this.getRotorWindowLetter(position));
+        return this.getRotor(position).notchPosition.indexOf(notchLetter) > -1;
+    };
+    Enigma.prototype.advanceRotor = function (position) {
+        this.setRotorWindowLetter(Utils.getNextLetter(this.getRotorWindowLetter(position)), position);
+        this.emit('change.rotorAdvanced', position, this.getRotor(position), this.getRotorWindowLetter(position));
+        return this;
+    };
+    Enigma.prototype.advanceRotors = function () {
+        var isCenterNotch = this.isRotorInNotchPosition(CENTER_ROTOR);
+        var isRightNotch = this.isRotorInNotchPosition(RIGHT_ROTOR);
+        if (isCenterNotch) {
+            this.advanceRotor(LEFT_ROTOR);
+        }
+        //And that's how we deal with the double step
+        if (isCenterNotch || isRightNotch) {
+            this.advanceRotor(CENTER_ROTOR);
+        }
+        this.advanceRotor(RIGHT_ROTOR);
+        this.emit('change.rotorsAdvanced');
+        return this;
+    };
+    Enigma.prototype.encodeForward = function (inputLetter) {
+        //FORWARD THROUGH THE NON ROTATING PARTS
+        var normalizedInputLetter = inputLetter.toUpperCase();
+        var swappedInputLetter = this.plugBoard.getSwappedLetter(normalizedInputLetter);
+        var entryWheelInputPosition = this.entryWheel.getPlateFromLetter(swappedInputLetter);
+        //RIGHT ROTOR
+        var rightRotorInputPin = this.getRotorInputPosition(entryWheelInputPosition, RIGHT_ROTOR);
+        var rightRotorOutputPlate = this.getRotor(RIGHT_ROTOR).pinToPlate(rightRotorInputPin);
+        var rightRotorForwardOutputPosition = this.getRotorOutputPosition(rightRotorOutputPlate, RIGHT_ROTOR);
+        //CENTER ROTOR
+        var centerRotorInputPin = this.getRotorInputPosition(rightRotorForwardOutputPosition, CENTER_ROTOR);
+        var centerRotorOutputPlate = this.getRotor(CENTER_ROTOR).pinToPlate(centerRotorInputPin);
+        var centerRotorForwardOutputPosition = this.getRotorOutputPosition(centerRotorOutputPlate, CENTER_ROTOR);
+        //LEFT ROTOR
+        var leftRotorInputPin = this.getRotorInputPosition(centerRotorForwardOutputPosition, LEFT_ROTOR);
+        var leftRotorOutputPlate = this.getRotor(LEFT_ROTOR).pinToPlate(leftRotorInputPin);
+        var leftRotorForwardOutputPosition = this.getRotorOutputPosition(leftRotorOutputPlate, LEFT_ROTOR);
+        return leftRotorForwardOutputPosition;
+    };
+    Enigma.prototype.encodeReflect = function (leftRotorForwardOutputPosition) {
+        //REFLECTION
+        var reflectedPosition = this.reflector.pinToPin(leftRotorForwardOutputPosition);
+        //AND NOW BACKWARDS!
+        return reflectedPosition;
+    };
+    Enigma.prototype.encodeBackwards = function (reflectedPosition) {
+        //LEFT ROTOR
+        var leftRotorInputPlate = this.getRotorInputPosition(reflectedPosition, LEFT_ROTOR);
+        var leftRotorOutputPin = this.getRotor(LEFT_ROTOR).plateToPin(leftRotorInputPlate);
+        var leftRotorBackwardsOutputPosition = this.getRotorOutputPosition(leftRotorOutputPin, LEFT_ROTOR);
+        //CENTER ROTOR
+        var centerRotorInputPosition = this.getRotorInputPosition(leftRotorBackwardsOutputPosition, CENTER_ROTOR);
+        var centerRotorOutputPin = this.getRotor(CENTER_ROTOR).plateToPin(centerRotorInputPosition);
+        var centerRotorBackwardsOutputPosition = this.getRotorOutputPosition(centerRotorOutputPin, CENTER_ROTOR);
+        //RIGHT ROTOR
+        var rightRotorInputPlate = this.getRotorInputPosition(centerRotorBackwardsOutputPosition, RIGHT_ROTOR);
+        var rightRotorOutputPin = this.getRotor(RIGHT_ROTOR).plateToPin(rightRotorInputPlate);
+        var rightRotorBackwardsOutputPosition = this.getRotorOutputPosition(rightRotorOutputPin, RIGHT_ROTOR);
+        //AND THROUGH AGAIN THE NON ROTATING PARTS
+        var entryWheelOutputLetter = this.entryWheel.getLetterFromPlate(rightRotorBackwardsOutputPosition);
+        var swappedOutputLetter = this.plugBoard.getSwappedLetter(entryWheelOutputLetter);
+        return swappedOutputLetter;
+    };
+    Enigma.prototype.getEncodedLetter = function (inputLetter) {
+        if (!this.isMachineValidState()) {
+            throw 'Machine is not in valid state';
+        }
+        this.advanceRotors();
+        var leftRotorForwardOutputPosition = this.encodeForward(inputLetter);
+        var reflectedPosition = this.encodeReflect(leftRotorForwardOutputPosition);
+        var swappedOutputLetter = this.encodeBackwards(reflectedPosition);
+        return swappedOutputLetter;
+    };
+    Enigma.prototype.getRotorInputPosition = function (inputPosition, rotor) {
+        return Utils.getModularNumber(inputPosition +
+            Utils.getIndex(this.getRotorWindowLetter(rotor)) -
+            this.getRotor(rotor).ringPosition);
+    };
+    Enigma.prototype.getRotorOutputPosition = function (outputPosition, rotor) {
+        return Utils.getModularNumber(outputPosition -
+            Utils.getIndex(this.getRotorWindowLetter(rotor)) +
+            this.getRotor(rotor).ringPosition);
+    };
+    Enigma.prototype.encode = function (string) {
+        var output = '';
+        for (var i = 0; i < string.length; i += 1) {
+            output += this.getEncodedLetter(string.charAt(i));
+        }
+        return output;
+    };
+    Enigma.prototype.isMachineValidState = function () {
+        return (this.getRotor(LEFT_ROTOR) instanceof Rotor_1.default &&
+            this.getRotor(CENTER_ROTOR) instanceof Rotor_1.default &&
+            this.getRotor(RIGHT_ROTOR) instanceof Rotor_1.default &&
+            this.reflector instanceof Reflector_1.default);
+    };
+    Enigma.LEFT_ROTOR = LEFT_ROTOR;
+    Enigma.CENTER_ROTOR = CENTER_ROTOR;
+    Enigma.RIGHT_ROTOR = RIGHT_ROTOR;
+    return Enigma;
+}(events_1.default));
 exports.default = Enigma;
-
-
-Enigma.LEFT_ROTOR = LEFT_ROTOR;
-Enigma.CENTER_ROTOR = CENTER_ROTOR;
-Enigma.RIGHT_ROTOR = RIGHT_ROTOR;
-module.exports = exports["default"];

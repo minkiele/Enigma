@@ -1,35 +1,31 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _ThinRotor2 = require("../ThinRotor");
-
-var _ThinRotor3 = _interopRequireDefault(_ThinRotor2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ThinRotorBeta = function (_ThinRotor) {
-  _inherits(ThinRotorBeta, _ThinRotor);
-
-  function ThinRotorBeta() {
-    _classCallCheck(this, ThinRotorBeta);
-
-    var _this = _possibleConstructorReturn(this, (ThinRotorBeta.__proto__ || Object.getPrototypeOf(ThinRotorBeta)).call(this));
-
-    _this.wirings = 'LEYJVCNIXWPBQMDRTAKZGFUHOS';
-    return _this;
-  }
-
-  return ThinRotorBeta;
-}(_ThinRotor3.default);
-
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var ThinRotor_1 = __importDefault(require("../ThinRotor"));
+var ThinRotorBeta = /** @class */ (function (_super) {
+    __extends(ThinRotorBeta, _super);
+    function ThinRotorBeta() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.wirings = 'LEYJVCNIXWPBQMDRTAKZGFUHOS';
+        return _this;
+    }
+    return ThinRotorBeta;
+}(ThinRotor_1.default));
 exports.default = ThinRotorBeta;
-module.exports = exports["default"];

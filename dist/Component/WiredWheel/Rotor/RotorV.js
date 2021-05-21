@@ -1,36 +1,32 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _Rotor2 = require('../Rotor');
-
-var _Rotor3 = _interopRequireDefault(_Rotor2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var RotorV = function (_Rotor) {
-  _inherits(RotorV, _Rotor);
-
-  function RotorV() {
-    _classCallCheck(this, RotorV);
-
-    var _this = _possibleConstructorReturn(this, (RotorV.__proto__ || Object.getPrototypeOf(RotorV)).call(this));
-
-    _this.wirings = 'VZBRGITYUPSDNHLXAWMJQOFECK';
-    _this.notchPosition = 'H';
-    return _this;
-  }
-
-  return RotorV;
-}(_Rotor3.default);
-
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var Rotor_1 = __importDefault(require("../Rotor"));
+var RotorV = /** @class */ (function (_super) {
+    __extends(RotorV, _super);
+    function RotorV() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.wirings = 'VZBRGITYUPSDNHLXAWMJQOFECK';
+        _this.notchPosition = 'H';
+        return _this;
+    }
+    return RotorV;
+}(Rotor_1.default));
 exports.default = RotorV;
-module.exports = exports['default'];

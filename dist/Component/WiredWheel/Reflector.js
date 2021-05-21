@@ -1,55 +1,58 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _WiredWheel2 = require("../WiredWheel");
-
-var _WiredWheel3 = _interopRequireDefault(_WiredWheel2);
-
-var _Utils = require("../../Utils");
-
-var Utils = _interopRequireWildcard(_Utils);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Reflector = function (_WiredWheel) {
-  _inherits(Reflector, _WiredWheel);
-
-  function Reflector() {
-    _classCallCheck(this, Reflector);
-
-    return _possibleConstructorReturn(this, (Reflector.__proto__ || Object.getPrototypeOf(Reflector)).apply(this, arguments));
-  }
-
-  _createClass(Reflector, [{
-    key: "pinToPin",
-    value: function pinToPin(inputPin) {
-      return Utils.getIndex(this.wirings, inputPin);
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var WiredWheel_1 = __importDefault(require("../WiredWheel"));
+var Utils = __importStar(require("../../Utils"));
+var Reflector = /** @class */ (function (_super) {
+    __extends(Reflector, _super);
+    function Reflector() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-  }, {
-    key: "getReflectedLetter",
-    value: function getReflectedLetter(inputLetter) {
-      var normalizedInputLetter = inputLetter.toUpperCase();
-      var inputIndex = Utils.getIndex(normalizedInputLetter);
-      var outputIndex = this.pinToPin(inputIndex);
-      return Utils.getLetter(outputIndex);
-    }
-  }]);
-
-  return Reflector;
-}(_WiredWheel3.default);
-
+    Reflector.prototype.pinToPin = function (inputPin) {
+        return Utils.getIndex(this.wirings, inputPin);
+    };
+    Reflector.prototype.getReflectedLetter = function (inputLetter) {
+        var normalizedInputLetter = inputLetter.toUpperCase();
+        var inputIndex = Utils.getIndex(normalizedInputLetter);
+        var outputIndex = this.pinToPin(inputIndex);
+        return Utils.getLetter(outputIndex);
+    };
+    return Reflector;
+}(WiredWheel_1.default));
 exports.default = Reflector;
-module.exports = exports["default"];

@@ -1,109 +1,90 @@
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _Component2 = require("../Component");
-
-var _Component3 = _interopRequireDefault(_Component2);
-
-var _Utils = require("../Utils");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var PlugBoard = function (_Component) {
-  _inherits(PlugBoard, _Component);
-
-  function PlugBoard() {
-    _classCallCheck(this, PlugBoard);
-
-    var _this = _possibleConstructorReturn(this, (PlugBoard.__proto__ || Object.getPrototypeOf(PlugBoard)).call(this));
-
-    _this.wirings = [];
-    return _this;
-  }
-
-  _createClass(PlugBoard, [{
-    key: "plugWire",
-    value: function plugWire(firstLetter, secondLetter) {
-
-      firstLetter = (0, _Utils.normalizeInput)(firstLetter);
-      secondLetter = (0, _Utils.normalizeInput)(secondLetter);
-
-      if (firstLetter === secondLetter) {
-        throw 'Cannot plug the same letter';
-      }
-
-      for (var i = 0; i < this.wirings.length; i += 1) {
-        if (this.wirings[i][0] === firstLetter || this.wirings[i][1] === secondLetter || this.wirings[i][1] === firstLetter || this.wirings[i][0] === secondLetter) {
-          return false;
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var Component_1 = __importDefault(require("../Component"));
+var Utils_1 = require("../Utils");
+var PlugBoard = /** @class */ (function (_super) {
+    __extends(PlugBoard, _super);
+    function PlugBoard() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.wirings = [];
+        return _this;
+    }
+    PlugBoard.prototype.plugWire = function (firstLetter, secondLetter) {
+        firstLetter = Utils_1.normalizeInput(firstLetter);
+        secondLetter = Utils_1.normalizeInput(secondLetter);
+        if (firstLetter === secondLetter) {
+            throw 'Cannot plug the same letter';
         }
-      }
-
-      var wire = [firstLetter, secondLetter];
-      this.wirings.push(wire);
-      this.emit('change.wirePlugged', firstLetter, secondLetter);
-    }
-  }, {
-    key: "unplugWire",
-    value: function unplugWire(firstLetter, secondLetter) {
-
-      firstLetter = (0, _Utils.normalizeInput)(firstLetter);
-      secondLetter = (0, _Utils.normalizeInput)(secondLetter);
-
-      for (var i = 0; i < this.wirings.length; i += 1) {
-        if (this.wirings[i][0] === firstLetter && this.wirings[i][1] === secondLetter || this.wirings[i][1] === firstLetter && this.wirings[i][0] === secondLetter) {
-          this.wirings.splice(i, 1);
-          this.emit('change.wireUnplugged', firstLetter, secondLetter);
-          return true;
+        for (var i = 0; i < this.wirings.length; i += 1) {
+            var _a = this.wirings[i], wiringFirstLetter = _a[0], wiringSecondLetter = _a[1];
+            if (wiringFirstLetter === firstLetter ||
+                wiringSecondLetter === secondLetter ||
+                wiringSecondLetter === firstLetter ||
+                wiringFirstLetter === secondLetter) {
+                return false;
+            }
         }
-      }
-
-      return false;
-    }
-  }, {
-    key: "plugWires",
-    value: function plugWires(wires) {
-      var _this2 = this;
-
-      wires.forEach(function (wire) {
-        _this2.plugWire(wire[0], wire[1]);
-      });
-    }
-  }, {
-    key: "unplugAllWires",
-    value: function unplugAllWires() {
-      this.wirings.splice(0, this.wirings.length);
-    }
-  }, {
-    key: "getSwappedLetter",
-    value: function getSwappedLetter(inputLetter) {
-
-      inputLetter = (0, _Utils.normalizeInput)(inputLetter);
-
-      for (var i = 0; i < this.wirings.length; i += 1) {
-        if (this.wirings[i][0] === inputLetter) {
-          return this.wirings[i][1];
-        } else if (this.wirings[i][1] === inputLetter) {
-          return this.wirings[i][0];
+        var wire = [firstLetter, secondLetter];
+        this.wirings.push(wire);
+        this.emit('change.wirePlugged', firstLetter, secondLetter);
+        return true;
+    };
+    PlugBoard.prototype.unplugWire = function (firstLetter, secondLetter) {
+        firstLetter = Utils_1.normalizeInput(firstLetter);
+        secondLetter = Utils_1.normalizeInput(secondLetter);
+        for (var i = 0; i < this.wirings.length; i += 1) {
+            var _a = this.wirings[i], wiringFirstLetter = _a[0], wiringSecondLetter = _a[1];
+            if ((wiringFirstLetter === firstLetter &&
+                wiringSecondLetter === secondLetter) ||
+                (wiringSecondLetter === firstLetter &&
+                    wiringFirstLetter === secondLetter)) {
+                this.wirings.splice(i, 1);
+                this.emit('change.wireUnplugged', firstLetter, secondLetter);
+                return true;
+            }
         }
-      }
-
-      return inputLetter;
-    }
-  }]);
-
-  return PlugBoard;
-}(_Component3.default);
-
+        return false;
+    };
+    PlugBoard.prototype.plugWires = function (wires) {
+        var _this = this;
+        wires.forEach(function (wire) {
+            _this.plugWire(wire[0], wire[1]);
+        });
+    };
+    PlugBoard.prototype.unplugAllWires = function () {
+        this.wirings.splice(0, this.wirings.length);
+    };
+    PlugBoard.prototype.getSwappedLetter = function (inputLetter) {
+        inputLetter = Utils_1.normalizeInput(inputLetter);
+        for (var i = 0; i < this.wirings.length; i += 1) {
+            var _a = this.wirings[i], wiringFirstLetter = _a[0], wiringSecondLetter = _a[1];
+            if (wiringFirstLetter === inputLetter) {
+                return wiringSecondLetter;
+            }
+            else if (wiringSecondLetter === inputLetter) {
+                return wiringFirstLetter;
+            }
+        }
+        return inputLetter;
+    };
+    return PlugBoard;
+}(Component_1.default));
 exports.default = PlugBoard;
-module.exports = exports["default"];

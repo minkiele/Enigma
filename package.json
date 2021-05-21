@@ -1,27 +1,33 @@
 {
   "name": "enigma-minkiele",
-  "version": "1.1.3",
-  "description": "\"An ES6 implementation of Enigma\"",
-  "main": "index.js",
+  "version": "1.2.0",
+  "description": "A Typescript implementation of the Enigma Machine",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jasmine"
+    "build": "tsc",
+    "lint": "eslint . --fix --ext .js,.ts,.json",
+    "test": "jest"
   },
   "keywords": [
-    "\"Enigma\""
+    "Enigma"
   ],
-  "author": "\"Michele Montagner\"",
+  "author": "Michele Montagner",
   "license": "MIT",
   "devDependencies": {
-    "jasmine": "^2.5.2",
-    "babel-cli": "^6.14.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-es2015": "^6.14.0"
+    "@types/jest": "^26.0.23",
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "events": "^3.3.0",
+    "jest": "^26.6.3",
+    "prettier": "^2.3.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/minkiele/Enigma"
-  },
-  "dependencies": {
-    "glob": "^7.1.1"
   }
 }
