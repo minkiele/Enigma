@@ -5,7 +5,8 @@
     "module": "CommonJS",
     "outDir": "dist",
     "rootDir": "src",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "declaration": true,
   },
   "include": ["src/**/*"]
 }

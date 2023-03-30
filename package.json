@@ -7,8 +7,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --fix --ext .js,.ts,.json",
-    "test": "jest",
-    "types": "tsc -p types.tsconfig.json"
+    "test": "jest"
   },
   "keywords": [
     "Enigma"
