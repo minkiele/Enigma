@@ -3,7 +3,7 @@
   "version": "1.2.1",
   "description": "A Typescript implementation of the Enigma Machine",
   "main": "dist/index.js",
-  "types": "types/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --fix --ext .js,.ts,.json",
@@ -31,5 +31,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/minkiele/Enigma"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
