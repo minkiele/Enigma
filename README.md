@@ -1,7 +1,7 @@
-# Enigma ES6
+# Enigma TypeScript
 
-This is an Enigma machine implementation in ES6. I built several tests with
-Jasmine 2 to prove it works. It tests some getters, setters, samples from
+This is an Enigma machine implementation in TypeScript. I built several tests with
+Jest to prove it works. It tests some getters, setters, samples from
 Wikipedia but nothing fancy.
 
 It contains also an implementation of the Enigma M4, with the fourth rotor and
@@ -20,8 +20,6 @@ The main references:
  * [Enigma/Sample Messages](http://wiki.franklinheath.co.uk/index.php/Enigma/Sample_Messages)
  * [Umkehrwalze D (Rewirable reflector) implementation](http://www.cryptomuseum.com/crypto/enigma/ukwd/index.htm)
 
-## ES5 and CommonJS
+## Library
 
-The `dist` directory has been transpiled for ES5 and to support a CommonJS environment.
-
-    BABEL_ENV=ES5-CJS node_modules/.bin/babel -d dist src
+The library is now built for modern browsers only, I dropped ES5 support just because IE11 is finally dead.

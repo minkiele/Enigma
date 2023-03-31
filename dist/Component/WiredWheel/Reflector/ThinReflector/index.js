@@ -1,10 +1,1 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ThinReflectorC = exports.ThinReflectorB = void 0;
-var ThinReflectorB_1 = require("./ThinReflectorB");
-Object.defineProperty(exports, "ThinReflectorB", { enumerable: true, get: function () { return __importDefault(ThinReflectorB_1).default; } });
-var ThinReflectorC_1 = require("./ThinReflectorC");
-Object.defineProperty(exports, "ThinReflectorC", { enumerable: true, get: function () { return __importDefault(ThinReflectorC_1).default; } });
+var __importDefault=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};!function(e){if("object"==typeof module&&"object"==typeof module.exports){var t=e(require,exports);void 0!==t&&(module.exports=t)}else"function"==typeof define&&define.amd&&define(["require","exports","./ThinReflectorB","./ThinReflectorC"],e)}((function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.ThinReflectorC=t.ThinReflectorB=void 0;var r=e("./ThinReflectorB");Object.defineProperty(t,"ThinReflectorB",{enumerable:!0,get:function(){return __importDefault(r).default}});var o=e("./ThinReflectorC");Object.defineProperty(t,"ThinReflectorC",{enumerable:!0,get:function(){return __importDefault(o).default}})}));

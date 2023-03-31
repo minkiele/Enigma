@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "target": "ES5",
-    "module": "CommonJS",
-    "outDir": "dist",
+    "target": "ESNext",
+    "module": "umd",
+    "outDir": ".build",
     "rootDir": "src",
     "moduleResolution": "node",
     "declaration": true,
+    "declarationDir": "dist"
   },
   "include": ["src/**/*"]
 }

@@ -1,10 +1,1 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ThinRotorGamma = exports.ThinRotorBeta = void 0;
-var ThinRotorBeta_1 = require("./ThinRotorBeta");
-Object.defineProperty(exports, "ThinRotorBeta", { enumerable: true, get: function () { return __importDefault(ThinRotorBeta_1).default; } });
-var ThinRotorGamma_1 = require("./ThinRotorGamma");
-Object.defineProperty(exports, "ThinRotorGamma", { enumerable: true, get: function () { return __importDefault(ThinRotorGamma_1).default; } });
+var __importDefault=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};!function(e){if("object"==typeof module&&"object"==typeof module.exports){var t=e(require,exports);void 0!==t&&(module.exports=t)}else"function"==typeof define&&define.amd&&define(["require","exports","./ThinRotorBeta","./ThinRotorGamma"],e)}((function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.ThinRotorGamma=t.ThinRotorBeta=void 0;var o=e("./ThinRotorBeta");Object.defineProperty(t,"ThinRotorBeta",{enumerable:!0,get:function(){return __importDefault(o).default}});var r=e("./ThinRotorGamma");Object.defineProperty(t,"ThinRotorGamma",{enumerable:!0,get:function(){return __importDefault(r).default}})}));
