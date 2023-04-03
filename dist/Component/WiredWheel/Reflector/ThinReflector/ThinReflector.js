@@ -1,1 +1,1 @@
-"use strict";var __importDefault=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(exports,"__esModule",{value:!0});const Reflector_1=__importDefault(require("../Reflector"));class ThinReflector extends Reflector_1.default{}exports.default=ThinReflector;
+Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e,t=(e=require("../Reflector"))&&e.__esModule?e:{default:e};class d extends t.default{}exports.default=d;

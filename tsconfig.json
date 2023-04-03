@@ -3,11 +3,12 @@
     "esModuleInterop": true,
     "target": "ESNext",
     "module": "CommonJS",
-    "outDir": ".build",
+    "outDir": "dist",
     "rootDir": "src",
     "moduleResolution": "node",
     "declaration": true,
-    "declarationDir": "dist"
+    "declarationDir": "dist",
+    "emitDeclarationOnly": true
   },
   "include": ["src/**/*"]
 }

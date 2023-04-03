@@ -1,1 +1,1 @@
-"use strict";var __importDefault=this&&this.__importDefault||function(t){return t&&t.__esModule?t:{default:t}};Object.defineProperty(exports,"__esModule",{value:!0});const EventEmitter_1=__importDefault(require("../lib/EventEmitter"));class Component extends EventEmitter_1.default{}exports.default=Component;
+Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e,t=(e=require("../lib/EventEmitter"))&&e.__esModule?e:{default:e};class d extends t.default{}exports.default=d;
