@@ -1,5 +1,5 @@
-import WiredWheel from '../WiredWheel';
-import * as Utils from '../../Utils';
+import WiredWheel from '../../WiredWheel/WiredWheel';
+import { getIndex, getLetter, getModularNumber } from '../../../lib/utils';
 
 export default abstract class Rotor extends WiredWheel {
   public ringPosition: number;
@@ -11,11 +11,11 @@ export default abstract class Rotor extends WiredWheel {
   }
 
   public pinToPlate(inputPin: number): number {
-    return Utils.getIndex(this.wirings, inputPin);
+    return getIndex(this.wirings, inputPin);
   }
 
   public plateToPin(outputPlate: number): number {
-    return this.wirings.indexOf(Utils.getLetter(outputPlate));
+    return this.wirings.indexOf(getLetter(outputPlate));
   }
 
   public setRingPosition(ringPosition: number): void {
@@ -24,33 +24,33 @@ export default abstract class Rotor extends WiredWheel {
   }
 
   public setRingSetting(ringSetting: string): void {
-    this.setRingPosition(Utils.getIndex(ringSetting));
+    this.setRingPosition(getIndex(ringSetting));
     this.emit('change.ringSettingSet', ringSetting);
   }
 
   public getOutputLetter(inputLetter: string): string {
     const normalizedInputLetter = inputLetter.toUpperCase();
-    const inputIndex = Utils.getIndex(normalizedInputLetter);
-    const normalizedInputIndex = Utils.getModularNumber(
+    const inputIndex = getIndex(normalizedInputLetter);
+    const normalizedInputIndex = getModularNumber(
       inputIndex - this.ringPosition
     );
     const normalizedOutputIndex = this.pinToPlate(normalizedInputIndex);
-    const outputIndex = Utils.getModularNumber(
+    const outputIndex = getModularNumber(
       normalizedOutputIndex + this.ringPosition
     );
-    return Utils.getLetter(outputIndex);
+    return getLetter(outputIndex);
   }
 
   public getInputLetter(outputLetter: string): string {
     const normalizedOutputLetter = outputLetter.toUpperCase();
-    const outputIndex = Utils.getIndex(normalizedOutputLetter);
-    const normalizedOutputIndex = Utils.getModularNumber(
+    const outputIndex = getIndex(normalizedOutputLetter);
+    const normalizedOutputIndex = getModularNumber(
       outputIndex + this.ringPosition
     );
     const normalizedInputIndex = this.plateToPin(normalizedOutputIndex);
-    const inputIndex = Utils.getModularNumber(
+    const inputIndex = getModularNumber(
       normalizedInputIndex - this.ringPosition
     );
-    return Utils.getLetter(inputIndex);
+    return getLetter(inputIndex);
   }
 }

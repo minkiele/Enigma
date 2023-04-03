@@ -1,5 +1,5 @@
 import { Enigma as IndexEnigma } from '../src/index';
-import Enigma from '../src/Enigma';
+import Enigma from '../src/Enigma/Enigma';
 
 describe('indexjs', () => {
   it('should load the same things', () => {

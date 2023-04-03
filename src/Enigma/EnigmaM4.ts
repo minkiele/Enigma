@@ -1,7 +1,7 @@
 import Enigma from './Enigma';
-import ThinRotor from './Component/WiredWheel/Rotor/ThinRotor';
-import Reflector from './Component/WiredWheel/Reflector';
-import ThinReflector from './Component/WiredWheel/Reflector/ThinReflector';
+import ThinRotor from '../Component/WiredWheel/Rotor/ThinRotor/ThinRotor';
+import Reflector from '../Component/WiredWheel/Reflector/Reflector';
+import ThinReflector from '../Component/WiredWheel/Reflector/ThinReflector/ThinReflector';
 
 const FOURTH_ROTOR = 'F';
 

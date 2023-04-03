@@ -1,4 +1,4 @@
-import PlugBoard from '../src/Component/PlugBoard';
+import PlugBoard from '../src/Component/PlugBoard/PlugBoard';
 import RotorI from '../src/Component/WiredWheel/Rotor/RotorI';
 
 describe('Plugboard EventEmitter', () => {

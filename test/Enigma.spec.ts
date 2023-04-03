@@ -1,9 +1,9 @@
 import ReflectorB from '../src/Component/WiredWheel/Reflector/ReflectorB';
-import Rotor from '../src/Component/WiredWheel/Rotor';
+import Rotor from '../src/Component/WiredWheel/Rotor/Rotor';
 import RotorI from '../src/Component/WiredWheel/Rotor/RotorI';
 import RotorII from '../src/Component/WiredWheel/Rotor/RotorII';
 import RotorIII from '../src/Component/WiredWheel/Rotor/RotorIII';
-import Enigma from '../src/Enigma';
+import Enigma from '../src/Enigma/Enigma';
 
 describe('Enigma Machine', () => {
   it('should have all its rotors not set', () => {

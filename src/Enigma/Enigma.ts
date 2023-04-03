@@ -1,9 +1,14 @@
-import PlugBoard from './Component/PlugBoard';
-import * as Utils from './Utils';
-import EntryWheel from './Component/WiredWheel/EntryWheel';
-import Rotor from './Component/WiredWheel/Rotor';
-import Reflector from './Component/WiredWheel/Reflector';
-import EventEmitter from 'events';
+import PlugBoard from '../Component/PlugBoard/PlugBoard';
+import {
+  getNotchLetter,
+  getNextLetter,
+  getModularNumber,
+  getIndex,
+} from '../lib/utils';
+import EntryWheel from '../Component/WiredWheel/EntryWheel';
+import Rotor from '../Component/WiredWheel/Rotor/Rotor';
+import Reflector from '../Component/WiredWheel/Reflector/Reflector';
+import EventEmitter from '../lib/EventEmitter';
 
 const LEFT_ROTOR = 'L';
 const CENTER_ROTOR = 'C';
@@ -60,7 +65,7 @@ export default class Enigma extends EventEmitter {
   }
 
   public isRotorInNotchPosition(position: string): boolean {
-    const notchLetter: string = Utils.getNotchLetter(
+    const notchLetter: string = getNotchLetter(
       this.getRotorWindowLetter(position)
     );
     return this.getRotor(position).notchPosition.indexOf(notchLetter) > -1;
@@ -68,7 +73,7 @@ export default class Enigma extends EventEmitter {
 
   public advanceRotor(position: string): this {
     this.setRotorWindowLetter(
-      Utils.getNextLetter(this.getRotorWindowLetter(position)),
+      getNextLetter(this.getRotorWindowLetter(position)),
       position
     );
     this.emit(
@@ -219,17 +224,17 @@ export default class Enigma extends EventEmitter {
   }
 
   public getRotorInputPosition(inputPosition: number, rotor: string): number {
-    return Utils.getModularNumber(
+    return getModularNumber(
       inputPosition +
-        Utils.getIndex(this.getRotorWindowLetter(rotor)) -
+        getIndex(this.getRotorWindowLetter(rotor)) -
         this.getRotor(rotor).ringPosition
     );
   }
 
   public getRotorOutputPosition(outputPosition: number, rotor: string): number {
-    return Utils.getModularNumber(
+    return getModularNumber(
       outputPosition -
-        Utils.getIndex(this.getRotorWindowLetter(rotor)) +
+        getIndex(this.getRotorWindowLetter(rotor)) +
         this.getRotor(rotor).ringPosition
     );
   }

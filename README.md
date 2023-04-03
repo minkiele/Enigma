@@ -23,3 +23,7 @@ The main references:
 ## Library
 
 The library is now built for modern browsers only, I dropped ES5 support just because IE11 is finally dead.
+
+## Tests
+
+The tests are written using Jest

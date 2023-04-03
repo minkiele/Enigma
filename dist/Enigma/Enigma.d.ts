@@ -1,9 +1,8 @@
-/// <reference types="node" />
-import PlugBoard from './Component/PlugBoard';
-import EntryWheel from './Component/WiredWheel/EntryWheel';
-import Rotor from './Component/WiredWheel/Rotor';
-import Reflector from './Component/WiredWheel/Reflector';
-import EventEmitter from 'events';
+import PlugBoard from '../Component/PlugBoard/PlugBoard';
+import EntryWheel from '../Component/WiredWheel/EntryWheel';
+import Rotor from '../Component/WiredWheel/Rotor/Rotor';
+import Reflector from '../Component/WiredWheel/Reflector/Reflector';
+import EventEmitter from '../lib/EventEmitter';
 export default class Enigma extends EventEmitter {
     protected plugBoard: PlugBoard;
     protected entryWheel: EntryWheel;

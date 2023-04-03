@@ -1,4 +1,3 @@
-export declare const A_INDEX: number;
 export declare function getIndex(letter: string, index?: number): number;
 export declare function getLetter(index: number): string;
 export declare function getShiftedLetter(currentLetter: string, shift: number): string;

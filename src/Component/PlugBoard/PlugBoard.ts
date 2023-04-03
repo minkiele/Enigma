@@ -1,10 +1,10 @@
 import Component from '../Component';
-import { normalizeInput } from '../Utils';
+import { normalizeInput } from '../../lib/utils';
 
 export type PlugBoardWire = [string, string];
 
 export default class PlugBoard extends Component {
-  private wirings: Array<PlugBoardWire> = [];
+  #wirings: Array<PlugBoardWire> = [];
 
   public plugWire(firstLetter: string, secondLetter: string): boolean {
     firstLetter = normalizeInput(firstLetter);
@@ -14,8 +14,8 @@ export default class PlugBoard extends Component {
       throw 'Cannot plug the same letter';
     }
 
-    for (let i = 0; i < this.wirings.length; i += 1) {
-      const [wiringFirstLetter, wiringSecondLetter] = this.wirings[i];
+    for (let i = 0; i < this.#wirings.length; i += 1) {
+      const [wiringFirstLetter, wiringSecondLetter] = this.#wirings[i];
       if (
         wiringFirstLetter === firstLetter ||
         wiringSecondLetter === secondLetter ||
@@ -27,7 +27,7 @@ export default class PlugBoard extends Component {
     }
 
     const wire: PlugBoardWire = [firstLetter, secondLetter];
-    this.wirings.push(wire);
+    this.#wirings.push(wire);
     this.emit('change.wirePlugged', firstLetter, secondLetter);
     return true;
   }
@@ -36,15 +36,15 @@ export default class PlugBoard extends Component {
     firstLetter = normalizeInput(firstLetter);
     secondLetter = normalizeInput(secondLetter);
 
-    for (let i = 0; i < this.wirings.length; i += 1) {
-      const [wiringFirstLetter, wiringSecondLetter] = this.wirings[i];
+    for (let i = 0; i < this.#wirings.length; i += 1) {
+      const [wiringFirstLetter, wiringSecondLetter] = this.#wirings[i];
       if (
         (wiringFirstLetter === firstLetter &&
           wiringSecondLetter === secondLetter) ||
         (wiringSecondLetter === firstLetter &&
           wiringFirstLetter === secondLetter)
       ) {
-        this.wirings.splice(i, 1);
+        this.#wirings.splice(i, 1);
         this.emit('change.wireUnplugged', firstLetter, secondLetter);
         return true;
       }
@@ -60,14 +60,14 @@ export default class PlugBoard extends Component {
   }
 
   public unplugAllWires(): void {
-    this.wirings.splice(0, this.wirings.length);
+    this.#wirings.splice(0, this.#wirings.length);
   }
 
   public getSwappedLetter(inputLetter: string): string {
     inputLetter = normalizeInput(inputLetter);
 
-    for (let i = 0; i < this.wirings.length; i += 1) {
-      const [wiringFirstLetter, wiringSecondLetter] = this.wirings[i];
+    for (let i = 0; i < this.#wirings.length; i += 1) {
+      const [wiringFirstLetter, wiringSecondLetter] = this.#wirings[i];
       if (wiringFirstLetter === inputLetter) {
         return wiringSecondLetter;
       } else if (wiringSecondLetter === inputLetter) {

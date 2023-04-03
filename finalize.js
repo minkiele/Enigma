@@ -17,7 +17,10 @@ glob(`${baseSrcPath}/**/*.js`)
         readFile(source, {
           encoding: 'utf-8',
         })
-          .then(minify)
+          .then((content) => minify(content, {
+            compress: {},
+            mangle: {}
+          }))
           .then(({ code }) =>
             writeFile(
               resolve(baseDistPath, relative(baseSrcPath, source)),

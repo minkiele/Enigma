@@ -1,4 +1,4 @@
-import WiredWheel from '../WiredWheel';
+import WiredWheel from '../../WiredWheel/WiredWheel';
 export default abstract class Rotor extends WiredWheel {
     ringPosition: number;
     notchPosition: string;

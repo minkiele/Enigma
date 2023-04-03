@@ -1,0 +1,1 @@
+"use strict";var __importDefault=this&&this.__importDefault||function(t){return t&&t.__esModule?t:{default:t}};Object.defineProperty(exports,"__esModule",{value:!0});const Rotor_1=__importDefault(require("../Rotor"));class ThinRotor extends Rotor_1.default{}exports.default=ThinRotor;

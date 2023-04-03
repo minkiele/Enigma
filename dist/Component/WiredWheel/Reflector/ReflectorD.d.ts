@@ -1,7 +1,7 @@
-import Reflector from '../Reflector';
+import Reflector from './Reflector';
 export declare type ReflectorDWiring = [number, number];
 export default class ReflectorD extends Reflector {
-    private reflectorDWirings;
+    #private;
     plugWire(position1: number, position2: number): void;
     arePlugsWireable(position1: number, position2: number): boolean;
     unplugWire(position1: number, position2: number): void;

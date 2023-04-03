@@ -1,2 +1,2 @@
-export * from './Reflector/index';
-export * from './Rotor/index';
+export * from './Reflector';
+export * from './Rotor';

@@ -1,4 +1,4 @@
-export * from './ThinReflector/index';
+export * from './ThinReflector';
 export { default as ReflectorA } from './ReflectorA';
 export { default as ReflectorB } from './ReflectorB';
 export { default as ReflectorBeta } from './ReflectorBeta';

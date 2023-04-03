@@ -5,7 +5,7 @@ import RotorII from '../src/Component/WiredWheel/Rotor/RotorII';
 import RotorIII from '../src/Component/WiredWheel/Rotor/RotorIII';
 import RotorIV from '../src/Component/WiredWheel/Rotor/RotorIV';
 import ThinRotorBeta from '../src/Component/WiredWheel/Rotor/ThinRotor/ThinRotorBeta';
-import EnigmaM4 from '../src/EnigmaM4';
+import EnigmaM4 from '../src/Enigma/EnigmaM4';
 
 describe('EnigmaM4 Machine', () => {
   it('should decrypt correctly this message', () => {

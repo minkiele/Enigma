@@ -2,7 +2,7 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "target": "ESNext",
-    "module": "umd",
+    "module": "CommonJS",
     "outDir": ".build",
     "rootDir": "src",
     "moduleResolution": "node",

@@ -1,4 +1,4 @@
-export const A_INDEX: number = 'A'.charCodeAt(0);
+const A_INDEX: number = 'A'.charCodeAt(0);
 
 export function getIndex(letter: string, index = 0): number {
   return letter.charCodeAt(index) - A_INDEX;

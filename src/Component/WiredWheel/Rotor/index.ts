@@ -1,4 +1,4 @@
-export * from './ThinRotor/index';
+export * from './ThinRotor';
 export { default as RotorI } from './RotorI';
 export { default as RotorII } from './RotorII';
 export { default as RotorIII } from './RotorIII';
