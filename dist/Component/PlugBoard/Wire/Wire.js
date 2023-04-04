@@ -1,0 +1,1 @@
+Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e,t=(e=require("../../Component"))&&e.__esModule?e:{default:e};class r extends t.default{constructor(e,t){super(),this.firstLetter=e,this.secondLetter=t}}exports.default=r;

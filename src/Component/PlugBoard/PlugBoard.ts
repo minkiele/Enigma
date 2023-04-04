@@ -1,12 +1,18 @@
 import Component from '../Component';
 import { normalizeInput } from '../../lib/utils';
+import Wire from './Wire/Wire';
+import PlugBoardWire from './Wire/PlugBoardWire';
 
-export type PlugBoardWire = [string, string];
+export type PlugBoardWireTuple = [string, string, Wire];
 
 export default class PlugBoard extends Component {
-  #wirings: Array<PlugBoardWire> = [];
+  #wirings: Array<PlugBoardWireTuple> = [];
 
-  public plugWire(firstLetter: string, secondLetter: string): boolean {
+  public plugWire(
+    firstLetter: string,
+    secondLetter: string,
+    wire: Wire = new PlugBoardWire(firstLetter, secondLetter)
+  ): boolean {
     firstLetter = normalizeInput(firstLetter);
     secondLetter = normalizeInput(secondLetter);
 
@@ -26,8 +32,8 @@ export default class PlugBoard extends Component {
       }
     }
 
-    const wire: PlugBoardWire = [firstLetter, secondLetter];
-    this.#wirings.push(wire);
+    const wiring: PlugBoardWireTuple = [firstLetter, secondLetter, wire];
+    this.#wirings.push(wiring);
     this.emit('change.wirePlugged', firstLetter, secondLetter);
     return true;
   }
@@ -53,9 +59,9 @@ export default class PlugBoard extends Component {
     return false;
   }
 
-  public plugWires(wires: Array<PlugBoardWire>): void {
+  public plugWires(wires: Array<PlugBoardWireTuple>): void {
     wires.forEach((wire) => {
-      this.plugWire(wire[0], wire[1]);
+      this.plugWire(wire[0], wire[1], wire[2]);
     });
   }
 
@@ -67,11 +73,12 @@ export default class PlugBoard extends Component {
     inputLetter = normalizeInput(inputLetter);
 
     for (let i = 0; i < this.#wirings.length; i += 1) {
-      const [wiringFirstLetter, wiringSecondLetter] = this.#wirings[i];
-      if (wiringFirstLetter === inputLetter) {
-        return wiringSecondLetter;
-      } else if (wiringSecondLetter === inputLetter) {
-        return wiringFirstLetter;
+      const [wiringFirstLetter, wiringSecondLetter, wire] = this.#wirings[i];
+      if (
+        wiringFirstLetter === inputLetter ||
+        wiringSecondLetter === inputLetter
+      ) {
+        return wire.encode(inputLetter);
       }
     }
 
