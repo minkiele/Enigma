@@ -64,14 +64,14 @@ export default class Enigma extends EventEmitter {
     return this.rotorsWindowLetter[position];
   }
 
-  public isRotorInNotchPosition(position: string): boolean {
+  private isRotorInNotchPosition(position: string): boolean {
     const notchLetter: string = getNotchLetter(
       this.getRotorWindowLetter(position)
     );
     return this.getRotor(position).notchPosition.indexOf(notchLetter) > -1;
   }
 
-  public advanceRotor(position: string): this {
+  private advanceRotor(position: string): this {
     this.setRotorWindowLetter(
       getNextLetter(this.getRotorWindowLetter(position)),
       position
@@ -100,7 +100,7 @@ export default class Enigma extends EventEmitter {
     return this;
   }
 
-  public encodeForward(inputLetter: string): number {
+  protected encodeForward(inputLetter: string): number {
     //FORWARD THROUGH THE NON ROTATING PARTS
     const normalizedInputLetter: string = inputLetter.toUpperCase();
     const swappedInputLetter = this.plugBoard.getSwappedLetter(
@@ -148,7 +148,7 @@ export default class Enigma extends EventEmitter {
     return leftRotorForwardOutputPosition;
   }
 
-  public encodeReflect(leftRotorForwardOutputPosition: number): number {
+  private encodeReflect(leftRotorForwardOutputPosition: number): number {
     //REFLECTION
     const reflectedPosition = this.reflector.pinToPin(
       leftRotorForwardOutputPosition
@@ -158,7 +158,7 @@ export default class Enigma extends EventEmitter {
     return reflectedPosition;
   }
 
-  public encodeBackwards(reflectedPosition: number): string {
+  protected encodeBackwards(reflectedPosition: number): string {
     //LEFT ROTOR
     const leftRotorInputPlate = this.getRotorInputPosition(
       reflectedPosition,
@@ -207,7 +207,7 @@ export default class Enigma extends EventEmitter {
     return swappedOutputLetter;
   }
 
-  public getEncodedLetter(inputLetter: string): string {
+  private getEncodedLetter(inputLetter: string): string {
     if (!this.isMachineValidState()) {
       throw 'Machine is not in valid state';
     }
@@ -223,7 +223,10 @@ export default class Enigma extends EventEmitter {
     return swappedOutputLetter;
   }
 
-  public getRotorInputPosition(inputPosition: number, rotor: string): number {
+  protected getRotorInputPosition(
+    inputPosition: number,
+    rotor: string
+  ): number {
     return getModularNumber(
       inputPosition +
         getIndex(this.getRotorWindowLetter(rotor)) -
@@ -231,7 +234,10 @@ export default class Enigma extends EventEmitter {
     );
   }
 
-  public getRotorOutputPosition(outputPosition: number, rotor: string): number {
+  protected getRotorOutputPosition(
+    outputPosition: number,
+    rotor: string
+  ): number {
     return getModularNumber(
       outputPosition -
         getIndex(this.getRotorWindowLetter(rotor)) +
@@ -247,7 +253,7 @@ export default class Enigma extends EventEmitter {
     return output;
   }
 
-  public isMachineValidState(): boolean {
+  protected isMachineValidState(): boolean {
     return (
       this.getRotor(LEFT_ROTOR) instanceof Rotor &&
       this.getRotor(CENTER_ROTOR) instanceof Rotor &&

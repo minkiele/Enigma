@@ -11,7 +11,7 @@ export default class EnigmaM4 extends Enigma {
     this.setRotor(null, FOURTH_ROTOR);
   }
 
-  public encodeForward(inputLetter: string): number {
+  protected encodeForward(inputLetter: string): number {
     const leftRotorForwardOutputPosition: number = super.encodeForward(
       inputLetter
     );
@@ -35,7 +35,7 @@ export default class EnigmaM4 extends Enigma {
     }
   }
 
-  public encodeBackwards(reflectedPosition: number): string {
+  protected encodeBackwards(reflectedPosition: number): string {
     let inputReflectedPosition: number;
 
     if (this.isClassicConfiguration()) {
@@ -60,7 +60,7 @@ export default class EnigmaM4 extends Enigma {
     return super.encodeBackwards(inputReflectedPosition);
   }
 
-  public isClassicConfiguration(): boolean {
+  private isClassicConfiguration(): boolean {
     return (
       this.getRotor(FOURTH_ROTOR) === null &&
       this.reflector instanceof Reflector &&
@@ -68,7 +68,7 @@ export default class EnigmaM4 extends Enigma {
     );
   }
 
-  public isMachineValidState(): boolean {
+  protected isMachineValidState(): boolean {
     const superTest: boolean = super.isMachineValidState();
 
     if (this.isClassicConfiguration()) {
