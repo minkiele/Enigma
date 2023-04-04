@@ -207,7 +207,7 @@ export default class Enigma extends EventEmitter {
     return swappedOutputLetter;
   }
 
-  private getEncodedLetter(inputLetter: string): string {
+  public getEncodedLetter(inputLetter: string): string {
     if (!this.isMachineValidState()) {
       throw 'Machine is not in valid state';
     }
@@ -223,10 +223,7 @@ export default class Enigma extends EventEmitter {
     return swappedOutputLetter;
   }
 
-  protected getRotorInputPosition(
-    inputPosition: number,
-    rotor: string
-  ): number {
+  public getRotorInputPosition(inputPosition: number, rotor: string): number {
     return getModularNumber(
       inputPosition +
         getIndex(this.getRotorWindowLetter(rotor)) -
@@ -234,10 +231,7 @@ export default class Enigma extends EventEmitter {
     );
   }
 
-  protected getRotorOutputPosition(
-    outputPosition: number,
-    rotor: string
-  ): number {
+  public getRotorOutputPosition(outputPosition: number, rotor: string): number {
     return getModularNumber(
       outputPosition -
         getIndex(this.getRotorWindowLetter(rotor)) +

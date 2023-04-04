@@ -19,6 +19,7 @@ The main references:
  * [Enigma details](http://users.telenet.be/d.rijmenants/en/enigmatech.htm#steppingmechanism)
  * [Enigma/Sample Messages](http://wiki.franklinheath.co.uk/index.php/Enigma/Sample_Messages)
  * [Umkehrwalze D (Rewirable reflector) implementation](http://www.cryptomuseum.com/crypto/enigma/ukwd/index.htm)
+ * [The Uhr (Plugboard wires scrambler)](https://cryptomuseum.com/crypto/enigma/uhr/index.htm)
 
 ## Library
 

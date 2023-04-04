@@ -22,9 +22,9 @@ export default class Enigma extends EventEmitter {
     protected encodeForward(inputLetter: string): number;
     private encodeReflect;
     protected encodeBackwards(reflectedPosition: number): string;
-    private getEncodedLetter;
-    protected getRotorInputPosition(inputPosition: number, rotor: string): number;
-    protected getRotorOutputPosition(outputPosition: number, rotor: string): number;
+    getEncodedLetter(inputLetter: string): string;
+    getRotorInputPosition(inputPosition: number, rotor: string): number;
+    getRotorOutputPosition(outputPosition: number, rotor: string): number;
     encode(string: string): string;
     protected isMachineValidState(): boolean;
     static LEFT_ROTOR: string;

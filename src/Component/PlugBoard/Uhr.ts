@@ -9,6 +9,8 @@ const scramblerWirings: Array<number> = [
 
 const blackWires: Array<number> = [6, 0, 7, 5, 1, 8, 4, 2, 9, 3];
 
+type UhrWiring = [string, string];
+
 export default class Uhr extends Component {
   #wires: Record<number, Wire> = {};
   #setting = 0;
@@ -35,36 +37,35 @@ export default class Uhr extends Component {
     const outerPin = scramblerWirings.indexOf(normalizedInnerPin);
     return getModularNumber(outerPin - this.#setting, scramblerWirings.length);
   }
-  public getBlackWire(redWire: number): number {
+  private getBlackWire(redWire: number): number {
     const outerInputPin = (redWire - 1) * 4;
     const innerOutputPin = this.getInnerPin(outerInputPin);
     return blackWires[(innerOutputPin - 2) / 4] + 1;
   }
 
-  public getRedWire(blackWire: number): number {
+  private getRedWire(blackWire: number): number {
     const innerInputPin = blackWires.indexOf(blackWire - 1) * 4;
     const outerOutputPin = this.getOuterPin(innerInputPin);
     return (outerOutputPin - 2) / 4 + 1;
   }
-  public getUhrWire(
+  public getUhrWire(index: number): Wire {
+    return this.#wires[index];
+  }
+  public getUhrWires(): Array<Wire> {
+    return Object.keys(this.#wires)
+      .sort((a, b) => Number(b) - Number(a))
+      .map((key) => this.#wires[key]);
+  }
+
+  public prepareUhrWire(
     index: number,
     firstLetter: string,
     secondLetter: string
   ): Wire {
-    if (this.#wires[index] == null) {
-      this.createUhrWire(index, firstLetter, secondLetter);
-    }
-    return this.#wires[index];
-  }
-  private createUhrWire(
-    index: number,
-    firstLetter: string,
-    secondLetter: string
-  ) {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const uhr = this;
     const wire = new (class extends Wire {
-      public encode(letter: string): string | undefined {
+      public swap(letter: string): string | undefined {
         if (letter === this.firstLetter) {
           return uhr.#wires[uhr.getBlackWire(index)].secondLetter;
         } else if (letter === this.secondLetter) {
@@ -74,5 +75,12 @@ export default class Uhr extends Component {
       }
     })(firstLetter, secondLetter);
     this.#wires[index] = wire;
+    return wire;
+  }
+
+  public prepareUhrWires(wirings: Array<UhrWiring>): void {
+    wirings.forEach(([firstLetter, secondLetter], index) => {
+      this.prepareUhrWire(index + 1, firstLetter, secondLetter);
+    });
   }
 }
