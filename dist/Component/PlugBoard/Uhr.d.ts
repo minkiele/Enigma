@@ -7,8 +7,10 @@ export default class Uhr extends Component {
     getUhrSetting(): number;
     private getInnerPin;
     private getOuterPin;
-    private getBlackWire;
-    private getRedWire;
+    private getIngoingBlackWire;
+    private getOutgoingBlackWire;
+    private getIngoingRedWire;
+    private getOutgoingRedWire;
     getUhrWire(index: number): Wire;
     getUhrWires(): Array<Wire>;
     prepareUhrWire(index: number, firstLetter: string, secondLetter: string): Wire;

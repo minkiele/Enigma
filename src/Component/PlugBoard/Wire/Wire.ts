@@ -13,5 +13,6 @@ export default abstract class Wire extends Component {
       throw new Error('Plugging the same letter');
     }
   }
-  public abstract swap(letter: string): string;
+  public abstract swapForward(letter: string): string;
+  public abstract swapBackward(letter: string): string;
 }

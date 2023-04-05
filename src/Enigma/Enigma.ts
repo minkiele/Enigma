@@ -104,7 +104,8 @@ export default class Enigma extends EventEmitter {
     //FORWARD THROUGH THE NON ROTATING PARTS
     const normalizedInputLetter: string = inputLetter.toUpperCase();
     const swappedInputLetter = this.plugBoard.getSwappedLetter(
-      normalizedInputLetter
+      normalizedInputLetter,
+      PlugBoard.DIRECTION_FORWARD
     );
     const entryWheelInputPosition =
       this.entryWheel.getPlateFromLetter(swappedInputLetter);
@@ -201,7 +202,8 @@ export default class Enigma extends EventEmitter {
       rightRotorBackwardsOutputPosition
     );
     const swappedOutputLetter = this.plugBoard.getSwappedLetter(
-      entryWheelOutputLetter
+      entryWheelOutputLetter,
+      PlugBoard.DIRECTION_BACKWARDS
     );
 
     return swappedOutputLetter;

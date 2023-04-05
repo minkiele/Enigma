@@ -5,7 +5,13 @@ import PlugBoardWire from './Wire/PlugBoardWire';
 
 export type PlugBoardWireTuple = [string, string] | Wire;
 
+const DIRECTION_FORWARD = 'F';
+const DIRECTION_BACKWARDS = 'B';
+
 export default class PlugBoard extends Component {
+  public static DIRECTION_FORWARD: 'F' | 'B' = DIRECTION_FORWARD;
+  public static DIRECTION_BACKWARDS: 'F' | 'B' = DIRECTION_BACKWARDS;
+
   #wirings: Array<Wire> = [];
 
   public plugWire(firstLetter: string, secondLetter: string): boolean;
@@ -76,11 +82,14 @@ export default class PlugBoard extends Component {
     this.#wirings.splice(0, this.#wirings.length);
   }
 
-  public getSwappedLetter(inputLetter: string): string {
+  public getSwappedLetter(inputLetter: string, direction: 'F' | 'B'): string {
     inputLetter = normalizeInput(inputLetter);
 
     for (let i = 0; i < this.#wirings.length; i += 1) {
-      const swappedLetter = this.#wirings[i].swap(inputLetter);
+      const swappedLetter =
+        direction === DIRECTION_FORWARD
+          ? this.#wirings[i].swapForward(inputLetter)
+          : this.#wirings[i].swapBackward(inputLetter);
       if (swappedLetter != null) {
         return swappedLetter;
       }

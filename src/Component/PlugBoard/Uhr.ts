@@ -37,16 +37,26 @@ export default class Uhr extends Component {
     const outerPin = scramblerWirings.indexOf(normalizedInnerPin);
     return getModularNumber(outerPin - this.#setting, scramblerWirings.length);
   }
-  private getBlackWire(redWire: number): number {
+  private getIngoingBlackWire(redWire: number): number {
     const outerInputPin = (redWire - 1) * 4;
     const innerOutputPin = this.getInnerPin(outerInputPin);
     return blackWires[(innerOutputPin - 2) / 4] + 1;
   }
+  private getOutgoingBlackWire(redWire: number): number {
+    const outerInputPin = (redWire - 1) * 4 + 2;
+    const innerOutputPin = this.getInnerPin(outerInputPin);
+    return blackWires[innerOutputPin / 4] + 1;
+  }
 
-  private getRedWire(blackWire: number): number {
+  private getIngoingRedWire(blackWire: number): number {
     const innerInputPin = blackWires.indexOf(blackWire - 1) * 4;
     const outerOutputPin = this.getOuterPin(innerInputPin);
     return (outerOutputPin - 2) / 4 + 1;
+  }
+  private getOutgoingRedWire(blackWire: number): number {
+    const innerInputPin = blackWires.indexOf(blackWire - 1) * 4 + 2;
+    const outerOutputPin = this.getOuterPin(innerInputPin);
+    return outerOutputPin / 4 + 1;
   }
   public getUhrWire(index: number): Wire {
     return this.#wires[index];
@@ -65,11 +75,19 @@ export default class Uhr extends Component {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const uhr = this;
     const wire = new (class extends Wire {
-      public swap(letter: string): string | undefined {
+      public swapForward(letter: string): string | undefined {
         if (letter === this.firstLetter) {
-          return uhr.#wires[uhr.getBlackWire(index)].secondLetter;
+          return uhr.#wires[uhr.getIngoingBlackWire(index)].secondLetter;
         } else if (letter === this.secondLetter) {
-          return uhr.#wires[uhr.getRedWire(index)].firstLetter;
+          return uhr.#wires[uhr.getIngoingRedWire(index)].firstLetter;
+        }
+        return undefined;
+      }
+      public swapBackward(letter: string): string | undefined {
+        if (letter === this.firstLetter) {
+          return uhr.#wires[uhr.getOutgoingBlackWire(index)].secondLetter;
+        } else if (letter === this.secondLetter) {
+          return uhr.#wires[uhr.getOutgoingRedWire(index)].firstLetter;
         }
         return undefined;
       }
