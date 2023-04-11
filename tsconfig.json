@@ -3,11 +3,11 @@
     "esModuleInterop": true,
     "target": "ESNext",
     "module": "CommonJS",
-    "outDir": "dist",
+    "outDir": "enigma",
     "rootDir": "src",
     "moduleResolution": "node",
     "declaration": true,
-    "declarationDir": "dist",
+    "declarationDir": "enigma",
     "emitDeclarationOnly": true
   },
   "include": ["src/**/*"]

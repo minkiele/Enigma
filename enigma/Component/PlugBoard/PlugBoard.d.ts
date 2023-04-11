@@ -1,6 +1,6 @@
 import Component from '../Component';
 import Wire from './Wire/Wire';
-export declare type PlugBoardWireTuple = [string, string] | Wire;
+export type PlugBoardWireTuple = [string, string] | Wire;
 export default class PlugBoard extends Component {
     #private;
     static DIRECTION_FORWARD: 'F' | 'B';

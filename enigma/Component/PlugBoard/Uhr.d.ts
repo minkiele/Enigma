@@ -1,6 +1,6 @@
 import Component from '../Component';
 import Wire from './Wire/Wire';
-declare type UhrWiring = [string, string];
+type UhrWiring = [string, string];
 export default class Uhr extends Component {
     #private;
     setUhrSetting(setting: number): void;

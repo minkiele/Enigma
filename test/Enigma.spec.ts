@@ -21,9 +21,9 @@ describe('Enigma Machine', () => {
     machine.setRotor(new RotorII(), Enigma.CENTER_ROTOR);
     machine.setRotor(new RotorI(), Enigma.RIGHT_ROTOR);
 
-    expect(machine.getRotor(Enigma.LEFT_ROTOR)).toEqual(jasmine.any(Rotor));
-    expect(machine.getRotor(Enigma.CENTER_ROTOR)).toEqual(jasmine.any(Rotor));
-    expect(machine.getRotor(Enigma.RIGHT_ROTOR)).toEqual(jasmine.any(Rotor));
+    expect(machine.getRotor(Enigma.LEFT_ROTOR)).toEqual(expect.any(Rotor));
+    expect(machine.getRotor(Enigma.CENTER_ROTOR)).toEqual(expect.any(Rotor));
+    expect(machine.getRotor(Enigma.RIGHT_ROTOR)).toEqual(expect.any(Rotor));
   });
 
   it('should have rotor getters that work', () => {
@@ -33,9 +33,9 @@ describe('Enigma Machine', () => {
     machine.setRotor(new RotorII(), Enigma.CENTER_ROTOR);
     machine.setRotor(new RotorI(), Enigma.RIGHT_ROTOR);
 
-    expect(machine.getRotor(Enigma.LEFT_ROTOR)).toEqual(jasmine.any(Rotor));
-    expect(machine.getRotor(Enigma.CENTER_ROTOR)).toEqual(jasmine.any(Rotor));
-    expect(machine.getRotor(Enigma.RIGHT_ROTOR)).toEqual(jasmine.any(Rotor));
+    expect(machine.getRotor(Enigma.LEFT_ROTOR)).toEqual(expect.any(Rotor));
+    expect(machine.getRotor(Enigma.CENTER_ROTOR)).toEqual(expect.any(Rotor));
+    expect(machine.getRotor(Enigma.RIGHT_ROTOR)).toEqual(expect.any(Rotor));
   });
 
   it('should do the double step', () => {

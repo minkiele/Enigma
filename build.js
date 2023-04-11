@@ -1,18 +1,15 @@
-/* eslint-disable */
-
-const glob = require('glob');
+const { glob } = require('glob');
 const { minify } = require('terser');
 const { writeFile } = require('fs/promises');
 const { relative, resolve, dirname } = require('path');
 const core = require('@babel/core');
-const { default: mkdirp } = require('mkdirp');
-const { default: rimraf } = require('rimraf');
-
-console.log('Compress and clean everything');
+const { mkdirp } = require('mkdirp');
+const { rimraf } = require('rimraf');
 
 const baseSrcPath = `${__dirname}/src`;
-const baseDistPath = `${__dirname}/dist`;
+const baseDistPath = `${__dirname}/enigma`;
 
+console.log("Building the Enigma machine");
 // Delete the dist directory
 rimraf(baseDistPath)
   .then(() =>
@@ -47,7 +44,7 @@ rimraf(baseDistPath)
   )
   .then(
     () => {
-      console.log('Compressed everything');
+      console.log('Everything went according to plan, you may now generate the type definitions.');
     },
     (err) => {
       console.log('Something went very wrong', err);
