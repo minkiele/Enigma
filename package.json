@@ -1,6 +1,6 @@
 {
   "name": "enigma-minkiele",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "A Typescript implementation of the Enigma Machine",
   "main": "enigma/index.js",
   "scripts": {
@@ -33,6 +33,7 @@
     "prettier": "^2.8.7",
     "rimraf": "^5.0.0",
     "rollup": "^4.2.0",
+    "standard-version": "^9.5.0",
     "terser": "^5.16.9",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
