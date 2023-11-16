@@ -51,7 +51,7 @@ export default class ReflectorD extends Reflector {
     }
 
     this.#reflectorDWirings.push([position1, position2]);
-    this.emit('change.wirePlugged', position1, position2);
+    this.getEventEmitter()?.emit('change.wirePlugged', position1, position2);
   }
 
   public arePlugsWireable(position1: number, position2: number): boolean {
@@ -74,7 +74,11 @@ export default class ReflectorD extends Reflector {
         (wiredPosition1 === position2 && wiredPosition2 === position1)
       ) {
         this.#reflectorDWirings.splice(i, 1);
-        this.emit('change.wireUnplugged', position1, position2);
+        this.getEventEmitter()?.emit(
+          'change.wireUnplugged',
+          position1,
+          position2
+        );
       }
     }
   }

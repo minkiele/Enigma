@@ -22,11 +22,11 @@ export default {
     resolve({
       extensions,
     }),
-    commonjs(),
     babel({
       extensions,
       babelHelpers: 'bundled',
     }),
+    commonjs(),
     terser(),
   ],
 };

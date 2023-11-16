@@ -34,7 +34,11 @@ export default class PlugBoard extends Component {
       }
 
       this.#wirings.push(fp);
-      this.emit('change.wirePlugged', fp.firstLetter, fp.secondLetter);
+      this.getEventEmitter()?.emit(
+        'change.wirePlugged',
+        fp.firstLetter,
+        fp.secondLetter
+      );
       return true;
     } else if (typeof fp === 'string' && typeof sp === 'string') {
       return this.plugWire(new PlugBoardWire(fp, sp));
@@ -58,7 +62,11 @@ export default class PlugBoard extends Component {
             wiringFirstLetter === fp.secondLetter)
         ) {
           this.#wirings.splice(i, 1);
-          this.emit('change.wireUnplugged', fp.firstLetter, fp.secondLetter);
+          this.getEventEmitter()?.emit(
+            'change.wireUnplugged',
+            fp.firstLetter,
+            fp.secondLetter
+          );
           return true;
         }
       }

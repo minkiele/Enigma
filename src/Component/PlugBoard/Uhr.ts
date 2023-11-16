@@ -16,7 +16,7 @@ export default class Uhr extends Component {
   #setting = 0;
   public setUhrSetting(setting: number): void {
     this.#setting = getModularNumber(setting, scramblerWirings.length);
-    this.emit('change.uhrSetting', this.#setting);
+    this.getEventEmitter()?.emit('change.uhrSetting', this.#setting);
   }
   public getUhrSetting(): number {
     return this.#setting;

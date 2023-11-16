@@ -1,1 +1,1 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e,t=(e=require("../lib/EventEmitter"))&&e.__esModule?e:{default:e};class d extends t.default{}exports.default=d;
+Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;exports.default=class{#e;setEventEmitter(e){return this.#e=e,this}unsetEventEmitter(){return this.#e=void 0,this}getEventEmitter(){return this.#e}};

@@ -14,15 +14,17 @@ const LEFT_ROTOR = 'L';
 const CENTER_ROTOR = 'C';
 const RIGHT_ROTOR = 'R';
 
-export default class Enigma extends EventEmitter {
+export default class Enigma {
+  #ee: EventEmitter | undefined;
   protected plugBoard = new PlugBoard();
   protected entryWheel = new EntryWheel();
   protected rotors: Record<string, Rotor> = {};
   protected rotorsWindowLetter: Record<string, string> = {};
   protected reflector: Reflector;
 
-  public constructor() {
-    super();
+  public constructor(ee?: EventEmitter) {
+    this.#ee = ee;
+    this.plugBoard.setEventEmitter(this.#ee);
     this.setRotor(null, LEFT_ROTOR);
     this.setRotor(null, CENTER_ROTOR);
     this.setRotor(null, RIGHT_ROTOR);
@@ -33,8 +35,9 @@ export default class Enigma extends EventEmitter {
   }
 
   public setRotor(rotor: Rotor, position: string): this {
+    rotor.setEventEmitter(this.#ee);
     this.rotors[position] = rotor;
-    this.emit('change.rotorSet', rotor, position);
+    this.#ee.emit('change.rotorSet', rotor, position);
     this.setRotorWindowLetter('A', position);
     return this;
   }
@@ -44,14 +47,15 @@ export default class Enigma extends EventEmitter {
   }
 
   public setReflector(reflector: Reflector): this {
+    reflector.setEventEmitter(this.#ee);
     this.reflector = reflector;
-    this.emit('change.reflectorSet', reflector);
+    this.#ee.emit('change.reflectorSet', reflector);
     return this;
   }
 
   public setRotorWindowLetter(letter: string, position: string): this {
     this.rotorsWindowLetter[position] = letter;
-    this.emit(
+    this.#ee.emit(
       'change.rotorWindowLetterSet',
       letter,
       position,
@@ -76,7 +80,7 @@ export default class Enigma extends EventEmitter {
       getNextLetter(this.getRotorWindowLetter(position)),
       position
     );
-    this.emit(
+    this.#ee.emit(
       'change.rotorAdvanced',
       position,
       this.getRotor(position),
@@ -96,7 +100,7 @@ export default class Enigma extends EventEmitter {
       this.advanceRotor(CENTER_ROTOR);
     }
     this.advanceRotor(RIGHT_ROTOR);
-    this.emit('change.rotorsAdvanced');
+    this.#ee.emit('change.rotorsAdvanced');
     return this;
   }
 
