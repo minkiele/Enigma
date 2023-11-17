@@ -1,6 +1,6 @@
 {
   "name": "enigma-minkiele",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "A Typescript implementation of the Enigma Machine",
   "main": "enigma/index.js",
   "scripts": {
