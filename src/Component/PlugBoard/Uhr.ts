@@ -11,12 +11,11 @@ const blackWires: Array<number> = [6, 0, 7, 5, 1, 8, 4, 2, 9, 3];
 
 type UhrWiring = [string, string];
 
-export default class Uhr extends Component {
+export default class Uhr implements Component {
   #wires: Record<number, Wire> = {};
   #setting = 0;
   public setUhrSetting(setting: number): void {
     this.#setting = getModularNumber(setting, scramblerWirings.length);
-    this.getEventEmitter()?.emit('change.uhrSetting', this.#setting);
   }
   public getUhrSetting(): number {
     return this.#setting;

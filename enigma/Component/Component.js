@@ -1,1 +1,1 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;exports.default=class{#e;setEventEmitter(e){return this.#e=e,this}unsetEventEmitter(){return this.#e=void 0,this}getEventEmitter(){return this.#e}};
+

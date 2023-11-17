@@ -8,23 +8,19 @@ import {
 import EntryWheel from '../Component/WiredWheel/EntryWheel';
 import Rotor from '../Component/WiredWheel/Rotor/Rotor';
 import Reflector from '../Component/WiredWheel/Reflector/Reflector';
-import EventEmitter from '../lib/EventEmitter';
 
 const LEFT_ROTOR = 'L';
 const CENTER_ROTOR = 'C';
 const RIGHT_ROTOR = 'R';
 
 export default class Enigma {
-  #ee: EventEmitter | undefined;
   protected plugBoard = new PlugBoard();
   protected entryWheel = new EntryWheel();
   protected rotors: Record<string, Rotor> = {};
   protected rotorsWindowLetter: Record<string, string> = {};
   protected reflector: Reflector;
 
-  public constructor(ee?: EventEmitter) {
-    this.#ee = ee;
-    this.plugBoard.setEventEmitter(this.#ee);
+  public constructor() {
     this.setRotor(null, LEFT_ROTOR);
     this.setRotor(null, CENTER_ROTOR);
     this.setRotor(null, RIGHT_ROTOR);
@@ -35,9 +31,7 @@ export default class Enigma {
   }
 
   public setRotor(rotor: Rotor, position: string): this {
-    rotor.setEventEmitter(this.#ee);
     this.rotors[position] = rotor;
-    this.#ee.emit('change.rotorSet', rotor, position);
     this.setRotorWindowLetter('A', position);
     return this;
   }
@@ -47,20 +41,12 @@ export default class Enigma {
   }
 
   public setReflector(reflector: Reflector): this {
-    reflector.setEventEmitter(this.#ee);
     this.reflector = reflector;
-    this.#ee.emit('change.reflectorSet', reflector);
     return this;
   }
 
   public setRotorWindowLetter(letter: string, position: string): this {
     this.rotorsWindowLetter[position] = letter;
-    this.#ee.emit(
-      'change.rotorWindowLetterSet',
-      letter,
-      position,
-      this.getRotor(position)
-    );
     return this;
   }
 
@@ -80,12 +66,6 @@ export default class Enigma {
       getNextLetter(this.getRotorWindowLetter(position)),
       position
     );
-    this.#ee.emit(
-      'change.rotorAdvanced',
-      position,
-      this.getRotor(position),
-      this.getRotorWindowLetter(position)
-    );
     return this;
   }
 
@@ -100,7 +80,6 @@ export default class Enigma {
       this.advanceRotor(CENTER_ROTOR);
     }
     this.advanceRotor(RIGHT_ROTOR);
-    this.#ee.emit('change.rotorsAdvanced');
     return this;
   }
 

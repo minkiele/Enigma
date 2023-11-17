@@ -2,15 +2,13 @@ import PlugBoard from '../Component/PlugBoard/PlugBoard';
 import EntryWheel from '../Component/WiredWheel/EntryWheel';
 import Rotor from '../Component/WiredWheel/Rotor/Rotor';
 import Reflector from '../Component/WiredWheel/Reflector/Reflector';
-import EventEmitter from '../lib/EventEmitter';
 export default class Enigma {
-    #private;
     protected plugBoard: PlugBoard;
     protected entryWheel: EntryWheel;
     protected rotors: Record<string, Rotor>;
     protected rotorsWindowLetter: Record<string, string>;
     protected reflector: Reflector;
-    constructor(ee?: EventEmitter);
+    constructor();
     getPlugBoard(): PlugBoard;
     setRotor(rotor: Rotor, position: string): this;
     getRotor(position: string): Rotor;

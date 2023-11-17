@@ -8,7 +8,7 @@ export type PlugBoardWireTuple = [string, string] | Wire;
 const DIRECTION_FORWARD = 'F';
 const DIRECTION_BACKWARDS = 'B';
 
-export default class PlugBoard extends Component {
+export default class PlugBoard implements Component {
   public static DIRECTION_FORWARD: 'F' | 'B' = DIRECTION_FORWARD;
   public static DIRECTION_BACKWARDS: 'F' | 'B' = DIRECTION_BACKWARDS;
 
@@ -34,11 +34,6 @@ export default class PlugBoard extends Component {
       }
 
       this.#wirings.push(fp);
-      this.getEventEmitter()?.emit(
-        'change.wirePlugged',
-        fp.firstLetter,
-        fp.secondLetter
-      );
       return true;
     } else if (typeof fp === 'string' && typeof sp === 'string') {
       return this.plugWire(new PlugBoardWire(fp, sp));
@@ -62,11 +57,6 @@ export default class PlugBoard extends Component {
             wiringFirstLetter === fp.secondLetter)
         ) {
           this.#wirings.splice(i, 1);
-          this.getEventEmitter()?.emit(
-            'change.wireUnplugged',
-            fp.firstLetter,
-            fp.secondLetter
-          );
           return true;
         }
       }

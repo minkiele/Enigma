@@ -1,5 +1,5 @@
 import Component from '../../Component';
-export default abstract class Wire extends Component {
+export default abstract class Wire implements Component {
     firstLetter: string;
     secondLetter: string;
     constructor(firstLetter: string, secondLetter: string);
