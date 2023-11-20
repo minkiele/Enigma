@@ -44,8 +44,9 @@
     "url": "https://github.com/minkiele/Enigma"
   },
   "files": [
-    "dist"
+    "enigma"
   ],
+  "types": "enigma/index.d.ts",
   "engines": {
     "node": ">=12"
   }
