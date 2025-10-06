@@ -71,10 +71,10 @@ export default class Uhr implements Component {
     firstLetter: string,
     secondLetter: string
   ): Wire {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const uhr = this;
+    const getUhr = () => this;
     const wire = new (class extends Wire {
       public swapForward(letter: string): string | undefined {
+        const uhr = getUhr();
         if (letter === this.firstLetter) {
           return uhr.#wires[uhr.getIngoingBlackWire(index)].secondLetter;
         } else if (letter === this.secondLetter) {
@@ -83,6 +83,7 @@ export default class Uhr implements Component {
         return undefined;
       }
       public swapBackward(letter: string): string | undefined {
+        const uhr = getUhr();
         if (letter === this.firstLetter) {
           return uhr.#wires[uhr.getOutgoingBlackWire(index)].secondLetter;
         } else if (letter === this.secondLetter) {
