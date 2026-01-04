@@ -13,6 +13,11 @@ const LEFT_ROTOR = 'L';
 const CENTER_ROTOR = 'C';
 const RIGHT_ROTOR = 'R';
 
+/**
+ * Enigma M3 Implementation.
+ * To make it operational you must at least set the 3 rotors
+ * and the reflector. Plugs are optional.
+ */
 export default class Enigma {
   protected plugBoard = new PlugBoard();
   protected entryWheel = new EntryWheel();
@@ -36,12 +41,27 @@ export default class Enigma {
     return this;
   }
 
-  public getRotor(position: string): Rotor {
+  public getRotor(position: string): Rotor | null {
     return this.rotors[position];
+  }
+
+  public unsetRotor(position: string): this {
+    this.rotors[position] = null;
+    this.setRotorWindowLetter('A', position);
+    return this;
+  }
+
+  public getReflector(): Reflector | undefined {
+    return this.reflector;
   }
 
   public setReflector(reflector: Reflector): this {
     this.reflector = reflector;
+    return this;
+  }
+
+  public unsetReflector(): this {
+    this.reflector = undefined;
     return this;
   }
 
