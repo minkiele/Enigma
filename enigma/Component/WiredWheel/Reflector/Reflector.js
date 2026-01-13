@@ -1,1 +1,13 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e,t=(e=require("../../WiredWheel/WiredWheel"))&&e.__esModule?e:{default:e},r=require("../../../lib/utils");class i extends t.default{pinToPin(e){return(0,r.getIndex)(this.wirings,e)}getReflectedLetter(e){const t=e.toUpperCase(),i=(0,r.getIndex)(t),d=this.pinToPin(i);return(0,r.getLetter)(d)}}exports.default=i;
+import WiredWheel from '../../WiredWheel/WiredWheel';
+import { getIndex, getLetter } from '../../../lib/utils';
+export default class Reflector extends WiredWheel {
+    pinToPin(inputPin) {
+        return getIndex(this.wirings, inputPin);
+    }
+    getReflectedLetter(inputLetter) {
+        const normalizedInputLetter = inputLetter.toUpperCase();
+        const inputIndex = getIndex(normalizedInputLetter);
+        const outputIndex = this.pinToPin(inputIndex);
+        return getLetter(outputIndex);
+    }
+}

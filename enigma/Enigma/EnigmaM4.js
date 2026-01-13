@@ -1,1 +1,61 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var t=r(require("./Enigma")),e=r(require("../Component/WiredWheel/Rotor/ThinRotor/ThinRotor")),o=r(require("../Component/WiredWheel/Reflector/Reflector")),i=r(require("../Component/WiredWheel/Reflector/ThinReflector/ThinReflector"));function r(t){return t&&t.__esModule?t:{default:t}}const s="F";class n extends t.default{constructor(){super(),this.setRotor(null,s)}encodeForward(t){const e=super.encodeForward(t);if(this.isClassicConfiguration())return e;{const t=this.getRotorInputPosition(e,s),o=this.getRotor(s).pinToPlate(t);return this.getRotorOutputPosition(o,s)}}encodeBackwards(t){let e;if(this.isClassicConfiguration())e=t;else{const o=this.getRotorInputPosition(t,s),i=this.getRotor(s).plateToPin(o);e=this.getRotorOutputPosition(i,s)}return super.encodeBackwards(e)}isClassicConfiguration(){return null==this.getRotor(s)&&this.reflector instanceof o.default&&!(this.reflector instanceof i.default)}isMachineValidState(){const t=super.isMachineValidState();return this.isClassicConfiguration()?t:t&&this.getRotor(s)instanceof e.default&&this.reflector instanceof i.default}static FOURTH_ROTOR=s}exports.default=n;
+import Enigma from './Enigma';
+import ThinRotor from '../Component/WiredWheel/Rotor/ThinRotor/ThinRotor';
+import Reflector from '../Component/WiredWheel/Reflector/Reflector';
+import ThinReflector from '../Component/WiredWheel/Reflector/ThinReflector/ThinReflector';
+const FOURTH_ROTOR = 'F';
+/**
+ * Implementation of an Enigma M4. It can operate either
+ * with the classic configuration (3 rotors + 1 reflector) or
+ * with the M4 configuration (3 rotors + 1 thin rotor + 1 thin reflector)
+ */
+class EnigmaM4 extends Enigma {
+    constructor() {
+        super();
+        this.setRotor(null, FOURTH_ROTOR);
+    }
+    encodeForward(inputLetter) {
+        const leftRotorForwardOutputPosition = super.encodeForward(inputLetter);
+        if (this.isClassicConfiguration()) {
+            return leftRotorForwardOutputPosition;
+        }
+        else {
+            //FOURTH ROTOR
+            const fourthRotorForwardInputPin = this.getRotorInputPosition(leftRotorForwardOutputPosition, FOURTH_ROTOR);
+            const fourthRotorForwardOutputPin = this.getRotor(FOURTH_ROTOR).pinToPlate(fourthRotorForwardInputPin);
+            const fourthRotorForwardOutputPosition = this.getRotorOutputPosition(fourthRotorForwardOutputPin, FOURTH_ROTOR);
+            return fourthRotorForwardOutputPosition;
+        }
+    }
+    encodeBackwards(reflectedPosition) {
+        let inputReflectedPosition;
+        if (this.isClassicConfiguration()) {
+            inputReflectedPosition = reflectedPosition;
+        }
+        else {
+            //FOURTH ROTOR
+            const fourthRotorBackwardsInputPin = this.getRotorInputPosition(reflectedPosition, FOURTH_ROTOR);
+            const fourthRotorBackwardsOutputPin = this.getRotor(FOURTH_ROTOR).plateToPin(fourthRotorBackwardsInputPin);
+            const fourthRotorBackwardsOutputPosition = this.getRotorOutputPosition(fourthRotorBackwardsOutputPin, FOURTH_ROTOR);
+            inputReflectedPosition = fourthRotorBackwardsOutputPosition;
+        }
+        return super.encodeBackwards(inputReflectedPosition);
+    }
+    isClassicConfiguration() {
+        return (this.getRotor(FOURTH_ROTOR) == null &&
+            this.reflector instanceof Reflector &&
+            !(this.reflector instanceof ThinReflector));
+    }
+    isMachineValidState() {
+        const superTest = super.isMachineValidState();
+        if (this.isClassicConfiguration()) {
+            return superTest;
+        }
+        else {
+            return (superTest &&
+                this.getRotor(FOURTH_ROTOR) instanceof ThinRotor &&
+                this.reflector instanceof ThinReflector);
+        }
+    }
+    static FOURTH_ROTOR = FOURTH_ROTOR;
+}
+export default EnigmaM4;

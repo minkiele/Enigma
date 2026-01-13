@@ -1,1 +1,2 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),Object.defineProperty(exports,"ThinReflectorB",{enumerable:!0,get:function(){return e.default}}),Object.defineProperty(exports,"ThinReflectorC",{enumerable:!0,get:function(){return r.default}});var e=t(require("./ThinReflectorB")),r=t(require("./ThinReflectorC"));function t(e){return e&&e.__esModule?e:{default:e}}
+export { default as ThinReflectorB } from './ThinReflectorB';
+export { default as ThinReflectorC } from './ThinReflectorC';

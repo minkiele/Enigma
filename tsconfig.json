@@ -1,14 +1,11 @@
 {
   "compilerOptions": {
-    "esModuleInterop": true,
-    "target": "ESNext",
-    "module": "CommonJS",
+    "target": "esnext",
+    "module": "esnext",
     "outDir": "enigma",
     "rootDir": "src",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "declaration": true,
-    "declarationDir": "enigma",
-    "emitDeclarationOnly": true
   },
   "include": ["src/**/*"]
 }

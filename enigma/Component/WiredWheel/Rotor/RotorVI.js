@@ -1,1 +1,5 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e,t=(e=require("./Rotor"))&&e.__esModule?e:{default:e};class o extends t.default{wirings="JPGVOUMFYQBENHZRDKASXLICTW";notchPosition="HU"}exports.default=o;
+import Rotor from './Rotor';
+export default class RotorVI extends Rotor {
+    wirings = 'JPGVOUMFYQBENHZRDKASXLICTW';
+    notchPosition = 'HU';
+}

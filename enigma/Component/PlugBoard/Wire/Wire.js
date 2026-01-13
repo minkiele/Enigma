@@ -1,1 +1,12 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e=require("../../../lib/utils");exports.default=class{constructor(t,r){if(this.firstLetter=(0,e.normalizeInput)(t),this.secondLetter=(0,e.normalizeInput)(r),this.firstLetter===this.secondLetter)throw new Error("Plugging the same letter")}};
+import { normalizeInput } from '../../../lib/utils';
+export default class Wire {
+    firstLetter;
+    secondLetter;
+    constructor(firstLetter, secondLetter) {
+        this.firstLetter = normalizeInput(firstLetter);
+        this.secondLetter = normalizeInput(secondLetter);
+        if (this.firstLetter === this.secondLetter) {
+            throw new Error('Plugging the same letter');
+        }
+    }
+}

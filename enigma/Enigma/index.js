@@ -1,1 +1,2 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),Object.defineProperty(exports,"Enigma",{enumerable:!0,get:function(){return e.default}}),Object.defineProperty(exports,"EnigmaM4",{enumerable:!0,get:function(){return r.default}});var e=t(require("./Enigma")),r=t(require("./EnigmaM4"));function t(e){return e&&e.__esModule?e:{default:e}}
+export { default as Enigma } from './Enigma';
+export { default as EnigmaM4 } from './EnigmaM4';

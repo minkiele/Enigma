@@ -1,1 +1,99 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e,t=(e=require("./Reflector"))&&e.__esModule?e:{default:e},r=require("../../../lib/utils");class i extends t.default{#e=[[0,13]];plugWire(e,t){if(this.#e.length>=13)throw"All plugs have been wired";if(!this.arePlugsWireable(e,t))throw"This couple is permanently wired and therefore cannot be plugged";if(e===t)throw"Cannot wire the same letter";if(!(e>=0&&e<26&&t>=0&&t<26))throw"Wiring indexes out of bounds";for(let r=0;r<this.#e.length;r+=1){const[i,n]=this.#e[r];if(i===e||n===e||i===t||n===t)throw"At least one of the plugs is already wired"}this.#e.push([e,t])}arePlugsWireable(e,t){return!(0===e&&13===t||13===e&&0===t)}unplugWire(e,t){if(!this.arePlugsWireable(e,t))throw"This couple is permanently wired and therefore cannot be unplugged";for(let r=0;r<this.#e.length;r+=1){const[i,n]=this.#e[r];(i===e&&n===t||i===t&&n===e)&&this.#e.splice(r,1)}}pinToPin(e){for(let t=0;t<this.#e.length;t+=1){const[r,i]=this.#e[t];if(r===e)return i;if(i===e)return r}throw"This pin is not wired"}getReflectedLetter(){throw"This method has various interpretations on this reflector"}getIndexFromGermanNotation(e){let t=(0,r.getIndex)(e);if(9===t||24===t)throw"J and Y letters do not appear in German notation";return(t>8&&t<13||25===t)&&(t-=1),25-t}getIndexFromAlliedNotation(e){const t=(0,r.getIndex)(e);return(0,r.getModularNumber)(t+25)}plugWireInGermanNotation(e,t){this.plugWire(this.getIndexFromGermanNotation(e),this.getIndexFromGermanNotation(t))}unplugWireInGermanNotation(e,t){this.unplugWire(this.getIndexFromGermanNotation(e),this.getIndexFromGermanNotation(t))}plugWireInAlliedNotation(e,t){this.plugWire(this.getIndexFromAlliedNotation(e),this.getIndexFromAlliedNotation(t))}unplugWireInAlliedNotation(e,t){this.unplugWire(this.getIndexFromAlliedNotation(e),this.getIndexFromAlliedNotation(t))}}exports.default=i;
+import Reflector from './Reflector';
+import { getIndex, getModularNumber } from '../../../lib/utils';
+const COUPLES = 13;
+const LOWER_LIMIT = 0;
+const UPPER_LIMIT = 26;
+const PERMANENTLY_WIRED_0 = 0;
+const PERMANENTLY_WIRED_1 = 13;
+export default class ReflectorD extends Reflector {
+    #reflectorDWirings = [
+        [PERMANENTLY_WIRED_0, PERMANENTLY_WIRED_1],
+    ];
+    plugWire(position1, position2) {
+        if (this.#reflectorDWirings.length >= COUPLES) {
+            throw 'All plugs have been wired';
+        }
+        if (!this.arePlugsWireable(position1, position2)) {
+            throw 'This couple is permanently wired and therefore cannot be plugged';
+        }
+        if (position1 === position2) {
+            throw 'Cannot wire the same letter';
+        }
+        if (!(position1 >= LOWER_LIMIT &&
+            position1 < UPPER_LIMIT &&
+            position2 >= LOWER_LIMIT &&
+            position2 < UPPER_LIMIT)) {
+            throw 'Wiring indexes out of bounds';
+        }
+        for (let i = 0; i < this.#reflectorDWirings.length; i += 1) {
+            const [wiredPosition1, wiredPosition2] = this.#reflectorDWirings[i];
+            if (wiredPosition1 === position1 ||
+                wiredPosition2 === position1 ||
+                wiredPosition1 === position2 ||
+                wiredPosition2 === position2) {
+                throw 'At least one of the plugs is already wired';
+            }
+        }
+        this.#reflectorDWirings.push([position1, position2]);
+    }
+    arePlugsWireable(position1, position2) {
+        return !((position1 === PERMANENTLY_WIRED_0 &&
+            position2 === PERMANENTLY_WIRED_1) ||
+            (position1 === PERMANENTLY_WIRED_1 && position2 === PERMANENTLY_WIRED_0));
+    }
+    unplugWire(position1, position2) {
+        if (!this.arePlugsWireable(position1, position2)) {
+            throw 'This couple is permanently wired and therefore cannot be unplugged';
+        }
+        for (let i = 0; i < this.#reflectorDWirings.length; i += 1) {
+            const [wiredPosition1, wiredPosition2] = this.#reflectorDWirings[i];
+            if ((wiredPosition1 === position1 && wiredPosition2 === position2) ||
+                (wiredPosition1 === position2 && wiredPosition2 === position1)) {
+                this.#reflectorDWirings.splice(i, 1);
+            }
+        }
+    }
+    pinToPin(inputPin) {
+        for (let i = 0; i < this.#reflectorDWirings.length; i += 1) {
+            const [wiredPosition1, wiredPosition2] = this.#reflectorDWirings[i];
+            if (wiredPosition1 === inputPin) {
+                return wiredPosition2;
+            }
+            else if (wiredPosition2 === inputPin) {
+                return wiredPosition1;
+            }
+        }
+        throw 'This pin is not wired';
+    }
+    getReflectedLetter() {
+        throw 'This method has various interpretations on this reflector';
+    }
+    getIndexFromGermanNotation(letter) {
+        // const normalizedLetter = normalizeInput(letter);
+        let index = getIndex(letter);
+        if (index === 9 || index === 24) {
+            throw 'J and Y letters do not appear in German notation';
+        }
+        if ((index > 8 && index < 13) || index === 25) {
+            index -= 1;
+        }
+        return 25 - index;
+    }
+    getIndexFromAlliedNotation(letter) {
+        // const normalizedLetter = normalizeInput(letter);
+        const index = getIndex(letter);
+        return getModularNumber(index + 25);
+    }
+    plugWireInGermanNotation(letter1, letter2) {
+        this.plugWire(this.getIndexFromGermanNotation(letter1), this.getIndexFromGermanNotation(letter2));
+    }
+    unplugWireInGermanNotation(letter1, letter2) {
+        this.unplugWire(this.getIndexFromGermanNotation(letter1), this.getIndexFromGermanNotation(letter2));
+    }
+    plugWireInAlliedNotation(letter1, letter2) {
+        this.plugWire(this.getIndexFromAlliedNotation(letter1), this.getIndexFromAlliedNotation(letter2));
+    }
+    unplugWireInAlliedNotation(letter1, letter2) {
+        this.unplugWire(this.getIndexFromAlliedNotation(letter1), this.getIndexFromAlliedNotation(letter2));
+    }
+}

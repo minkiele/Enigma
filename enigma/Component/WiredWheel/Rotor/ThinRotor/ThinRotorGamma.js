@@ -1,1 +1,4 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e,t=(e=require("./ThinRotor"))&&e.__esModule?e:{default:e};class r extends t.default{wirings="FSOKANUERHMBTIYCWLQPZXVGJD"}exports.default=r;
+import ThinRotor from './ThinRotor';
+export default class ThinRotorGamma extends ThinRotor {
+    wirings = 'FSOKANUERHMBTIYCWLQPZXVGJD';
+}

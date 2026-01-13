@@ -1,1 +1,10 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e,t=(e=require("../WiredWheel/WiredWheel"))&&e.__esModule?e:{default:e},r=require("../../lib/utils");class l extends t.default{getPlateFromLetter(e){return(0,r.getIndex)(e)}getLetterFromPlate(e){return(0,r.getLetter)(e)}}exports.default=l;
+import WiredWheel from '../WiredWheel/WiredWheel';
+import { getIndex, getLetter } from '../../lib/utils';
+export default class EntryWheel extends WiredWheel {
+    getPlateFromLetter(letter) {
+        return getIndex(letter);
+    }
+    getLetterFromPlate(plate) {
+        return getLetter(plate);
+    }
+}

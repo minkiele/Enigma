@@ -1,1 +1,85 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e,t=require("../../lib/utils"),r=(e=require("./Wire/Wire"))&&e.__esModule?e:{default:e};const i=[6,31,4,29,18,39,16,25,30,23,28,1,38,11,36,37,26,27,24,21,14,3,12,17,2,7,0,33,10,35,8,5,22,19,20,13,34,15,32,9],s=[6,0,7,5,1,8,4,2,9,3];exports.default=class{#e={};#t=0;setUhrSetting(e){this.#t=(0,t.getModularNumber)(e,i.length)}getUhrSetting(){return this.#t}getInnerPin(e){return(0,t.getModularNumber)(i[(0,t.getModularNumber)(e+this.#t,i.length)]-this.#t,i.length)}getOuterPin(e){const r=(0,t.getModularNumber)(e+this.#t,i.length),s=i.indexOf(r);return(0,t.getModularNumber)(s-this.#t,i.length)}getIngoingBlackWire(e){const t=4*(e-1),r=this.getInnerPin(t);return s[(r-2)/4]+1}getOutgoingBlackWire(e){const t=4*(e-1)+2,r=this.getInnerPin(t);return s[r/4]+1}getIngoingRedWire(e){const t=4*s.indexOf(e-1);return(this.getOuterPin(t)-2)/4+1}getOutgoingRedWire(e){const t=4*s.indexOf(e-1)+2;return this.getOuterPin(t)/4+1}getUhrWire(e){return this.#e[e]}getUhrWires(){return Object.keys(this.#e).sort(((e,t)=>Number(t)-Number(e))).map((e=>this.#e[e]))}prepareUhrWire(e,t,i){const s=()=>this,n=new class extends r.default{swapForward(t){const r=s();return t===this.firstLetter?r.#e[r.getIngoingBlackWire(e)].secondLetter:t===this.secondLetter?r.#e[r.getIngoingRedWire(e)].firstLetter:void 0}swapBackward(t){const r=s();return t===this.firstLetter?r.#e[r.getOutgoingBlackWire(e)].secondLetter:t===this.secondLetter?r.#e[r.getOutgoingRedWire(e)].firstLetter:void 0}}(t,i);return this.#e[e]=n,n}prepareUhrWires(e){e.forEach((([e,t],r)=>{this.prepareUhrWire(r+1,e,t)}))}};
+import { getModularNumber } from '../../lib/utils';
+import Wire from './Wire/Wire';
+const scramblerWirings = [
+    6, 31, 4, 29, 18, 39, 16, 25, 30, 23, 28, 1, 38, 11, 36, 37, 26, 27, 24, 21,
+    14, 3, 12, 17, 2, 7, 0, 33, 10, 35, 8, 5, 22, 19, 20, 13, 34, 15, 32, 9,
+];
+const blackWires = [6, 0, 7, 5, 1, 8, 4, 2, 9, 3];
+export default class Uhr {
+    #wires = {};
+    #setting = 0;
+    setUhrSetting(setting) {
+        this.#setting = getModularNumber(setting, scramblerWirings.length);
+    }
+    getUhrSetting() {
+        return this.#setting;
+    }
+    getInnerPin(outerPin) {
+        return getModularNumber(scramblerWirings[getModularNumber(outerPin + this.#setting, scramblerWirings.length)] - this.#setting, scramblerWirings.length);
+    }
+    getOuterPin(innerPin) {
+        const normalizedInnerPin = getModularNumber(innerPin + this.#setting, scramblerWirings.length);
+        const outerPin = scramblerWirings.indexOf(normalizedInnerPin);
+        return getModularNumber(outerPin - this.#setting, scramblerWirings.length);
+    }
+    getIngoingBlackWire(redWire) {
+        const outerInputPin = (redWire - 1) * 4;
+        const innerOutputPin = this.getInnerPin(outerInputPin);
+        return blackWires[(innerOutputPin - 2) / 4] + 1;
+    }
+    getOutgoingBlackWire(redWire) {
+        const outerInputPin = (redWire - 1) * 4 + 2;
+        const innerOutputPin = this.getInnerPin(outerInputPin);
+        return blackWires[innerOutputPin / 4] + 1;
+    }
+    getIngoingRedWire(blackWire) {
+        const innerInputPin = blackWires.indexOf(blackWire - 1) * 4;
+        const outerOutputPin = this.getOuterPin(innerInputPin);
+        return (outerOutputPin - 2) / 4 + 1;
+    }
+    getOutgoingRedWire(blackWire) {
+        const innerInputPin = blackWires.indexOf(blackWire - 1) * 4 + 2;
+        const outerOutputPin = this.getOuterPin(innerInputPin);
+        return outerOutputPin / 4 + 1;
+    }
+    getUhrWire(index) {
+        return this.#wires[index];
+    }
+    getUhrWires() {
+        return Object.keys(this.#wires)
+            .sort((a, b) => Number(b) - Number(a))
+            .map((key) => this.#wires[key]);
+    }
+    prepareUhrWire(index, firstLetter, secondLetter) {
+        const getUhr = () => this;
+        const wire = new (class extends Wire {
+            swapForward(letter) {
+                const uhr = getUhr();
+                if (letter === this.firstLetter) {
+                    return uhr.#wires[uhr.getIngoingBlackWire(index)].secondLetter;
+                }
+                else if (letter === this.secondLetter) {
+                    return uhr.#wires[uhr.getIngoingRedWire(index)].firstLetter;
+                }
+                return undefined;
+            }
+            swapBackward(letter) {
+                const uhr = getUhr();
+                if (letter === this.firstLetter) {
+                    return uhr.#wires[uhr.getOutgoingBlackWire(index)].secondLetter;
+                }
+                else if (letter === this.secondLetter) {
+                    return uhr.#wires[uhr.getOutgoingRedWire(index)].firstLetter;
+                }
+                return undefined;
+            }
+        })(firstLetter, secondLetter);
+        this.#wires[index] = wire;
+        return wire;
+    }
+    prepareUhrWires(wirings) {
+        wirings.forEach(([firstLetter, secondLetter], index) => {
+            this.prepareUhrWire(index + 1, firstLetter, secondLetter);
+        });
+    }
+}

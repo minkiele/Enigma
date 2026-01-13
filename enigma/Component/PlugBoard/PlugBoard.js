@@ -1,1 +1,73 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e=require("../../lib/utils"),t=i(require("./Wire/Wire")),r=i(require("./Wire/PlugBoardWire"));function i(e){return e&&e.__esModule?e:{default:e}}exports.default=class{static DIRECTION_FORWARD="F";static DIRECTION_BACKWARDS="B";#e=[];plugWire(e,i){if(e instanceof t.default&&null==i){for(let t=0;t<this.#e.length;t+=1){const{firstLetter:r,secondLetter:i}=this.#e[t];if(r===e.firstLetter||i===e.secondLetter||i===e.firstLetter||r===e.secondLetter)return!1}return this.#e.push(e),!0}return"string"==typeof e&&"string"==typeof i&&this.plugWire(new r.default(e,i))}unplugWire(e,i){if(e instanceof t.default&&null==i)for(let t=0;t<this.#e.length;t+=1){const{firstLetter:r,secondLetter:i}=this.#e[t];if(r===e.firstLetter&&i===e.secondLetter||i===e.firstLetter&&r===e.secondLetter)return this.#e.splice(t,1),!0}else if("string"==typeof e&&"string"==typeof i)return this.unplugWire(new r.default(e,i));return!1}plugWires(e){e.forEach((e=>{e instanceof Array?this.plugWire(e[0],e[1]):e instanceof t.default&&this.plugWire(e)}))}unplugAllWires(){this.#e.splice(0,this.#e.length)}getSwappedLetter(t,r){t=(0,e.normalizeInput)(t);for(let e=0;e<this.#e.length;e+=1){const i="F"===r?this.#e[e].swapForward(t):this.#e[e].swapBackward(t);if(null!=i)return i}return t}};
+import { normalizeInput } from '../../lib/utils';
+import Wire from './Wire/Wire';
+import PlugBoardWire from './Wire/PlugBoardWire';
+const DIRECTION_FORWARD = 'F';
+const DIRECTION_BACKWARDS = 'B';
+class PlugBoard {
+    static DIRECTION_FORWARD = DIRECTION_FORWARD;
+    static DIRECTION_BACKWARDS = DIRECTION_BACKWARDS;
+    #wirings = [];
+    plugWire(fp, sp) {
+        if (fp instanceof Wire && sp == null) {
+            for (let i = 0; i < this.#wirings.length; i += 1) {
+                const { firstLetter: wiringFirstLetter, secondLetter: wiringSecondLetter, } = this.#wirings[i];
+                if (wiringFirstLetter === fp.firstLetter ||
+                    wiringSecondLetter === fp.secondLetter ||
+                    wiringSecondLetter === fp.firstLetter ||
+                    wiringFirstLetter === fp.secondLetter) {
+                    return false;
+                }
+            }
+            this.#wirings.push(fp);
+            return true;
+        }
+        else if (typeof fp === 'string' && typeof sp === 'string') {
+            return this.plugWire(new PlugBoardWire(fp, sp));
+        }
+        return false;
+    }
+    unplugWire(fp, sp) {
+        if (fp instanceof Wire && sp == null) {
+            for (let i = 0; i < this.#wirings.length; i += 1) {
+                const { firstLetter: wiringFirstLetter, secondLetter: wiringSecondLetter, } = this.#wirings[i];
+                if ((wiringFirstLetter === fp.firstLetter &&
+                    wiringSecondLetter === fp.secondLetter) ||
+                    (wiringSecondLetter === fp.firstLetter &&
+                        wiringFirstLetter === fp.secondLetter)) {
+                    this.#wirings.splice(i, 1);
+                    return true;
+                }
+            }
+        }
+        else if (typeof fp === 'string' && typeof sp === 'string') {
+            return this.unplugWire(new PlugBoardWire(fp, sp));
+        }
+        return false;
+    }
+    plugWires(wires) {
+        wires.forEach((wire) => {
+            if (wire instanceof Array) {
+                this.plugWire(wire[0], wire[1]);
+            }
+            else if (wire instanceof Wire) {
+                this.plugWire(wire);
+            }
+        });
+    }
+    unplugAllWires() {
+        this.#wirings.splice(0, this.#wirings.length);
+    }
+    getSwappedLetter(inputLetter, direction) {
+        inputLetter = normalizeInput(inputLetter);
+        for (let i = 0; i < this.#wirings.length; i += 1) {
+            const swappedLetter = direction === DIRECTION_FORWARD
+                ? this.#wirings[i].swapForward(inputLetter)
+                : this.#wirings[i].swapBackward(inputLetter);
+            if (swappedLetter != null) {
+                return swappedLetter;
+            }
+        }
+        return inputLetter;
+    }
+}
+export default PlugBoard;

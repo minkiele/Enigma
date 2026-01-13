@@ -17,7 +17,6 @@ export default {
       format: 'esm',
     },
   ],
-  external: ['events'],
   plugins: [
     resolve({
       extensions,

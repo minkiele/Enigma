@@ -1,1 +1,16 @@
-Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=void 0;var e,t=(e=require("./Wire"))&&e.__esModule?e:{default:e};class s extends t.default{swap(e){return e===this.firstLetter?this.secondLetter:e===this.secondLetter?this.firstLetter:void 0}swapForward=this.swap.bind(this);swapBackward=this.swap.bind(this)}exports.default=s;
+import Wire from './Wire';
+export default class PlugBoardWire extends Wire {
+    swap(letter) {
+        if (letter === this.firstLetter) {
+            return this.secondLetter;
+        }
+        else if (letter === this.secondLetter) {
+            return this.firstLetter;
+        }
+        return undefined;
+    }
+    // Since the plugboard is reciprocal the swap method is the same
+    // Forward and backwards
+    swapForward = this.swap.bind(this);
+    swapBackward = this.swap.bind(this);
+}
