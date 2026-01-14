@@ -4,7 +4,7 @@
   "description": "A Typescript implementation of the Enigma Machine",
   "main": "enigma/index.js",
   "scripts": {
-    "types": "tsc",
+    "build": "tsc",
     "lint": "eslint . --fix --ext .js,.ts,.json",
     "test": "jest",
     "bundle": "rollup -c"
