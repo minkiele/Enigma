@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.2](https://github.com/minkiele/Enigma/compare/v1.6.0...v1.6.2) (2026-01-14)
+
+
+### Features
+
+* updated exports with modern js ([e3fe9da](https://github.com/minkiele/Enigma/commit/e3fe9da674e90d638cdaffb93966c443cda78e9d))
+
 ### [1.6.1](https://github.com/minkiele/Enigma/compare/v1.6.0...v1.6.1) (2026-01-04)
 
 ## [1.6.0](https://github.com/minkiele/Enigma/compare/v1.5.1...v1.6.0) (2023-11-20)
