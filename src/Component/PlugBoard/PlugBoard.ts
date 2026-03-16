@@ -84,12 +84,12 @@ export default class PlugBoard implements Component {
     inputLetter = normalizeInput(inputLetter);
 
     for (let i = 0; i < this.#wirings.length; i += 1) {
-      const swappedLetter =
-        direction === DIRECTION_FORWARD
-          ? this.#wirings[i].swapForward(inputLetter)
-          : this.#wirings[i].swapBackward(inputLetter);
-      if (swappedLetter != null) {
-        return swappedLetter;
+      try {
+        return direction === DIRECTION_FORWARD
+            ? this.#wirings[i].swapForward(inputLetter)
+            : this.#wirings[i].swapBackward(inputLetter);
+      } catch {
+        // Going forward
       }
     }
 

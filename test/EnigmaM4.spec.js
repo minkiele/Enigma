@@ -1,3 +1,6 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert';
+
 import ReflectorB from '../enigma/Component/WiredWheel/Reflector/ReflectorB.js';
 import ThinReflectorB from '../enigma/Component/WiredWheel/Reflector/ThinReflector/ThinReflectorB.js';
 import RotorI from '../enigma/Component/WiredWheel/Rotor/RotorI.js';
@@ -49,7 +52,7 @@ describe('EnigmaM4 Machine', () => {
     machine.setRotorWindowLetter('N', EnigmaM4.CENTER_ROTOR);
 
     const encodedMessage =
-      'NCZWVUSXPNYMINHZXMQXSFWXWLKJAHSHNMCOCCAKUQPMKCSMHKSEINJUSBLKIOSXCKUBHMLLXCSJUSRRDVKOHULXWCCBGVLIYXEOAHXRHKKFVDREWEZLXOBAFGYUJQUKGRTVUKAMEURBVEKSUHHVOYHABCJWMAKLFKLMYFVNRIZRVVRTKOFDANJMOLBGFFLEOPRGTFLVRHOWOPBEKVWMUQFMPWPARMFHAGKXIIBG.js';
+      'NCZWVUSXPNYMINHZXMQXSFWXWLKJAHSHNMCOCCAKUQPMKCSMHKSEINJUSBLKIOSXCKUBHMLLXCSJUSRRDVKOHULXWCCBGVLIYXEOAHXRHKKFVDREWEZLXOBAFGYUJQUKGRTVUKAMEURBVEKSUHHVOYHABCJWMAKLFKLMYFVNRIZRVVRTKOFDANJMOLBGFFLEOPRGTFLVRHOWOPBEKVWMUQFMPWPARMFHAGKXIIBG';
     //VONVONJLOOKSJHFFTTTEINSEINSDREIZWOYYQNNSNEUNINHALTXXBEIANGRIFFUNTERWASSERGEDRUECKTYWABOSXLETZTERGEGNERSTANDNULACHTDREINULUHRMARQUANTONJOTANEUNACHTSEYHSDREIYZWOZWONULGRADYACHTSMYSTOSSENACHXEKNSVIERMBFAELLTYNNNNNNOOOVIERYSICHTEINSNULL
     const decodedMessage = machine.encode(encodedMessage);
 
@@ -58,7 +61,7 @@ describe('EnigmaM4 Machine', () => {
     machine.setRotorWindowLetter('N', EnigmaM4.CENTER_ROTOR);
     machine.setRotorWindowLetter('A', EnigmaM4.RIGHT_ROTOR);
 
-    expect(machine.encode(decodedMessage)).toBe(encodedMessage);
+    assert.equal(machine.encode(decodedMessage), encodedMessage);
   });
 });
 
@@ -76,11 +79,11 @@ describe('Enigma M4 Machine (in classic mode)', () => {
     machine.setRotor(new RotorIII(), EnigmaM4.RIGHT_ROTOR);
     machine.setReflector(new ReflectorB());
 
-    expect(machine.getEncodedLetter('A')).toEqual('B');
-    expect(machine.getEncodedLetter('A')).toEqual('D');
-    expect(machine.getEncodedLetter('A')).toEqual('Z');
-    expect(machine.getEncodedLetter('A')).toEqual('G');
-    expect(machine.getEncodedLetter('A')).toEqual('O');
+    assert.equal(machine.getEncodedLetter('A'), 'B');
+    assert.equal(machine.getEncodedLetter('A'), 'D');
+    assert.equal(machine.getEncodedLetter('A'), 'Z');
+    assert.equal(machine.getEncodedLetter('A'), 'G');
+    assert.equal(machine.getEncodedLetter('A'), 'O');
   });
 
   it('should encode AAAAA IN EWTYX', () => {
@@ -103,10 +106,10 @@ describe('Enigma M4 Machine (in classic mode)', () => {
     machine.setRotor(rightRotor, EnigmaM4.RIGHT_ROTOR);
     machine.setReflector(new ReflectorB());
 
-    expect(machine.getEncodedLetter('A')).toEqual('E');
-    expect(machine.getEncodedLetter('A')).toEqual('W');
-    expect(machine.getEncodedLetter('A')).toEqual('T');
-    expect(machine.getEncodedLetter('A')).toEqual('Y');
-    expect(machine.getEncodedLetter('A')).toEqual('X');
+    assert.equal(machine.getEncodedLetter('A'), 'E');
+    assert.equal(machine.getEncodedLetter('A'), 'W');
+    assert.equal(machine.getEncodedLetter('A'), 'T');
+    assert.equal(machine.getEncodedLetter('A'), 'Y');
+    assert.equal(machine.getEncodedLetter('A'), 'X');
   });
 });

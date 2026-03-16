@@ -1,7 +1,7 @@
 import PlugBoard from '../Component/PlugBoard/PlugBoard.js';
 import { getNotchLetter, getNextLetter, getModularNumber, getIndex, } from '../lib/utils.js';
 import EntryWheel from '../Component/WiredWheel/EntryWheel.js';
-import Rotor from '../Component/WiredWheel/Rotor/RotorII.js';
+import Rotor from '../Component/WiredWheel/Rotor/Rotor.js';
 import Reflector from '../Component/WiredWheel/Reflector/Reflector.js';
 const LEFT_ROTOR = 'L';
 const CENTER_ROTOR = 'C';
