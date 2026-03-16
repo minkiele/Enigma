@@ -1,5 +1,5 @@
-import Component from '../Component';
-import Wire from './Wire/Wire';
+import Component from '../Component.js';
+import Wire from './Wire/Wire.js';
 type UhrWiring = [string, string];
 export default class Uhr implements Component {
     #private;

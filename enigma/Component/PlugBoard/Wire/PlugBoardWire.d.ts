@@ -1,6 +1,6 @@
-import Wire from './Wire';
+import Wire from './Wire.js';
 export default class PlugBoardWire extends Wire {
     private swap;
-    swapForward: any;
-    swapBackward: any;
+    swapForward: (letter: string) => string;
+    swapBackward: (letter: string) => string;
 }

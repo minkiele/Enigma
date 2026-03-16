@@ -1,4 +1,4 @@
-import Component from '../../Component';
+import Component from '../../Component.js';
 export default abstract class Wire implements Component {
     firstLetter: string;
     secondLetter: string;

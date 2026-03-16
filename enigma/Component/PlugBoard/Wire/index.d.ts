@@ -1,1 +1,1 @@
-export { default as PlugBoardWire } from './PlugBoardWire';
+export { default as PlugBoardWire } from './PlugBoardWire.js';

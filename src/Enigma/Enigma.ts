@@ -237,7 +237,7 @@ export default class Enigma {
 
   public getEncodedLetter(inputLetter: string): string {
     if (!this.isMachineValidState()) {
-      throw 'Machine is not in valid state';
+      throw new Error('Machine is not in valid state');
     }
 
     this.advanceRotors();

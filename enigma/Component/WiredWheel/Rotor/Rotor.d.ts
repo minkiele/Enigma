@@ -1,7 +1,7 @@
-import WiredWheel from '../../WiredWheel/WiredWheel';
+import WiredWheel from '../../WiredWheel/WiredWheel.js';
 export default abstract class Rotor extends WiredWheel {
     ringPosition: number;
-    notchPosition: string;
+    abstract notchPosition: string;
     constructor();
     pinToPlate(inputPin: number): number;
     plateToPin(outputPlate: number): number;

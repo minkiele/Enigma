@@ -4,9 +4,10 @@
   "description": "A Typescript implementation of the Enigma Machine",
   "type": "module",
   "main": "enigma/index.js",
+  "types": "enigma/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "lint": "eslint . --fix --ext .js,.ts,.json",
+    "lint": "eslint --fix",
     "test": "node --test"
   },
   "keywords": [
@@ -15,14 +16,16 @@
   "author": "Michele Montagner",
   "license": "MIT",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@typescript-eslint/eslint-plugin": "^8.57.0",
     "@typescript-eslint/parser": "^8.57.0",
     "eslint": "^10.0.3",
-    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^17.4.0",
     "prettier": "^3.8.1",
     "standard-version": "^9.5.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.57.1"
   },
   "repository": {
     "type": "git",
@@ -31,8 +34,7 @@
   "files": [
     "enigma"
   ],
-  "types": "enigma/index.d.ts",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   }
 }

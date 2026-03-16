@@ -1,5 +1,5 @@
-import Component from '../Component';
-import Wire from './Wire/Wire';
+import Component from '../Component.js';
+import Wire from './Wire/Wire.js';
 export type PlugBoardWireTuple = [string, string] | Wire;
 export default class PlugBoard implements Component {
     #private;

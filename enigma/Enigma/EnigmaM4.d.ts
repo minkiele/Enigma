@@ -1,4 +1,4 @@
-import Enigma from './Enigma';
+import Enigma from './Enigma.js';
 /**
  * Implementation of an Enigma M4. It can operate either
  * with the classic configuration (3 rotors + 1 reflector) or

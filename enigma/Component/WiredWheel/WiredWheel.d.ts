@@ -1,4 +1,4 @@
-import Component from '../Component';
+import Component from '../Component.js';
 export default abstract class WiredWheel implements Component {
-    protected wirings: string;
+    protected abstract wirings: string;
 }

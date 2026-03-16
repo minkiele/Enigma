@@ -17,15 +17,17 @@ export default class ReflectorD extends Reflector {
 
   public plugWire(position1: number, position2: number): void {
     if (this.#reflectorDWirings.length >= COUPLES) {
-      throw 'All plugs have been wired';
+      throw new Error('All plugs have been wired');
     }
 
     if (!this.arePlugsWireable(position1, position2)) {
-      throw 'This couple is permanently wired and therefore cannot be plugged';
+      throw new Error(
+        'This couple is permanently wired and therefore cannot be plugged',
+      );
     }
 
     if (position1 === position2) {
-      throw 'Cannot wire the same letter';
+      throw new Error('Cannot wire the same letter');
     }
 
     if (
@@ -36,7 +38,7 @@ export default class ReflectorD extends Reflector {
         position2 < UPPER_LIMIT
       )
     ) {
-      throw 'Wiring indexes out of bounds';
+      throw new Error('Wiring indexes out of bounds');
     }
 
     for (let i = 0; i < this.#reflectorDWirings.length; i += 1) {
@@ -47,7 +49,7 @@ export default class ReflectorD extends Reflector {
         wiredPosition1 === position2 ||
         wiredPosition2 === position2
       ) {
-        throw 'At least one of the plugs is already wired';
+        throw new Error('At least one of the plugs is already wired');
       }
     }
 
@@ -64,7 +66,9 @@ export default class ReflectorD extends Reflector {
 
   public unplugWire(position1: number, position2: number): void {
     if (!this.arePlugsWireable(position1, position2)) {
-      throw 'This couple is permanently wired and therefore cannot be unplugged';
+      throw new Error(
+        'This couple is permanently wired and therefore cannot be unplugged',
+      );
     }
 
     for (let i = 0; i < this.#reflectorDWirings.length; i += 1) {
@@ -88,11 +92,13 @@ export default class ReflectorD extends Reflector {
       }
     }
 
-    throw 'This pin is not wired';
+    throw new Error('This pin is not wired');
   }
 
   public getReflectedLetter(): never {
-    throw 'This method has various interpretations on this reflector';
+    throw new Error(
+      'This method has various interpretations on this reflector',
+    );
   }
 
   public getIndexFromGermanNotation(letter: string): number {
@@ -100,7 +106,7 @@ export default class ReflectorD extends Reflector {
     let index = getIndex(letter);
 
     if (index === 9 || index === 24) {
-      throw 'J and Y letters do not appear in German notation';
+      throw new Error('J and Y letters do not appear in German notation');
     }
 
     if ((index > 8 && index < 13) || index === 25) {
@@ -119,28 +125,28 @@ export default class ReflectorD extends Reflector {
   public plugWireInGermanNotation(letter1: string, letter2: string): void {
     this.plugWire(
       this.getIndexFromGermanNotation(letter1),
-      this.getIndexFromGermanNotation(letter2)
+      this.getIndexFromGermanNotation(letter2),
     );
   }
 
   public unplugWireInGermanNotation(letter1: string, letter2: string): void {
     this.unplugWire(
       this.getIndexFromGermanNotation(letter1),
-      this.getIndexFromGermanNotation(letter2)
+      this.getIndexFromGermanNotation(letter2),
     );
   }
 
   public plugWireInAlliedNotation(letter1: string, letter2: string): void {
     this.plugWire(
       this.getIndexFromAlliedNotation(letter1),
-      this.getIndexFromAlliedNotation(letter2)
+      this.getIndexFromAlliedNotation(letter2),
     );
   }
 
   public unplugWireInAlliedNotation(letter1: string, letter2: string): void {
     this.unplugWire(
       this.getIndexFromAlliedNotation(letter1),
-      this.getIndexFromAlliedNotation(letter2)
+      this.getIndexFromAlliedNotation(letter2),
     );
   }
 }

@@ -25,13 +25,13 @@ export default class Uhr implements Component {
       scramblerWirings[
         getModularNumber(outerPin + this.#setting, scramblerWirings.length)
       ] - this.#setting,
-      scramblerWirings.length
+      scramblerWirings.length,
     );
   }
   private getOuterPin(innerPin: number): number {
     const normalizedInnerPin = getModularNumber(
       innerPin + this.#setting,
-      scramblerWirings.length
+      scramblerWirings.length,
     );
     const outerPin = scramblerWirings.indexOf(normalizedInnerPin);
     return getModularNumber(outerPin - this.#setting, scramblerWirings.length);
@@ -69,7 +69,7 @@ export default class Uhr implements Component {
   public prepareUhrWire(
     index: number,
     firstLetter: string,
-    secondLetter: string
+    secondLetter: string,
   ): Wire {
     const getUhr = () => this;
     const wire = new (class extends Wire {

@@ -30,11 +30,11 @@ export default abstract class Rotor extends WiredWheel {
     const normalizedInputLetter = inputLetter.toUpperCase();
     const inputIndex = getIndex(normalizedInputLetter);
     const normalizedInputIndex = getModularNumber(
-      inputIndex - this.ringPosition
+      inputIndex - this.ringPosition,
     );
     const normalizedOutputIndex = this.pinToPlate(normalizedInputIndex);
     const outputIndex = getModularNumber(
-      normalizedOutputIndex + this.ringPosition
+      normalizedOutputIndex + this.ringPosition,
     );
     return getLetter(outputIndex);
   }
@@ -43,11 +43,11 @@ export default abstract class Rotor extends WiredWheel {
     const normalizedOutputLetter = outputLetter.toUpperCase();
     const outputIndex = getIndex(normalizedOutputLetter);
     const normalizedOutputIndex = getModularNumber(
-      outputIndex + this.ringPosition
+      outputIndex + this.ringPosition,
     );
     const normalizedInputIndex = this.plateToPin(normalizedOutputIndex);
     const inputIndex = getModularNumber(
-      normalizedInputIndex - this.ringPosition
+      normalizedInputIndex - this.ringPosition,
     );
     return getLetter(inputIndex);
   }

@@ -12,19 +12,19 @@ export default class ReflectorD extends Reflector {
     ];
     plugWire(position1, position2) {
         if (this.#reflectorDWirings.length >= COUPLES) {
-            throw 'All plugs have been wired';
+            throw new Error('All plugs have been wired');
         }
         if (!this.arePlugsWireable(position1, position2)) {
-            throw 'This couple is permanently wired and therefore cannot be plugged';
+            throw new Error('This couple is permanently wired and therefore cannot be plugged');
         }
         if (position1 === position2) {
-            throw 'Cannot wire the same letter';
+            throw new Error('Cannot wire the same letter');
         }
         if (!(position1 >= LOWER_LIMIT &&
             position1 < UPPER_LIMIT &&
             position2 >= LOWER_LIMIT &&
             position2 < UPPER_LIMIT)) {
-            throw 'Wiring indexes out of bounds';
+            throw new Error('Wiring indexes out of bounds');
         }
         for (let i = 0; i < this.#reflectorDWirings.length; i += 1) {
             const [wiredPosition1, wiredPosition2] = this.#reflectorDWirings[i];
@@ -32,7 +32,7 @@ export default class ReflectorD extends Reflector {
                 wiredPosition2 === position1 ||
                 wiredPosition1 === position2 ||
                 wiredPosition2 === position2) {
-                throw 'At least one of the plugs is already wired';
+                throw new Error('At least one of the plugs is already wired');
             }
         }
         this.#reflectorDWirings.push([position1, position2]);
@@ -44,7 +44,7 @@ export default class ReflectorD extends Reflector {
     }
     unplugWire(position1, position2) {
         if (!this.arePlugsWireable(position1, position2)) {
-            throw 'This couple is permanently wired and therefore cannot be unplugged';
+            throw new Error('This couple is permanently wired and therefore cannot be unplugged');
         }
         for (let i = 0; i < this.#reflectorDWirings.length; i += 1) {
             const [wiredPosition1, wiredPosition2] = this.#reflectorDWirings[i];
@@ -64,16 +64,16 @@ export default class ReflectorD extends Reflector {
                 return wiredPosition1;
             }
         }
-        throw 'This pin is not wired';
+        throw new Error('This pin is not wired');
     }
     getReflectedLetter() {
-        throw 'This method has various interpretations on this reflector';
+        throw new Error('This method has various interpretations on this reflector');
     }
     getIndexFromGermanNotation(letter) {
         // const normalizedLetter = normalizeInput(letter);
         let index = getIndex(letter);
         if (index === 9 || index === 24) {
-            throw 'J and Y letters do not appear in German notation';
+            throw new Error('J and Y letters do not appear in German notation');
         }
         if ((index > 8 && index < 13) || index === 25) {
             index -= 1;

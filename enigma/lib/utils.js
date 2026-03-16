@@ -29,6 +29,6 @@ export function normalizeInput(letter) {
         return upperCase.charAt(0);
     }
     else {
-        throw 'Input cannot be normalized';
+        throw new Error('Input cannot be normalized');
     }
 }

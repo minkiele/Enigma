@@ -1,9 +1,9 @@
-export * from './ThinRotor';
-export { default as RotorI } from './RotorI';
-export { default as RotorII } from './RotorII';
-export { default as RotorIII } from './RotorIII';
-export { default as RotorIV } from './RotorIV';
-export { default as RotorV } from './RotorV';
-export { default as RotorVI } from './RotorVI';
-export { default as RotorVII } from './RotorVII';
-export { default as RotorVIII } from './RotorVIII';
+export * from './ThinRotor/index.js';
+export { default as RotorI } from './RotorI.js';
+export { default as RotorII } from './RotorII.js';
+export { default as RotorIII } from './RotorIII.js';
+export { default as RotorIV } from './RotorIV.js';
+export { default as RotorV } from './RotorV.js';
+export { default as RotorVI } from './RotorVI.js';
+export { default as RotorVII } from './RotorVII.js';
+export { default as RotorVIII } from './RotorVIII.js';

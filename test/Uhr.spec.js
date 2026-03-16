@@ -11,10 +11,10 @@ import RotorVIII from '../enigma/Component/WiredWheel/Rotor/RotorVIII.js';
 import Enigma from '../enigma/Enigma/Enigma.js';
 import { getLetter } from '../enigma/lib/utils.js';
 
-const letterPairs = Array.from({ length: 10 }).map(
-  (_, index) =>
-    [getLetter(index * 2), getLetter(index * 2 + 1)]
-);
+const letterPairs = Array.from({ length: 10 }).map((_, index) => [
+  getLetter(index * 2),
+  getLetter(index * 2 + 1),
+]);
 
 describe('Uhr', () => {
   it('Should validate position 0 is compatibility mode', () => {

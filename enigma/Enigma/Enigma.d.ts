@@ -1,7 +1,7 @@
-import PlugBoard from '../Component/PlugBoard/PlugBoard';
-import EntryWheel from '../Component/WiredWheel/EntryWheel';
-import Rotor from '../Component/WiredWheel/Rotor/Rotor';
-import Reflector from '../Component/WiredWheel/Reflector/Reflector';
+import PlugBoard from '../Component/PlugBoard/PlugBoard.js';
+import EntryWheel from '../Component/WiredWheel/EntryWheel.js';
+import Rotor from '../Component/WiredWheel/Rotor/Rotor.js';
+import Reflector from '../Component/WiredWheel/Reflector/Reflector.js';
 /**
  * Enigma M3 Implementation.
  * To make it operational you must at least set the 3 rotors
@@ -10,15 +10,15 @@ import Reflector from '../Component/WiredWheel/Reflector/Reflector';
 export default class Enigma {
     protected plugBoard: PlugBoard;
     protected entryWheel: EntryWheel;
-    protected rotors: Record<string, Rotor>;
+    protected rotors: Record<string, Rotor | null>;
     protected rotorsWindowLetter: Record<string, string>;
-    protected reflector: Reflector;
+    protected reflector: Reflector | null;
     constructor();
     getPlugBoard(): PlugBoard;
-    setRotor(rotor: Rotor, position: string): this;
+    setRotor(rotor: Rotor | null, position: string): this;
     getRotor(position: string): Rotor | null;
     unsetRotor(position: string): this;
-    getReflector(): Reflector | undefined;
+    getReflector(): Reflector | null;
     setReflector(reflector: Reflector): this;
     unsetReflector(): this;
     setRotorWindowLetter(letter: string, position: string): this;

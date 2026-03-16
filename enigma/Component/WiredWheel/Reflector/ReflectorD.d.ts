@@ -1,7 +1,8 @@
-import Reflector from './Reflector';
+import Reflector from './Reflector.js';
 export type ReflectorDWiring = [number, number];
 export default class ReflectorD extends Reflector {
     #private;
+    protected wirings: string;
     plugWire(position1: number, position2: number): void;
     arePlugsWireable(position1: number, position2: number): boolean;
     unplugWire(position1: number, position2: number): void;

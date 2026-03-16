@@ -1,3 +1,3 @@
-export * from './Component';
-export * from './Enigma';
-export * from './lib';
+export * from './Component/index.js';
+export * from './Enigma/index.js';
+export * from './lib/index.js';

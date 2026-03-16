@@ -1,4 +1,4 @@
-import WiredWheel from '../../WiredWheel/WiredWheel';
+import WiredWheel from '../../WiredWheel/WiredWheel.js';
 export default abstract class Reflector extends WiredWheel {
     pinToPin(inputPin: number): number;
     getReflectedLetter(inputLetter: string): string;
