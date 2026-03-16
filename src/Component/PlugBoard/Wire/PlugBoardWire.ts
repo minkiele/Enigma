@@ -1,13 +1,13 @@
-import Wire from './Wire';
+import Wire from './Wire.js';
 
 export default class PlugBoardWire extends Wire {
-  private swap(letter: string): string | undefined {
+  private swap(letter: string): string {
     if (letter === this.firstLetter) {
       return this.secondLetter;
     } else if (letter === this.secondLetter) {
       return this.firstLetter;
     }
-    return undefined;
+    throw new Error('Unmatched swap');
   }
   // Since the plugboard is reciprocal the swap method is the same
   // Forward and backwards

@@ -1,4 +1,4 @@
-import { normalizeInput } from '../../../lib/utils';
+import { normalizeInput } from '../../../lib/utils.js';
 export default class Wire {
     firstLetter;
     secondLetter;

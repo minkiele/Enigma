@@ -1,5 +1,5 @@
-import { normalizeInput } from '../../../lib/utils';
-import Component from '../../Component';
+import { normalizeInput } from '../../../lib/utils.js';
+import Component from '../../Component.js';
 
 export default abstract class Wire implements Component {
   public firstLetter: string;

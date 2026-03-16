@@ -1,8 +1,7 @@
-import WiredWheel from '../../WiredWheel/WiredWheel';
-import { getIndex, getLetter, getModularNumber } from '../../../lib/utils';
+import WiredWheel from '../../WiredWheel/WiredWheel.js';
+import { getIndex, getLetter, getModularNumber } from '../../../lib/utils.js';
 export default class Rotor extends WiredWheel {
-    ringPosition;
-    notchPosition;
+    ringPosition = 0;
     constructor() {
         super();
         this.setRingPosition(0);

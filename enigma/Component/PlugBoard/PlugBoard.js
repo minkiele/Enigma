@@ -1,9 +1,9 @@
-import { normalizeInput } from '../../lib/utils';
-import Wire from './Wire/Wire';
-import PlugBoardWire from './Wire/PlugBoardWire';
+import { normalizeInput } from '../../lib/utils.js';
+import Wire from './Wire/Wire.js';
+import PlugBoardWire from './Wire/PlugBoardWire.js';
 const DIRECTION_FORWARD = 'F';
 const DIRECTION_BACKWARDS = 'B';
-class PlugBoard {
+export default class PlugBoard {
     static DIRECTION_FORWARD = DIRECTION_FORWARD;
     static DIRECTION_BACKWARDS = DIRECTION_BACKWARDS;
     #wirings = [];
@@ -70,4 +70,3 @@ class PlugBoard {
         return inputLetter;
     }
 }
-export default PlugBoard;

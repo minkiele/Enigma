@@ -1,7 +1,7 @@
-import Enigma from './Enigma';
-import ThinRotor from '../Component/WiredWheel/Rotor/ThinRotor/ThinRotor';
-import Reflector from '../Component/WiredWheel/Reflector/Reflector';
-import ThinReflector from '../Component/WiredWheel/Reflector/ThinReflector/ThinReflector';
+import Enigma from './Enigma.js';
+import ThinRotor from '../Component/WiredWheel/Rotor/ThinRotor/ThinRotor.js';
+import Reflector from '../Component/WiredWheel/Reflector/Reflector.js';
+import ThinReflector from '../Component/WiredWheel/Reflector/ThinReflector/ThinReflector.js';
 
 const FOURTH_ROTOR = 'F';
 
@@ -18,7 +18,7 @@ export default class EnigmaM4 extends Enigma {
 
   protected encodeForward(inputLetter: string): number {
     const leftRotorForwardOutputPosition: number = super.encodeForward(
-      inputLetter
+      inputLetter,
     );
 
     if (this.isClassicConfiguration()) {
@@ -27,14 +27,17 @@ export default class EnigmaM4 extends Enigma {
       //FOURTH ROTOR
       const fourthRotorForwardInputPin = this.getRotorInputPosition(
         leftRotorForwardOutputPosition,
-        FOURTH_ROTOR
+        FOURTH_ROTOR,
       );
       const fourthRotorForwardOutputPin = this.getRotor(
-        FOURTH_ROTOR
-      ).pinToPlate(fourthRotorForwardInputPin);
+        FOURTH_ROTOR,
+      )?.pinToPlate(fourthRotorForwardInputPin);
+      if (fourthRotorForwardOutputPin == null) {
+        throw new Error('Cannot encode forward, missing left rotor');
+      }
       const fourthRotorForwardOutputPosition = this.getRotorOutputPosition(
         fourthRotorForwardOutputPin,
-        FOURTH_ROTOR
+        FOURTH_ROTOR,
       );
       return fourthRotorForwardOutputPosition;
     }
@@ -49,14 +52,17 @@ export default class EnigmaM4 extends Enigma {
       //FOURTH ROTOR
       const fourthRotorBackwardsInputPin = this.getRotorInputPosition(
         reflectedPosition,
-        FOURTH_ROTOR
+        FOURTH_ROTOR,
       );
       const fourthRotorBackwardsOutputPin = this.getRotor(
-        FOURTH_ROTOR
-      ).plateToPin(fourthRotorBackwardsInputPin);
+        FOURTH_ROTOR,
+      )?.plateToPin(fourthRotorBackwardsInputPin);
+      if (fourthRotorBackwardsOutputPin == null) {
+        throw new Error('Cannot encode backwards, missing left rotor');
+      }
       const fourthRotorBackwardsOutputPosition = this.getRotorOutputPosition(
         fourthRotorBackwardsOutputPin,
-        FOURTH_ROTOR
+        FOURTH_ROTOR,
       );
 
       inputReflectedPosition = fourthRotorBackwardsOutputPosition;

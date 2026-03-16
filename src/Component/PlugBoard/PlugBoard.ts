@@ -1,7 +1,7 @@
-import Component from '../Component';
-import { normalizeInput } from '../../lib/utils';
-import Wire from './Wire/Wire';
-import PlugBoardWire from './Wire/PlugBoardWire';
+import Component from '../Component.js';
+import { normalizeInput } from '../../lib/utils.js';
+import Wire from './Wire/Wire.js';
+import PlugBoardWire from './Wire/PlugBoardWire.js';
 
 export type PlugBoardWireTuple = [string, string] | Wire;
 

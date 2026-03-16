@@ -1,11 +1,12 @@
-import Reflector from './Reflector';
-import { getIndex, getModularNumber } from '../../../lib/utils';
+import Reflector from './Reflector.js';
+import { getIndex, getModularNumber } from '../../../lib/utils.js';
 const COUPLES = 13;
 const LOWER_LIMIT = 0;
 const UPPER_LIMIT = 26;
 const PERMANENTLY_WIRED_0 = 0;
 const PERMANENTLY_WIRED_1 = 13;
 export default class ReflectorD extends Reflector {
+    wirings = '';
     #reflectorDWirings = [
         [PERMANENTLY_WIRED_0, PERMANENTLY_WIRED_1],
     ];

@@ -1,4 +1,4 @@
-export * from './Wire';
+export * from './Wire/index.js';
 
-export { default as PlugBoard } from './PlugBoard';
-export { default as Uhr } from './Uhr';
+export { default as PlugBoard } from './PlugBoard.js';
+export { default as Uhr } from './Uhr.js';

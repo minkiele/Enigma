@@ -1,16 +1,16 @@
-import Uhr from '../src/Component/PlugBoard/Uhr';
-import ReflectorB from '../src/Component/WiredWheel/Reflector/ReflectorB';
-import RotorI from '../src/Component/WiredWheel/Rotor/RotorI';
-import RotorII from '../src/Component/WiredWheel/Rotor/RotorII';
-import RotorIII from '../src/Component/WiredWheel/Rotor/RotorIII';
-import RotorVI from '../src/Component/WiredWheel/Rotor/RotorVI';
-import RotorVIII from '../src/Component/WiredWheel/Rotor/RotorVIII';
-import Enigma from '../src/Enigma/Enigma';
-import { getLetter } from '../src/lib/utils';
+import Uhr from '../enigma/Component/PlugBoard/Uhr.js';
+import ReflectorB from '../enigma/Component/WiredWheel/Reflector/ReflectorB.js';
+import RotorI from '../enigma/Component/WiredWheel/Rotor/RotorI.js';
+import RotorII from '../enigma/Component/WiredWheel/Rotor/RotorII.js';
+import RotorIII from '../enigma/Component/WiredWheel/Rotor/RotorIII.js';
+import RotorVI from '../enigma/Component/WiredWheel/Rotor/RotorVI.js';
+import RotorVIII from '../enigma/Component/WiredWheel/Rotor/RotorVIII.js';
+import Enigma from '../enigma/Enigma/Enigma.js';
+import { getLetter } from '../enigma/lib/utils.js';
 
 const letterPairs = Array.from({ length: 10 }).map(
   (_, index) =>
-    [getLetter(index * 2), getLetter(index * 2 + 1)] as [string, string]
+    [getLetter(index * 2), getLetter(index * 2 + 1)]
 );
 
 describe('Uhr', () => {

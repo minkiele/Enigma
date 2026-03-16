@@ -2,12 +2,12 @@
   "name": "enigma-minkiele",
   "version": "1.6.3",
   "description": "A Typescript implementation of the Enigma Machine",
+  "type": "module",
   "main": "enigma/index.js",
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --fix --ext .js,.ts,.json",
-    "test": "jest",
-    "bundle": "rollup -c"
+    "test": "node --test"
   },
   "keywords": [
     "Enigma"
@@ -15,26 +15,14 @@
   "author": "Michele Montagner",
   "license": "MIT",
   "devDependencies": {
-    "@babel/preset-env": "^7.21.4",
-    "@babel/preset-typescript": "^7.21.4",
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^25.0.7",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@types/jest": "^29.5.0",
-    "@typescript-eslint/eslint-plugin": "^5.58.0",
-    "@typescript-eslint/parser": "^5.58.0",
-    "eslint": "^8.38.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "glob": "^10.0.0",
-    "jest": "^29.5.0",
-    "prettier": "^2.8.7",
-    "rollup": "^4.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.0",
+    "eslint": "^10.0.3",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.1",
     "standard-version": "^9.5.0",
-    "terser": "^5.16.9",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.9.3"
   },
   "repository": {
     "type": "git",

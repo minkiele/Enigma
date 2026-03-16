@@ -1,13 +1,13 @@
-import PlugBoard from '../Component/PlugBoard/PlugBoard';
+import PlugBoard from '../Component/PlugBoard/PlugBoard.js';
 import {
   getNotchLetter,
   getNextLetter,
   getModularNumber,
   getIndex,
-} from '../lib/utils';
-import EntryWheel from '../Component/WiredWheel/EntryWheel';
-import Rotor from '../Component/WiredWheel/Rotor/Rotor';
-import Reflector from '../Component/WiredWheel/Reflector/Reflector';
+} from '../lib/utils.js';
+import EntryWheel from '../Component/WiredWheel/EntryWheel.js';
+import Rotor from '../Component/WiredWheel/Rotor/RotorII.js';
+import Reflector from '../Component/WiredWheel/Reflector/Reflector.js';
 
 const LEFT_ROTOR = 'L';
 const CENTER_ROTOR = 'C';
@@ -21,9 +21,9 @@ const RIGHT_ROTOR = 'R';
 export default class Enigma {
   protected plugBoard = new PlugBoard();
   protected entryWheel = new EntryWheel();
-  protected rotors: Record<string, Rotor> = {};
+  protected rotors: Record<string, Rotor | null> = {};
   protected rotorsWindowLetter: Record<string, string> = {};
-  protected reflector: Reflector;
+  protected reflector: Reflector | null = null;
 
   public constructor() {
     this.setRotor(null, LEFT_ROTOR);
@@ -35,7 +35,7 @@ export default class Enigma {
     return this.plugBoard;
   }
 
-  public setRotor(rotor: Rotor, position: string): this {
+  public setRotor(rotor: Rotor | null, position: string): this {
     this.rotors[position] = rotor;
     this.setRotorWindowLetter('A', position);
     return this;
@@ -51,7 +51,7 @@ export default class Enigma {
     return this;
   }
 
-  public getReflector(): Reflector | undefined {
+  public getReflector(): Reflector | null {
     return this.reflector;
   }
 
@@ -61,7 +61,7 @@ export default class Enigma {
   }
 
   public unsetReflector(): this {
-    this.reflector = undefined;
+    this.reflector = null;
     return this;
   }
 
@@ -76,15 +76,17 @@ export default class Enigma {
 
   private isRotorInNotchPosition(position: string): boolean {
     const notchLetter: string = getNotchLetter(
-      this.getRotorWindowLetter(position)
+      this.getRotorWindowLetter(position),
     );
-    return this.getRotor(position).notchPosition.indexOf(notchLetter) > -1;
+    return (
+      this.getRotor(position)?.notchPosition.includes(notchLetter) ?? false
+    );
   }
 
   private advanceRotor(position: string): this {
     this.setRotorWindowLetter(
       getNextLetter(this.getRotorWindowLetter(position)),
-      position
+      position,
     );
     return this;
   }
@@ -108,7 +110,7 @@ export default class Enigma {
     const normalizedInputLetter: string = inputLetter.toUpperCase();
     const swappedInputLetter = this.plugBoard.getSwappedLetter(
       normalizedInputLetter,
-      PlugBoard.DIRECTION_FORWARD
+      PlugBoard.DIRECTION_FORWARD,
     );
     const entryWheelInputPosition =
       this.entryWheel.getPlateFromLetter(swappedInputLetter);
@@ -116,37 +118,46 @@ export default class Enigma {
     //RIGHT ROTOR
     const rightRotorInputPin = this.getRotorInputPosition(
       entryWheelInputPosition,
-      RIGHT_ROTOR
+      RIGHT_ROTOR,
     );
     const rightRotorOutputPlate =
-      this.getRotor(RIGHT_ROTOR).pinToPlate(rightRotorInputPin);
+      this.getRotor(RIGHT_ROTOR)?.pinToPlate(rightRotorInputPin);
+    if (rightRotorOutputPlate == null) {
+      throw new Error('Cannot encode forward, missing right rotor');
+    }
     const rightRotorForwardOutputPosition = this.getRotorOutputPosition(
       rightRotorOutputPlate,
-      RIGHT_ROTOR
+      RIGHT_ROTOR,
     );
 
     //CENTER ROTOR
     const centerRotorInputPin = this.getRotorInputPosition(
       rightRotorForwardOutputPosition,
-      CENTER_ROTOR
+      CENTER_ROTOR,
     );
     const centerRotorOutputPlate =
-      this.getRotor(CENTER_ROTOR).pinToPlate(centerRotorInputPin);
+      this.getRotor(CENTER_ROTOR)?.pinToPlate(centerRotorInputPin);
+    if (centerRotorOutputPlate == null) {
+      throw new Error('Cannot encode forward, missing center rotor');
+    }
     const centerRotorForwardOutputPosition = this.getRotorOutputPosition(
       centerRotorOutputPlate,
-      CENTER_ROTOR
+      CENTER_ROTOR,
     );
 
     //LEFT ROTOR
     const leftRotorInputPin = this.getRotorInputPosition(
       centerRotorForwardOutputPosition,
-      LEFT_ROTOR
+      LEFT_ROTOR,
     );
     const leftRotorOutputPlate =
-      this.getRotor(LEFT_ROTOR).pinToPlate(leftRotorInputPin);
+      this.getRotor(LEFT_ROTOR)?.pinToPlate(leftRotorInputPin);
+    if (leftRotorOutputPlate == null) {
+      throw new Error('Cannot encode forward, missing left rotor');
+    }
     const leftRotorForwardOutputPosition = this.getRotorOutputPosition(
       leftRotorOutputPlate,
-      LEFT_ROTOR
+      LEFT_ROTOR,
     );
 
     return leftRotorForwardOutputPosition;
@@ -154,9 +165,12 @@ export default class Enigma {
 
   private encodeReflect(leftRotorForwardOutputPosition: number): number {
     //REFLECTION
-    const reflectedPosition = this.reflector.pinToPin(
-      leftRotorForwardOutputPosition
+    const reflectedPosition = this.getReflector()?.pinToPin(
+      leftRotorForwardOutputPosition,
     );
+    if (reflectedPosition == null) {
+      throw new Error('Cannot reflect, missing reflector');
+    }
     //AND NOW BACKWARDS!
 
     return reflectedPosition;
@@ -166,47 +180,56 @@ export default class Enigma {
     //LEFT ROTOR
     const leftRotorInputPlate = this.getRotorInputPosition(
       reflectedPosition,
-      LEFT_ROTOR
+      LEFT_ROTOR,
     );
     const leftRotorOutputPin =
-      this.getRotor(LEFT_ROTOR).plateToPin(leftRotorInputPlate);
+      this.getRotor(LEFT_ROTOR)?.plateToPin(leftRotorInputPlate);
+    if (leftRotorOutputPin == null) {
+      throw new Error('Cannot encode backwards, missing left rotor');
+    }
     const leftRotorBackwardsOutputPosition = this.getRotorOutputPosition(
       leftRotorOutputPin,
-      LEFT_ROTOR
+      LEFT_ROTOR,
     );
 
     //CENTER ROTOR
     const centerRotorInputPosition = this.getRotorInputPosition(
       leftRotorBackwardsOutputPosition,
-      CENTER_ROTOR
+      CENTER_ROTOR,
     );
-    const centerRotorOutputPin = this.getRotor(CENTER_ROTOR).plateToPin(
-      centerRotorInputPosition
+    const centerRotorOutputPin = this.getRotor(CENTER_ROTOR)?.plateToPin(
+      centerRotorInputPosition,
     );
+    if (centerRotorOutputPin == null) {
+      throw new Error('Cannot encode backwards, missing center rotor');
+    }
     const centerRotorBackwardsOutputPosition = this.getRotorOutputPosition(
       centerRotorOutputPin,
-      CENTER_ROTOR
+      CENTER_ROTOR,
     );
 
     //RIGHT ROTOR
     const rightRotorInputPlate = this.getRotorInputPosition(
       centerRotorBackwardsOutputPosition,
-      RIGHT_ROTOR
+      RIGHT_ROTOR,
     );
     const rightRotorOutputPin =
-      this.getRotor(RIGHT_ROTOR).plateToPin(rightRotorInputPlate);
+      this.getRotor(RIGHT_ROTOR)?.plateToPin(rightRotorInputPlate);
+    if (rightRotorOutputPin == null) {
+      throw new Error('Cannot encode backwards, missing right rotor');
+    }
     const rightRotorBackwardsOutputPosition = this.getRotorOutputPosition(
       rightRotorOutputPin,
-      RIGHT_ROTOR
+      RIGHT_ROTOR,
     );
 
     //AND THROUGH AGAIN THE NON ROTATING PARTS
     const entryWheelOutputLetter = this.entryWheel.getLetterFromPlate(
-      rightRotorBackwardsOutputPosition
+      rightRotorBackwardsOutputPosition,
     );
     const swappedOutputLetter = this.plugBoard.getSwappedLetter(
       entryWheelOutputLetter,
-      PlugBoard.DIRECTION_BACKWARDS
+      PlugBoard.DIRECTION_BACKWARDS,
     );
 
     return swappedOutputLetter;
@@ -221,7 +244,7 @@ export default class Enigma {
 
     const leftRotorForwardOutputPosition = this.encodeForward(inputLetter);
     const reflectedPosition = this.encodeReflect(
-      leftRotorForwardOutputPosition
+      leftRotorForwardOutputPosition,
     );
     const swappedOutputLetter = this.encodeBackwards(reflectedPosition);
 
@@ -229,18 +252,24 @@ export default class Enigma {
   }
 
   public getRotorInputPosition(inputPosition: number, rotor: string): number {
+    const ringPosition = this.getRotor(rotor)?.ringPosition;
+    if (ringPosition == null) {
+      throw new Error('Missing rotor');
+    }
     return getModularNumber(
-      inputPosition +
-        getIndex(this.getRotorWindowLetter(rotor)) -
-        this.getRotor(rotor).ringPosition
+      inputPosition + getIndex(this.getRotorWindowLetter(rotor)) - ringPosition,
     );
   }
 
   public getRotorOutputPosition(outputPosition: number, rotor: string): number {
+    const ringPosition = this.getRotor(rotor)?.ringPosition;
+    if (ringPosition == null) {
+      throw new Error('Missing rotor');
+    }
     return getModularNumber(
       outputPosition -
         getIndex(this.getRotorWindowLetter(rotor)) +
-        this.getRotor(rotor).ringPosition
+        ringPosition,
     );
   }
 

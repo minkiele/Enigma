@@ -1,5 +1,5 @@
-import { getModularNumber } from '../../lib/utils';
-import Wire from './Wire/Wire';
+import { getModularNumber } from '../../lib/utils.js';
+import Wire from './Wire/Wire.js';
 const scramblerWirings = [
     6, 31, 4, 29, 18, 39, 16, 25, 30, 23, 28, 1, 38, 11, 36, 37, 26, 27, 24, 21,
     14, 3, 12, 17, 2, 7, 0, 33, 10, 35, 8, 5, 22, 19, 20, 13, 34, 15, 32, 9,
@@ -48,7 +48,7 @@ export default class Uhr {
     getUhrWires() {
         return Object.keys(this.#wires)
             .sort((a, b) => Number(b) - Number(a))
-            .map((key) => this.#wires[key]);
+            .map((key) => this.#wires[Number(key)]);
     }
     prepareUhrWire(index, firstLetter, secondLetter) {
         const getUhr = () => this;
@@ -61,7 +61,7 @@ export default class Uhr {
                 else if (letter === this.secondLetter) {
                     return uhr.#wires[uhr.getIngoingRedWire(index)].firstLetter;
                 }
-                return undefined;
+                throw new Error('Unmatched swap');
             }
             swapBackward(letter) {
                 const uhr = getUhr();
@@ -71,7 +71,7 @@ export default class Uhr {
                 else if (letter === this.secondLetter) {
                     return uhr.#wires[uhr.getOutgoingRedWire(index)].firstLetter;
                 }
-                return undefined;
+                throw new Error('Unmatched swap');
             }
         })(firstLetter, secondLetter);
         this.#wires[index] = wire;

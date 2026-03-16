@@ -1,11 +1,11 @@
-import ReflectorB from '../src/Component/WiredWheel/Reflector/ReflectorB';
-import ThinReflectorB from '../src/Component/WiredWheel/Reflector/ThinReflector/ThinReflectorB';
-import RotorI from '../src/Component/WiredWheel/Rotor/RotorI';
-import RotorII from '../src/Component/WiredWheel/Rotor/RotorII';
-import RotorIII from '../src/Component/WiredWheel/Rotor/RotorIII';
-import RotorIV from '../src/Component/WiredWheel/Rotor/RotorIV';
-import ThinRotorBeta from '../src/Component/WiredWheel/Rotor/ThinRotor/ThinRotorBeta';
-import EnigmaM4 from '../src/Enigma/EnigmaM4';
+import ReflectorB from '../enigma/Component/WiredWheel/Reflector/ReflectorB.js';
+import ThinReflectorB from '../enigma/Component/WiredWheel/Reflector/ThinReflector/ThinReflectorB.js';
+import RotorI from '../enigma/Component/WiredWheel/Rotor/RotorI.js';
+import RotorII from '../enigma/Component/WiredWheel/Rotor/RotorII.js';
+import RotorIII from '../enigma/Component/WiredWheel/Rotor/RotorIII.js';
+import RotorIV from '../enigma/Component/WiredWheel/Rotor/RotorIV.js';
+import ThinRotorBeta from '../enigma/Component/WiredWheel/Rotor/ThinRotor/ThinRotorBeta.js';
+import EnigmaM4 from '../enigma/Enigma/EnigmaM4.js';
 
 describe('EnigmaM4 Machine', () => {
   it('should decrypt correctly this message', () => {
@@ -49,7 +49,7 @@ describe('EnigmaM4 Machine', () => {
     machine.setRotorWindowLetter('N', EnigmaM4.CENTER_ROTOR);
 
     const encodedMessage =
-      'NCZWVUSXPNYMINHZXMQXSFWXWLKJAHSHNMCOCCAKUQPMKCSMHKSEINJUSBLKIOSXCKUBHMLLXCSJUSRRDVKOHULXWCCBGVLIYXEOAHXRHKKFVDREWEZLXOBAFGYUJQUKGRTVUKAMEURBVEKSUHHVOYHABCJWMAKLFKLMYFVNRIZRVVRTKOFDANJMOLBGFFLEOPRGTFLVRHOWOPBEKVWMUQFMPWPARMFHAGKXIIBG';
+      'NCZWVUSXPNYMINHZXMQXSFWXWLKJAHSHNMCOCCAKUQPMKCSMHKSEINJUSBLKIOSXCKUBHMLLXCSJUSRRDVKOHULXWCCBGVLIYXEOAHXRHKKFVDREWEZLXOBAFGYUJQUKGRTVUKAMEURBVEKSUHHVOYHABCJWMAKLFKLMYFVNRIZRVVRTKOFDANJMOLBGFFLEOPRGTFLVRHOWOPBEKVWMUQFMPWPARMFHAGKXIIBG.js';
     //VONVONJLOOKSJHFFTTTEINSEINSDREIZWOYYQNNSNEUNINHALTXXBEIANGRIFFUNTERWASSERGEDRUECKTYWABOSXLETZTERGEGNERSTANDNULACHTDREINULUHRMARQUANTONJOTANEUNACHTSEYHSDREIYZWOZWONULGRADYACHTSMYSTOSSENACHXEKNSVIERMBFAELLTYNNNNNNOOOVIERYSICHTEINSNULL
     const decodedMessage = machine.encode(encodedMessage);
 

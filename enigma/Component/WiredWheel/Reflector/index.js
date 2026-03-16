@@ -1,7 +1,7 @@
-export * from './ThinReflector';
-export { default as ReflectorA } from './ReflectorA';
-export { default as ReflectorB } from './ReflectorB';
-export { default as ReflectorBeta } from './ReflectorBeta';
-export { default as ReflectorC } from './ReflectorC';
-export { default as ReflectorD } from './ReflectorD';
-export { default as ReflectorGamma } from './ReflectorGamma';
+export * from './ThinReflector/index.js';
+export { default as ReflectorA } from './ReflectorA.js';
+export { default as ReflectorB } from './ReflectorB.js';
+export { default as ReflectorBeta } from './ReflectorBeta.js';
+export { default as ReflectorC } from './ReflectorC.js';
+export { default as ReflectorD } from './ReflectorD.js';
+export { default as ReflectorGamma } from './ReflectorGamma.js';

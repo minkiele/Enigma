@@ -1,2 +1,2 @@
-export * from './WiredWheel';
-export * from './PlugBoard';
+export * from './WiredWheel/index.js';
+export * from './PlugBoard/index.js';

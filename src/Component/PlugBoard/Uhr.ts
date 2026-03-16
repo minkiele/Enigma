@@ -1,6 +1,6 @@
-import { getModularNumber } from '../../lib/utils';
-import Component from '../Component';
-import Wire from './Wire/Wire';
+import { getModularNumber } from '../../lib/utils.js';
+import Component from '../Component.js';
+import Wire from './Wire/Wire.js';
 
 const scramblerWirings: Array<number> = [
   6, 31, 4, 29, 18, 39, 16, 25, 30, 23, 28, 1, 38, 11, 36, 37, 26, 27, 24, 21,
@@ -63,7 +63,7 @@ export default class Uhr implements Component {
   public getUhrWires(): Array<Wire> {
     return Object.keys(this.#wires)
       .sort((a, b) => Number(b) - Number(a))
-      .map((key) => this.#wires[key]);
+      .map((key) => this.#wires[Number(key)]);
   }
 
   public prepareUhrWire(
@@ -73,23 +73,23 @@ export default class Uhr implements Component {
   ): Wire {
     const getUhr = () => this;
     const wire = new (class extends Wire {
-      public swapForward(letter: string): string | undefined {
+      public swapForward(letter: string): string {
         const uhr = getUhr();
         if (letter === this.firstLetter) {
           return uhr.#wires[uhr.getIngoingBlackWire(index)].secondLetter;
         } else if (letter === this.secondLetter) {
           return uhr.#wires[uhr.getIngoingRedWire(index)].firstLetter;
         }
-        return undefined;
+        throw new Error('Unmatched swap');
       }
-      public swapBackward(letter: string): string | undefined {
+      public swapBackward(letter: string): string {
         const uhr = getUhr();
         if (letter === this.firstLetter) {
           return uhr.#wires[uhr.getOutgoingBlackWire(index)].secondLetter;
         } else if (letter === this.secondLetter) {
           return uhr.#wires[uhr.getOutgoingRedWire(index)].firstLetter;
         }
-        return undefined;
+        throw new Error('Unmatched swap');
       }
     })(firstLetter, secondLetter);
     this.#wires[index] = wire;

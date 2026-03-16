@@ -1,4 +1,4 @@
-import Rotor from './Rotor';
+import Rotor from './Rotor.js';
 
 export default class RotorVI extends Rotor {
   protected wirings = 'JPGVOUMFYQBENHZRDKASXLICTW';

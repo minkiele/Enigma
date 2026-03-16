@@ -1,4 +1,4 @@
-import RotorI from '../src/Component/WiredWheel/Rotor/RotorI';
+import RotorI from '../enigma/Component/WiredWheel/Rotor/RotorI.js.js';
 
 describe('RotorI', () => {
   it('should return the same position', () => {
